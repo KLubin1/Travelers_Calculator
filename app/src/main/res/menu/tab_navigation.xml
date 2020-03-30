@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_calculator"
+        android:icon="@drawable/ic_5_calculator"
+        android:title="@string/calculator_tab"
+        />
+    <item
+        android:id="@+id/navigation_units"
+        android:icon="@drawable/ic_timer_units"
+        android:title="@string/units_tab"/>
+    <item
+        android:id="@+id/navigation_currency"
+        android:icon="@drawable/ic_local_atm_currency"
+        android:title="@string/currency_tab"/>
+
+    <item
+        android:id="@+id/navigation_time"
+        android:icon="@drawable/ic_access_time"
+        android:title="@string/time_tab"/>
+
+
+</menu>
