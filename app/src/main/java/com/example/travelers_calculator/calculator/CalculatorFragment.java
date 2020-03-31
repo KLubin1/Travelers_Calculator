@@ -114,11 +114,14 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         subtract.setOnClickListener(this);
         divide.setOnClickListener(this);
         multiply.setOnClickListener(this);
-        // divide.setText(Html.fromHtml(Helper.division));
-        // exponent.setText(Html.fromHtml(Helper.exponent));
         ac.setOnClickListener(this);
         dot.setOnClickListener(this);
         equal.setOnClickListener(this);
+        negative.setOnClickListener(this);
+        sqrt.setOnClickListener(this);
+        square.setOnClickListener(this);
+        base10.setOnClickListener(this);
+        exponent.setOnClickListener(this);
         return view;
     }
 
@@ -194,6 +197,23 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 inputToBeParsed +="=";
                 break;
 
+            case "^2":
+                currentDisplayedInput += "^2";
+                inputToBeParsed +="^2";
+                break;
+            case "^":
+                currentDisplayedInput += "^";
+                inputToBeParsed +="^";
+                break;
+            case "10^":
+                currentDisplayedInput += "10^";
+                inputToBeParsed +="10^";
+                break;
+            case "√":
+                currentDisplayedInput += "√";
+                inputToBeParsed +="sqrt(";
+                break;
+
 
         }
 
@@ -221,9 +241,10 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
         if (data.equals("AC"))
         {
-            outputResult.setText("");
+
             currentDisplayedInput = "";
             inputToBeParsed = "";
+            outputResult.setText("");
         }
         else if (data.equals("="))
         {
