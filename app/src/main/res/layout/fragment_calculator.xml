@@ -67,7 +67,7 @@
             android:padding="8dp"
             android:layout_marginRight="1dp"
             android:textColor="@color/primary_text"
-            android:background="@color/colorAccent"
+            android:background="@color/primary"
             android:text="@string/exponent" />
 
         <Button
@@ -138,7 +138,7 @@
             android:textColor="@color/primary_text"
             android:padding="8dp"
             android:layout_marginRight="1dp"
-            android:background="@color/colorAccent"
+            android:background="@color/primary"
             android:text="@string/square" />
         <Button
             android:id="@+id/four"
@@ -206,7 +206,7 @@
             android:textColor="@color/primary_text"
             android:padding="8dp"
             android:layout_marginRight="1dp"
-            android:background="@color/colorAccent"
+            android:background="@color/primary"
             android:text="@string/sqrt" />
 
         <Button
@@ -277,7 +277,7 @@
             android:textColor="@color/primary_text"
             android:padding="8dp"
             android:layout_marginRight="1dp"
-            android:background="@color/colorAccent"
+            android:background="@color/primary"
             android:text="@string/base10" />
 
         <Button
@@ -303,7 +303,7 @@
             android:padding="8dp"
             android:layout_marginRight="1dp"
             android:textColor="@color/primary_text"
-            android:background="@color/colorAccent"
+            android:background="@color/primary"
             android:text="@string/dot" />
         <Button
             android:id="@+id/negative"
@@ -315,7 +315,7 @@
             android:padding="8dp"
             android:layout_marginRight="1dp"
             android:textColor="@color/primary_text"
-            android:background="@color/colorAccent"
+            android:background="@color/primary"
             android:text="@string/negative" />
         <Button
             android:id="@+id/multiply"
