@@ -26,6 +26,8 @@
     <string name="dot">.</string>
     <string name="sqrt">√</string>
     <string name="square">^2</string>
+    <string name="open_paren">(</string>
+    <string name="close_paren">)</string>
     <string name="equal">=</string>
     <string name="error_message">"Can't Convert!"</string>
 

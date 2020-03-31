@@ -338,10 +338,36 @@
         android:layout_marginBottom="1dp"
         android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/open_paren"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@color/primary"
+            android:padding="8dp"
+            android:text="@string/open_paren"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/close_paren"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@color/primary"
+            android:padding="8dp"
+            android:text="@string/close_paren"
+            android:textColor="@color/primary_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/equal"
-            android:layout_width="192dp"
+            android:layout_width="62dp"
             android:layout_height="match_parent"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
@@ -351,7 +377,6 @@
             android:textColor="@color/primary_text"
             android:textSize="20sp"
             android:textStyle="bold" />
-
 
         <Button
             android:id="@+id/divide"
