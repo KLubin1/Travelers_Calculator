@@ -58,6 +58,19 @@
         android:layout_marginBottom="1dp"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/exponent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:layout_marginRight="1dp"
+            android:textColor="@color/primary_text"
+            android:background="@color/colorAccent"
+            android:text="@string/exponent" />
+
+        <Button
             android:id="@+id/seven"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -69,6 +82,7 @@
             android:textColor="@color/primary_text"
             android:background="@color/colorAccent"
             android:text="@string/seven" />
+
         <Button
             android:id="@+id/eight"
             android:layout_width="0dp"
@@ -114,6 +128,18 @@
         android:layout_weight="1"
         android:layout_marginBottom="1dp"
         android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/square"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primary_text"
+            android:padding="8dp"
+            android:layout_marginRight="1dp"
+            android:background="@color/colorAccent"
+            android:text="@string/square" />
         <Button
             android:id="@+id/four"
             android:layout_width="0dp"
@@ -171,6 +197,19 @@
         android:layout_marginBottom="1dp"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/sqrt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primary_text"
+            android:padding="8dp"
+            android:layout_marginRight="1dp"
+            android:background="@color/colorAccent"
+            android:text="@string/sqrt" />
+
+        <Button
             android:id="@+id/one"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -182,6 +221,7 @@
             android:layout_marginRight="1dp"
             android:background="@color/colorAccent"
             android:text="@string/one" />
+
         <Button
             android:id="@+id/two"
             android:layout_width="0dp"
@@ -228,6 +268,19 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/base10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/primary_text"
+            android:padding="8dp"
+            android:layout_marginRight="1dp"
+            android:background="@color/colorAccent"
+            android:text="@string/base10" />
+
+        <Button
             android:id="@+id/zero"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -239,6 +292,7 @@
             android:layout_marginRight="1dp"
             android:background="@color/colorAccent"
             android:text="@string/zero" />
+
         <Button
             android:id="@+id/dot"
             android:layout_width="0dp"
@@ -287,7 +341,7 @@
 
         <Button
             android:id="@+id/equal"
-            android:layout_width="160dp"
+            android:layout_width="192dp"
             android:layout_height="match_parent"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
@@ -297,6 +351,7 @@
             android:textColor="@color/primary_text"
             android:textSize="20sp"
             android:textStyle="bold" />
+
 
         <Button
             android:id="@+id/divide"

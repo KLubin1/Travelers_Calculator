@@ -21,7 +21,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     //numbers
     private Button one, two, three, four, five, six, seven, eight, nine, zero;
     //operations
-    private Button plus, subtract, multiply, divide;
+    private Button plus, subtract, multiply, divide, sqrt, square, base10, exponent;
     //signs
     private Button ac, dot, negative, equal;
     //calculator widget(loads the calculation to display)
@@ -75,6 +75,10 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         dot = (Button) view.findViewById(R.id.dot);
         negative = (Button) view.findViewById(R.id.negative);
         equal = (Button) view.findViewById(R.id.equal);
+        sqrt = (Button) view.findViewById(R.id.sqrt);
+        square  = (Button) view.findViewById(R.id.square);
+        base10 = (Button) view.findViewById(R.id.base10);
+        exponent  = (Button) view.findViewById(R.id.exponent);
         //widget assignment for loading conversions unto calculator
        // calculatorWidgetCalc = (Button) view.findViewById(R.id.calculator_widget_calc);
         /*calculatorWidgetCalc.setOnClickListener(new View.OnClickListener()
