@@ -23,7 +23,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     //operations
     private Button plus, subtract, multiply, divide, sqrt, square, base10, exponent;
     //signs
-    private Button ac, dot, negative, equal;
+    private Button ac, dot, negative, equal, openParen, closeParen;
     //calculator widget(loads the calculation to display)
     //private Button calculatorWidgetCalc;
     //input to be parsed
@@ -79,6 +79,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         square  = (Button) view.findViewById(R.id.square);
         base10 = (Button) view.findViewById(R.id.base10);
         exponent  = (Button) view.findViewById(R.id.exponent);
+        openParen = (Button) view.findViewById(R.id.open_paren);
+        closeParen = (Button) view.findViewById(R.id.close_paren);
         //widget assignment for loading conversions unto calculator
        // calculatorWidgetCalc = (Button) view.findViewById(R.id.calculator_widget_calc);
         /*calculatorWidgetCalc.setOnClickListener(new View.OnClickListener()
@@ -122,6 +124,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         square.setOnClickListener(this);
         base10.setOnClickListener(this);
         exponent.setOnClickListener(this);
+        openParen.setOnClickListener(this);
+        closeParen.setOnClickListener(this);
         return view;
     }
 
@@ -212,6 +216,14 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             case "√":
                 currentDisplayedInput += "√";
                 inputToBeParsed +="sqrt(";
+                break;
+            case "(":
+                currentDisplayedInput += "(";
+                inputToBeParsed +="(";
+                break;
+            case")":
+                currentDisplayedInput += ")";
+                inputToBeParsed +=")";
                 break;
 
 
