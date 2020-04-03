@@ -96,6 +96,7 @@ public class CalculatorFunctionality
             System.out.println("Displayed Output " + expressionUsedForParsing);
             currentSum = evaluator.evaluate(fixExpression(expressionUsedForParsing));
             currentSum = convertToRadians(currentSum);
+            //returns the sum, not the result
             currentDisplay = String.valueOf(currentSum);
             //previousSum = currentSum;
         }
@@ -105,6 +106,7 @@ public class CalculatorFunctionality
         }
         return currentDisplay;
     }
+    //converts double value to radians
     public double convertToRadians(double sum)
     {
         double newSum = sum;
@@ -117,7 +119,7 @@ public class CalculatorFunctionality
     {
         return currentDisplay;
     }
-    //Handles fixing the expression before parsing. Adding parens(parentheses), making sure parens can multiply with each other,
+    //Handles fixing the expression before parsing. Adding paren(parentheses), making sure paren can multiply with each other
     public String fixExpression(String exp)
     {
         int openParens = 0;

@@ -15,9 +15,9 @@ import com.example.travelers_calculator.R;
 
 public class CalculatorFragment extends Fragment implements View.OnClickListener
 {
-    //Add com.example.Travelers_Calculator_Demo.calculator code here
+    //Add calculator code here
 
-    /*com.example.Travelers_Calculator_Demo.calculator data members*/
+    //calculator data members
     //numbers
     private Button one, two, three, four, five, six, seven, eight, nine, zero;
     //operations
@@ -32,7 +32,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     private String currentDisplayedInput = "";
     //output
     private TextView outputResult;
-    //com.example.Travelers_Calculator_Demo.calculator functionality class
+    //calculator functionality class
     private CalculatorFunctionality mCalculator;
     //constructor
     public CalculatorFragment(){}
@@ -44,12 +44,13 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        //this returns the parameters of this oncreateview method, with the layout, container, and if the saved instance state of the last com.example.Travelers_Calculator_Demo.time the app was opened should be returned
+        //this returns the parameters of this oncreateview method, with the layout, container, and if the saved instance state of the app was opened should be returned
         // return inflater.inflate(R.layout.fragment_calculator, container, false);
 
         View view = inflater.inflate(R.layout.fragment_calculator, container, false);
-        //?
+        //hide the action bar
         //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
         //assign the output button and text display
         outputResult = (TextView) view.findViewById(R.id.display);
         outputResult.setText("");
@@ -81,6 +82,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         exponent  = (Button) view.findViewById(R.id.exponent);
         openParen = (Button) view.findViewById(R.id.open_paren);
         closeParen = (Button) view.findViewById(R.id.close_paren);
+
         //widget assignment for loading conversions unto calculator
        // calculatorWidgetCalc = (Button) view.findViewById(R.id.calculator_widget_calc);
         /*calculatorWidgetCalc.setOnClickListener(new View.OnClickListener()
@@ -129,6 +131,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         return view;
     }
 
+    //test and pass the string values (codes) of expressions through parser
     private void obtainInputValues(String Input)
     {
         switch (Input)
@@ -231,6 +234,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         }
 
 
+        //regarding evaluating the input
         //what im trying to say here is that if there is a placed in value without actual input, then evaluate it
         //SharedPreferences settings = getActivity().getSharedPreferences("Conversions Storage", Context.MODE_PRIVATE);
         //if(currentDisplayedInput.length() != 0)
@@ -252,6 +256,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //to display a toast, isnt really needed
         //Toast.makeText(getContext(), "Clicked" + data, Toast.LENGTH_LONG).show();
 
+        //for clear button
         if (data.equals("AC"))
         {
 
@@ -259,6 +264,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             inputToBeParsed = "";
             outputResult.setText("");
         }
+        //for equal button
         else if (data.equals("="))
         {
             String enteredInput = outputResult.getText().toString();
@@ -266,6 +272,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             String resultObject = mCalculator.getResult(currentDisplayedInput, inputToBeParsed);
             outputResult.setText(removeTrailingZero(resultObject));
         }
+        //call the parser
         else
         {
             obtainInputValues(data);

@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity
         BottomNavigationView bottomNav = findViewById(R.id.tab_navigation_bar);
         bottomNav.setOnNavigationItemSelectedListener(tabListener);
 
-        //start on com.example.Travelers_Calculator_Demo.com.example.travelers_calculator.calculator by default
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit(); //how to attach these activities to the container?
-
+        //start on calculator by default
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
     }
 
+    //switch between fragments
     private BottomNavigationView.OnNavigationItemSelectedListener tabListener = new BottomNavigationView.OnNavigationItemSelectedListener()
     {
         @Override
