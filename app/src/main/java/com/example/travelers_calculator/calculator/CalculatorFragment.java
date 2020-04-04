@@ -186,12 +186,12 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 currentDisplayedInput += "-";
                 inputToBeParsed +="-";
                 break;
-            case "x":
-                currentDisplayedInput += "x";
+            case "×":
+                currentDisplayedInput += "×";
                 inputToBeParsed +="*";
                 break;
-            case "/":
-                currentDisplayedInput += "/";
+            case "÷":
+                currentDisplayedInput += "÷";
                 inputToBeParsed +="/";
                 break;
             case ".":
