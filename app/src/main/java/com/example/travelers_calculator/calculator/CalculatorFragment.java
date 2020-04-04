@@ -30,6 +30,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     private String inputToBeParsed = "";
     //currentDisplayedInput
     private String currentDisplayedInput = "";
+    //last result
+    private String obtainLastResult = "";
     //output
     private TextView outputResult;
     //calculator functionality class
@@ -268,6 +270,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         else if (data.equals("="))
         {
             String enteredInput = outputResult.getText().toString();
+            //enteredInput += obtainLastResult;
             // calls the function that will return the result of the calculation.
             String resultObject = mCalculator.getResult(currentDisplayedInput, inputToBeParsed);
             outputResult.setText(removeTrailingZero(resultObject));
