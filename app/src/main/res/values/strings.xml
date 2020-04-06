@@ -31,4 +31,16 @@
     <string name="equal">=</string>
     <string name="error_message">"Can't Convert!"</string>
 
+    <string-array name="us_units">
+        <item>pounds(lb)</item>
+        <item>feet(ft)</item>
+        <item>gallons(GL)</item>
+    </string-array>
+
+    <string-array name="metric_units">
+        <item>grams(g)</item>
+        <item>meters(m)</item>
+        <item>liters(l)</item>
+    </string-array>
+
 </resources>

@@ -17,5 +17,6 @@ public class UnitsFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_units, container, false);
+        //where it comes together, what usually comes in the units main activity goes here
     }
 }
