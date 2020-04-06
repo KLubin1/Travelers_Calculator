@@ -38,7 +38,7 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
     {
         // return inflater.inflate(R.layout.fragment_units, container, false);
         //TODO: CHANGE THE LAYOUT TO THE CLASS'S CORRESPONDING LAYOUT
-        View view = inflater.inflate(R.layout.fragment_units_length, container, false);
+        View view = inflater.inflate(R.layout.fragment_units_volume, container, false);
 
         //the conversion quantities
         quantity = (EditText) view.findViewById(R.id.quantity);
@@ -50,14 +50,14 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
 
         //for spinner 1
         spinner1 = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_volume, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(this);
 
         //for spinner 2
         spinner2 = (Spinner) view.findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units_volume, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(this);
@@ -155,43 +155,52 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
         double constant = 0;
         //the quantity variable to multiply the constant by
         double multiplier = Double.parseDouble(quantity.getText().toString());
-        String errorMessage = getString(R.string.error_message);
+        //not really applicable here:
+       // String errorMessage = getString(R.string.error_message);
 
-        //for pounds to grams
+        //from gallons
         if(spinner1.getSelectedItemPosition() == 0)
         {
+            //to fluid ounces
             if(spinner2.getSelectedItemPosition() == 0)
-                constant = 454;
-
-            else if(spinner2.getSelectedItemPosition() == 1 || spinner2.getSelectedItemPosition() == 2)
-                result.setText(errorMessage);
-
+                constant = 128;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 3785.41178;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 3.785412;
             else return 0;
         }
 
-        //for feet to meters
+        //from pint
         else if(spinner1.getSelectedItemPosition() == 1)
         {
-            if(spinner2.getSelectedItemPosition() == 1)
-                constant = 0.3048;
-
-            else if(spinner2.getSelectedItemPosition() == 0 || spinner2.getSelectedItemPosition() == 2)
-                result.setText(errorMessage);
-
+            //to fluid ounces
+            if(spinner2.getSelectedItemPosition() == 0)
+                constant = 16;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 473.176473;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 0.473176;
             else return 0;
         }
 
-        //for gallons to liters
+        //from quarts
         else if(spinner1.getSelectedItemPosition() == 2)
         {
-            if(spinner2.getSelectedItemPosition() == 2)
-                constant = 3.7854;
-
-            else if(spinner2.getSelectedItemPosition() == 0 || spinner2.getSelectedItemPosition() == 1)
-                result.setText(errorMessage);
-
+            //to fluid ounces
+            if(spinner2.getSelectedItemPosition() == 0)
+                constant = 32;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 946.352946;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 0.946353;
             else return 0;
-
         }
 
         else

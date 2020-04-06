@@ -50,14 +50,14 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
 
         //for spinner 1
         spinner1 = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_length, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(this);
 
         //for spinner 2
         spinner2 = (Spinner) view.findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units_length, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(this);
@@ -157,39 +157,69 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         double multiplier = Double.parseDouble(quantity.getText().toString());
         String errorMessage = getString(R.string.error_message);
 
-        //for pounds to grams
+        //from inch
         if(spinner1.getSelectedItemPosition() == 0)
         {
+            //to centimeter
             if(spinner2.getSelectedItemPosition() == 0)
-                constant = 454;
-
-            else if(spinner2.getSelectedItemPosition() == 1 || spinner2.getSelectedItemPosition() == 2)
-                result.setText(errorMessage);
-
+                constant = 2.54;
+            //to meter
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 0.0254;
+            //to kilometer
+            else if( spinner2.getSelectedItemPosition() == 2)
+                    constant = 0.0000254;
             else return 0;
         }
 
-        //for feet to meters
+        //from feet
         else if(spinner1.getSelectedItemPosition() == 1)
         {
-            if(spinner2.getSelectedItemPosition() == 1)
+            //to centimeter
+            if(spinner2.getSelectedItemPosition() == 0)
+                constant = 30.48;
+
+            //to meter
+            else if(spinner2.getSelectedItemPosition() == 1)
                 constant = 0.3048;
 
-            else if(spinner2.getSelectedItemPosition() == 0 || spinner2.getSelectedItemPosition() == 2)
-                result.setText(errorMessage);
-
+            //to kilometer
+            else if(spinner2.getSelectedItemPosition() == 2)
+                    constant = 0.0003048;
             else return 0;
         }
 
-        //for gallons to liters
+        //from yards
         else if(spinner1.getSelectedItemPosition() == 2)
         {
-            if(spinner2.getSelectedItemPosition() == 2)
-                constant = 3.7854;
+            //to centimeter
+            if(spinner2.getSelectedItemPosition() == 0)
+                constant = 91.44;
 
-            else if(spinner2.getSelectedItemPosition() == 0 || spinner2.getSelectedItemPosition() == 1)
-                result.setText(errorMessage);
+            //to meter
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 0.9144;
 
+            //to kilometer
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 0.000914;
+            else return 0;
+
+        }
+        //from miles
+        else if(spinner1.getSelectedItemPosition() == 3)
+        {
+            //to centimeter
+            if(spinner2.getSelectedItemPosition() == 0)
+                constant = 160934.4;
+
+            //to meter
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 1609.344;
+
+            //to kilometer
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 1.609344;
             else return 0;
 
         }

@@ -38,7 +38,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     {
         // return inflater.inflate(R.layout.fragment_units, container, false);
         //TODO: CHANGE THE LAYOUT TO THE CLASS'S CORRESPONDING LAYOUT
-        View view = inflater.inflate(R.layout.fragment_units_length, container, false);
+        View view = inflater.inflate(R.layout.fragment_units_temperature, container, false);
 
         //the conversion quantities
         quantity = (EditText) view.findViewById(R.id.quantity);
@@ -50,14 +50,14 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
 
         //for spinner 1
         spinner1 = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_temp, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(this);
 
         //for spinner 2
         spinner2 = (Spinner) view.findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units_temp, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(this);
@@ -144,12 +144,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {
-//        Object pound = spinner1.getItemAtPosition(0);
-//        Object foot = spinner1.getItemAtPosition(1);
-//        Object gallon = spinner1.getItemAtPosition(2);
-//        Object gram = spinner2.getItemAtPosition(0);
-//        Object meter = spinner2.getItemAtPosition(1);
-//        Object liter = spinner2.getItemAtPosition(2);
+        //this factory wil be a little different given the nature converting from  fahrenheit to celsius and viceversa
 
         //the constant that multiplies by the quantity;
         double constant = 0;
@@ -157,48 +152,23 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
         double multiplier = Double.parseDouble(quantity.getText().toString());
         String errorMessage = getString(R.string.error_message);
 
-        //for pounds to grams
+        //from Fahrenheit
         if(spinner1.getSelectedItemPosition() == 0)
         {
+            //to Celsius
             if(spinner2.getSelectedItemPosition() == 0)
-                constant = 454;
-
-            else if(spinner2.getSelectedItemPosition() == 1 || spinner2.getSelectedItemPosition() == 2)
-                result.setText(errorMessage);
+                //takes in the quantity, put that in the formula
+                constant = ((multiplier - 32)*5)/9;
 
             else return 0;
-        }
-
-        //for feet to meters
-        else if(spinner1.getSelectedItemPosition() == 1)
-        {
-            if(spinner2.getSelectedItemPosition() == 1)
-                constant = 0.3048;
-
-            else if(spinner2.getSelectedItemPosition() == 0 || spinner2.getSelectedItemPosition() == 2)
-                result.setText(errorMessage);
-
-            else return 0;
-        }
-
-        //for gallons to liters
-        else if(spinner1.getSelectedItemPosition() == 2)
-        {
-            if(spinner2.getSelectedItemPosition() == 2)
-                constant = 3.7854;
-
-            else if(spinner2.getSelectedItemPosition() == 0 || spinner2.getSelectedItemPosition() == 1)
-                result.setText(errorMessage);
-
-            else return 0;
-
         }
 
         else
             return 0;
 
         //the conversion results
-        double conversion = constant*multiplier;
-        return conversion;
+       // double conversion = constant*multiplier;
+        //pop out the result
+        return constant;
     }
 }
