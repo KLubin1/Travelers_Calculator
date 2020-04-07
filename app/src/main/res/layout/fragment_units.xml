@@ -6,12 +6,41 @@
     android:background="@color/primary_light">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/length_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Length"/>
+
+         <com.google.android.material.tabs.TabItem
+             android:id="@+id/area_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Area"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/weight_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/temp_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temper-ature"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/volume_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volume"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager2"
+        android:id="@+id/view_page_layout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
 
