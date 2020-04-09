@@ -26,8 +26,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
     //Add units code here
     private Spinner usSpinner, metricSpinner;
     private EditText quantity;
-    private TextView result;
-    private TextView unitType;
+    private TextView result, unitType;
     private Button convert;
     private Button calculatorWidget;
 
