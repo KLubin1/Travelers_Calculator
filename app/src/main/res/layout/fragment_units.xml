@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--//where it comes together, what usually comes in the units activity_main goes here-->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_light">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -39,9 +42,10 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_page_layout2"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_page_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
-
 </FrameLayout>
+
+</RelativeLayout>

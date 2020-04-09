@@ -23,8 +23,8 @@ import com.example.travelers_calculator.R;
 
 public class LengthFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
-    //Add com.example.Travelers_Calculator_Demo.units code here
-    private Spinner spinner1, spinner2;
+    //Add units code here
+    private Spinner usSpinner, metricSpinner;
     private EditText quantity;
     private TextView result;
     private TextView unitType;
@@ -49,18 +49,18 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
 
         //for spinner 1
-        spinner1 = (Spinner) view.findViewById(R.id.spinner1);
+        usSpinner = (Spinner) view.findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_length, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(adapter1);
-        spinner1.setOnItemSelectedListener(this);
+        usSpinner.setAdapter(adapter1);
+        usSpinner.setOnItemSelectedListener(this);
 
         //for spinner 2
-        spinner2 = (Spinner) view.findViewById(R.id.spinner2);
+        metricSpinner = (Spinner) view.findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units_length, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
-        spinner2.setOnItemSelectedListener(this);
+        metricSpinner.setAdapter(adapter2);
+        metricSpinner.setOnItemSelectedListener(this);
 
 
 
@@ -80,7 +80,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 //set result textview to the result
                 result.setText(String.valueOf(conversionFactory()));
                 //set the type of result
-                unitType.setText(spinner2.getSelectedItem().toString());
+                unitType.setText(metricSpinner.getSelectedItem().toString());
 
                 //result.setText("changed to conversion");
             }
@@ -118,9 +118,9 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         //this is to make toast, but can put anything in here when a item is selected) maybe pull up the second spinner?
         // String text = parent.getItemAtPosition(position).toString();
        /* String errorMessage = getString(R.string.error_message);
-        if(spinner1.getSelectedItemPosition() == 0)
+        if(usSpinner.getSelectedItemPosition() == 0)
         {
-        if(spinner2.getSelectedItemPosition() == 1 || spinner2.getSelectedItemPosition() == 2)
+        if(metricSpinner.getSelectedItemPosition() == 1 || metricSpinner.getSelectedItemPosition() == 2)
             result.setText(errorMessage);
         else return;
         }
@@ -144,12 +144,12 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {
-//        Object pound = spinner1.getItemAtPosition(0);
-//        Object foot = spinner1.getItemAtPosition(1);
-//        Object gallon = spinner1.getItemAtPosition(2);
-//        Object gram = spinner2.getItemAtPosition(0);
-//        Object meter = spinner2.getItemAtPosition(1);
-//        Object liter = spinner2.getItemAtPosition(2);
+//        Object pound = usSpinner.getItemAtPosition(0);
+//        Object foot = usSpinner.getItemAtPosition(1);
+//        Object gallon = usSpinner.getItemAtPosition(2);
+//        Object gram = metricSpinner.getItemAtPosition(0);
+//        Object meter = metricSpinner.getItemAtPosition(1);
+//        Object liter = metricSpinner.getItemAtPosition(2);
 
         //the constant that multiplies by the quantity;
         double constant = 0;
@@ -158,67 +158,67 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         String errorMessage = getString(R.string.error_message);
 
         //from inch
-        if(spinner1.getSelectedItemPosition() == 0)
+        if(usSpinner.getSelectedItemPosition() == 0)
         {
             //to centimeter
-            if(spinner2.getSelectedItemPosition() == 0)
+            if(metricSpinner.getSelectedItemPosition() == 0)
                 constant = 2.54;
             //to meter
-            else if(spinner2.getSelectedItemPosition() == 1)
+            else if(metricSpinner.getSelectedItemPosition() == 1)
                 constant = 0.0254;
             //to kilometer
-            else if( spinner2.getSelectedItemPosition() == 2)
+            else if( metricSpinner.getSelectedItemPosition() == 2)
                     constant = 0.0000254;
             else return 0;
         }
 
         //from feet
-        else if(spinner1.getSelectedItemPosition() == 1)
+        else if(usSpinner.getSelectedItemPosition() == 1)
         {
             //to centimeter
-            if(spinner2.getSelectedItemPosition() == 0)
+            if(metricSpinner.getSelectedItemPosition() == 0)
                 constant = 30.48;
 
             //to meter
-            else if(spinner2.getSelectedItemPosition() == 1)
+            else if(metricSpinner.getSelectedItemPosition() == 1)
                 constant = 0.3048;
 
             //to kilometer
-            else if(spinner2.getSelectedItemPosition() == 2)
+            else if(metricSpinner.getSelectedItemPosition() == 2)
                     constant = 0.0003048;
             else return 0;
         }
 
         //from yards
-        else if(spinner1.getSelectedItemPosition() == 2)
+        else if(usSpinner.getSelectedItemPosition() == 2)
         {
             //to centimeter
-            if(spinner2.getSelectedItemPosition() == 0)
+            if(metricSpinner.getSelectedItemPosition() == 0)
                 constant = 91.44;
 
             //to meter
-            else if(spinner2.getSelectedItemPosition() == 1)
+            else if(metricSpinner.getSelectedItemPosition() == 1)
                 constant = 0.9144;
 
             //to kilometer
-            else if(spinner2.getSelectedItemPosition() == 2)
+            else if(metricSpinner.getSelectedItemPosition() == 2)
                 constant = 0.000914;
             else return 0;
 
         }
         //from miles
-        else if(spinner1.getSelectedItemPosition() == 3)
+        else if(usSpinner.getSelectedItemPosition() == 3)
         {
             //to centimeter
-            if(spinner2.getSelectedItemPosition() == 0)
+            if(metricSpinner.getSelectedItemPosition() == 0)
                 constant = 160934.4;
 
             //to meter
-            else if(spinner2.getSelectedItemPosition() == 1)
+            else if(metricSpinner.getSelectedItemPosition() == 1)
                 constant = 1609.344;
 
             //to kilometer
-            else if(spinner2.getSelectedItemPosition() == 2)
+            else if(metricSpinner.getSelectedItemPosition() == 2)
                 constant = 1.609344;
             else return 0;
 
