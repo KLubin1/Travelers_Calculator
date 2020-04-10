@@ -8,18 +8,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.travelers_calculator.R;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 public class UnitsFragment extends Fragment
 {
    private SectionsPagerAdapter mSectionsPagerAdapter;
-   private ViewPager2 mViewPager2;
-
-
+   private TabLayout tabLayout;
+   private ViewPagerOverride viewPager;
+   private TabItem lengthTab, areaTab, weightTab, tempTab, volumeTab;
 
     @Nullable
     @Override
@@ -27,30 +26,63 @@ public class UnitsFragment extends Fragment
         View v = inflater.inflate(R.layout.fragment_units, container, false);
         //where it comes together, what usually comes in the units main activity goes here
 
-        //mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager(), getLifecycle());
-        //setupViewPager(mViewPager2);
 
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager(), 5);//suspect causing crash
+        tabLayout = v.findViewById(R.id.tab_layout);
+        viewPager = v.findViewWithTag(R.id.view_page_layout);
+        lengthTab = v.findViewById(R.id.length_tab);
+        areaTab = v.findViewById(R.id.area_tab);
+        weightTab = v.findViewById(R.id.weight_tab);
+        tempTab = v.findViewById(R.id.temp_tab);
+        volumeTab = v.findViewById(R.id.volume_tab);
 
-        ViewPager2 viewPager = v.findViewById(R.id.view_pager2);
-        viewPager.setAdapter(new SectionsPagerAdapter(getChildFragmentManager(), getLifecycle()));
+        viewPager.setAdapter(mSectionsPagerAdapter);//where its crashing
+        tabLayout.setupWithViewPager(viewPager);
+        //setupViewPager(viewPager);
 
-        TabLayout tabLayout = v.findViewById(R.id.tabs);
-        //tabLayout.setupWithViewPager(mViewPager2);
-
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, true, new TabLayoutMediator.TabConfigurationStrategy() {
+        //tabLayout mediator needed for ViewPager2
+       /*TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, true, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
 
             }
         });
-        tabLayoutMediator.attach();
+        tabLayoutMediator.attach();*/
 
+        //------------From here on is deprecated territory----------------//
+       tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+       {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab)
+            {
+                viewPager.setCurrentItem(tab.getPosition());
+                if(tab.getPosition() == 0)
+                    mSectionsPagerAdapter.notifyDataSetChanged();
+                if(tab.getPosition() == 1)
+                    mSectionsPagerAdapter.notifyDataSetChanged();
+                if(tab.getPosition() == 2)
+                    mSectionsPagerAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+//       viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         return v;
     }
 
-    private void  setupViewPager(ViewPager2 _viewPager){
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getChildFragmentManager(), getLifecycle());// or lifecycleowner
+    //I don't trust the efficacy of this method anymore
+    private void  setupViewPager(ViewPagerOverride _viewPager){
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getFragmentManager(), tabLayout.getTabCount());// or lifecycleowner
         adapter.addFragment(new LengthFragment(), "Length");
         adapter.addFragment(new AreaFragment(), "Area");
         adapter.addFragment(new WeightFragment(), "Weight");
@@ -58,4 +90,5 @@ public class UnitsFragment extends Fragment
         adapter.addFragment(new VolumeFragment(), "Volume");
         _viewPager.setAdapter(adapter);
     }
+
 }

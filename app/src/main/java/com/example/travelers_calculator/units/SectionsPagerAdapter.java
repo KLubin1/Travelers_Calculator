@@ -3,21 +3,27 @@ package com.example.travelers_calculator.units;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //seems like various ways to go about this, this is one way
-public class SectionsPagerAdapter extends FragmentStateAdapter
+public class SectionsPagerAdapter extends FragmentStatePagerAdapter
 {
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> fragmentNames = new ArrayList<>();
 
-    public SectionsPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-        super(fragmentManager, lifecycle);
+    private int numOfTabs;
+
+    public SectionsPagerAdapter(@NonNull FragmentManager fm, int numOfTabs) {
+        super(fm);
+        this.numOfTabs = numOfTabs;
     }
+
+    /*public SectionsPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+        super(fragmentManager, lifecycle);
+    }*/
 
 
     public void addFragment(Fragment fragment, String title)
@@ -27,23 +33,55 @@ public class SectionsPagerAdapter extends FragmentStateAdapter
 
     }
 
+    @Override
+    public int getCount()
+    {
+        return numOfTabs;
+    }
+
+    @Override
     public CharSequence getPageTitle(int position)
     {
         return fragmentNames.get(position);
     }
 
-
-
     @NonNull
+    @Override
+    public Fragment getItem(int position)
+    {
+       switch (position)
+       {
+           case 0:
+               return new LengthFragment();
+           case 1:
+               return new AreaFragment();
+           case 2:
+               return new WeightFragment();
+           case 3:
+               return new TemperatureFragment();
+           case 4:
+               return new VolumeFragment();
+           default:
+               return null;
+       }
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
+/*  @NonNull
     @Override
     public Fragment createFragment(int position) {
         return fragmentList.get(position);
-    }
+    }*/
 
-    @Override
+   /* @Override
     public int getItemCount()
     {
         return fragmentList.size();
-    }
+    }*/
+
+
 
 }
