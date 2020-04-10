@@ -89,5 +89,54 @@
         <item>liters(L)</item>
     </string-array>
 
+    <!--currencies-->
+    <string-array name="currencies_list">
+        <item>United States Dollar (USD)</item>
+        <item>European Euro (EUR)</item>
+        <item>Pound Sterling (GBP)</item>
+        <item>Mexican Peso (MXN)</item>
+        <item>Japanese Yen (JPY)</item>
+        <item>Chinese Yuan Renminbi (CNY)</item>
+
+    </string-array>
+
+    <!--https request urls-->
+    <!--Dollars-->
+        <string name="USDtoEUR">https://api.exchangeratesapi.io/latest?symbols=USD,EUR</string>
+        <string name="USDtoGBP">https://api.exchangeratesapi.io/latest?symbols=USD,GBP</string>
+        <string name="USDtoMXN">https://api.exchangeratesapi.io/latest?symbols=USD,MXN</string>
+        <string name="USDtoJPY">https://api.exchangeratesapi.io/latest?symbols=USD,JPY</string>
+        <string name="USDtoCNY">https://api.exchangeratesapi.io/latest?symbols=USD,CNY</string>
+    <!--Euros-->
+        <string name="EURtoUSD">https://api.exchangeratesapi.io/latest?symbols=EUR,USD</string>
+        <string name="EURtoGBP">https://api.exchangeratesapi.io/latest?symbols=EUR,GBP</string>
+        <string name="EURtoMXN">https://api.exchangeratesapi.io/latest?symbols=EUR,MXN</string>
+        <string name="EURtoJPY">https://api.exchangeratesapi.io/latest?symbols=EUR,JPY</string>
+        <string name="EURtoCNY">https://api.exchangeratesapi.io/latest?symbols=EUR,CNY</string>
+    <!--Pounds-->
+        <string name="GBPtoEUR">https://api.exchangeratesapi.io/latest?symbols=GBP,EUR</string>
+        <string name="GBPtoUSD">https://api.exchangeratesapi.io/latest?symbols=GBP,USD</string>
+        <string name="GBPtoMXN">https://api.exchangeratesapi.io/latest?symbols=GBP,MXN</string>
+        <string name="GBPtoJPY">https://api.exchangeratesapi.io/latest?symbols=GBP,JPY</string>
+        <string name="GBPtoCNY">https://api.exchangeratesapi.io/latest?symbols=GBP,CNY</string>
+    <!--Pesos-->
+        <string name="MXNtoEUR">https://api.exchangeratesapi.io/latest?symbols=MXN,EUR</string>
+        <string name="MXNtoUSD">https://api.exchangeratesapi.io/latest?symbols=MXN,USD</string>
+        <string name="MXNtoGBP">https://api.exchangeratesapi.io/latest?symbols=MXN,GBP</string>
+        <string name="MXNtoJPY">https://api.exchangeratesapi.io/latest?symbols=MXN,JPY</string>
+        <string name="MXNtoCNY">https://api.exchangeratesapi.io/latest?symbols=MXN,CNY</string>
+    <!--Yens-->
+        <string name="JPYtoUSD">https://api.exchangeratesapi.io/latest?symbols=JPY,USD</string>
+        <string name="JPYtoEUR">https://api.exchangeratesapi.io/latest?symbols=JPY,EUR</string>
+        <string name="JPYtoGBP">https://api.exchangeratesapi.io/latest?symbols=JPY,GBP</string>
+        <string name="JPYtoMXN">https://api.exchangeratesapi.io/latest?symbols=JPY,MXN</string>
+        <string name="JPYtoCNY">https://api.exchangeratesapi.io/latest?symbols=JPY,CNY</string>
+    <!--Yuans-->
+        <string name="CNYtoUSD">https://api.exchangeratesapi.io/latest?symbols=CNY,USD</string>
+        <string name="CNYtoEUR">https://api.exchangeratesapi.io/latest?symbols=CNY,EUR</string>
+        <string name="CNYtoGBP">https://api.exchangeratesapi.io/latest?symbols=CNY,GBP</string>
+        <string name="CNYtoMXN">https://api.exchangeratesapi.io/latest?symbols=CNY,MXN</string>
+        <string name="CNYtoJPY">https://api.exchangeratesapi.io/latest?symbols=CNY,JPY</string>
+
 
 </resources>
