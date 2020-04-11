@@ -38,7 +38,7 @@
         android:layout_width="83dp"
         android:layout_height="46dp"
         android:ems="10"
-        android:hint="Quantity"
+        android:hint="quantity"
         android:inputType="number"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

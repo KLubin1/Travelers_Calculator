@@ -1,8 +1,6 @@
 package com.example.travelers_calculator.units;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +26,7 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
     private TextView result;
     private TextView unitType;
     private Button convert;
-    private Button calculatorWidget;
+    //private Button calculatorWidget;
 
 
     @Nullable
@@ -46,7 +43,7 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
         unitType = (TextView) view.findViewById(R.id.unit_type);
         convert = (Button) view.findViewById(R.id.convertButton);
         //calculator widget
-        calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
+        //calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
 
         //for spinner 1
         spinner1 = (Spinner) view.findViewById(R.id.spinner1);
@@ -87,7 +84,7 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
         });
 
         //saving calculations
-        calculatorWidget.setOnClickListener(new View.OnClickListener() {
+       /* calculatorWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -102,7 +99,7 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
                 Toast toast = Toast.makeText(getContext(), test, Toast.LENGTH_SHORT);
                 toast.show();
             }
-        });
+        });*/
 
 
 
