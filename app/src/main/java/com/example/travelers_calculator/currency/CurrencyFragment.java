@@ -132,16 +132,16 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 rate = (convertCurrency(getString(R.string.USDtoEUR)));
             //to pound
             else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 0.0000254;
+                rate = 6.87;
             //to peso
             else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 0.0000254;
+                rate = 6.90;
             //to yen
             else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 0.0000254;
+                rate = 5.89;
             //to yuan
             else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 0.0000254;
+                rate = 3.02;
 
             else return 0;
         }
@@ -151,22 +151,22 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         {
             //to dollar
             if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 0.0789;
+                rate = 1.09;
             //to euro
             else if(toSpinner.getSelectedItemPosition() == 1)
                 rate = 1;
             //to pound
             else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 0.0000254;
+                rate = 2.08;
             //to peso
             else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 0.0000254;
+                rate = 5.90;
             //to yen
             else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 0.0000254;
+                rate = 4.98;
             //to yuan
             else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 0.0000254;
+                rate = 5.89;
             else return 0;
         }
 
@@ -175,22 +175,22 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         {
             //to dollar
             if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 0.4568;
+                rate = 1.08;
             //to euro
             else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = 0.0254;
+                rate = 2.09;
             //to pound
             else if(toSpinner.getSelectedItemPosition() == 2)
                 rate = 1;
             //to peso
             else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 0.0000254;
+                rate = 7.89;
             //to yen
             else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 0.0000254;
+                rate = 3.90;
             //to yuan
             else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 0.0000254;
+                rate = 3.0;
             else return 0;
 
         }
@@ -309,20 +309,25 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                         try
                         {
                             JSONObject obj = new JSONObject(message);
-                            JSONObject  b = obj.getJSONObject("rates");
+                            //returns rates
+                            String result = obj.getString("rates");
 
                             //gets the exchange rates of the currencies from this spinner
-                            String fromVal = b.getString(fromSpinner.toString());
-                            String toVal = b.getString(toSpinner.toString());
+                            //String fromVal = result.getString(fromSpinner.toString());
+                            //String toVal = result.getString(toSpinner.toString());
 
                             //But since were just comparing between two rates, it should just return that answer and that's it
                             //So I just need to be able to return the rate, that's it
-                            String resultVal = String.valueOf(b);
+                            Double resultVal = Double.valueOf(result);
+
+
 
                             //then outputs the quantity value times the value of rates
                             //double output = dollarval*Double.valueOf(val);
 
                             //result.setText(String.valueOf(output));
+
+
 
                         }
                         catch (JSONException e)

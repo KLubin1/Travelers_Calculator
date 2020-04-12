@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.time.TimeFragment;
-import com.example.travelers_calculator.units.LengthFragment;
+import com.example.travelers_calculator.units.TemperatureFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
                     selectedFragment = new CalculatorFragment();
                     break;
                 case R.id.navigation_units:
-                    selectedFragment = new LengthFragment();
+                    selectedFragment = new TemperatureFragment();
                     break;
                 case R.id.navigation_currency:
                     selectedFragment = new CurrencyFragment();
