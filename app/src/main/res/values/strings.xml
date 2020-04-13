@@ -30,6 +30,7 @@
     <string name="close_paren">)</string>
     <string name="equal">=</string>
     <string name="error_message">"Can't Convert!"</string>
+    <string name="waiting_message">Calculating...</string>
 
     <!--TODO: HAVE THE ARRAYS FOR EACH UNIT TYPE AND SET THEM UP IN SO THAT CAN BE REFERENCED ACCORDINGLY IN THE CONVERSION FACTORY-->
     <!--length-->
@@ -91,14 +92,22 @@
 
     <!--currencies-->
     <string-array name="currencies_list">
-        <item>United States Dollar (USD)</item>
-        <item>European Euro (EUR)</item>
-        <item>Pound Sterling (GBP)</item>
-        <item>Mexican Peso (MXN)</item>
-        <item>Japanese Yen (JPY)</item>
-        <item>Chinese Yuan Renminbi (CNY)</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>MXN</item>
+        <item>JPY</item>
+        <item>CNY</item>
 
     </string-array>
+
+    <!--currencies description-->
+    <string name="Dollars">United States\nDollar</string>
+    <string name="Euros">European Euro</string>
+    <string name="Pounds">Pound Sterling</string>
+    <string name="Pesos">Mexican Peso</string>
+    <string name="Yens">Japanese Yen</string>
+    <string name="Yuans">Chinese Yuan</string>
 
     <!--https request urls-->
     <!--Dollars-->

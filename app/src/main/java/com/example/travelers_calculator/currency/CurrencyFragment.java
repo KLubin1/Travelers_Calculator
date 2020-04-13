@@ -35,7 +35,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
 
     private EditText quantity;
     private Spinner fromSpinner, toSpinner;
-    private TextView result, currencyType;
+    private TextView resultView, currencyType;
     private Button convert;
 
 
@@ -47,7 +47,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         quantity = v.findViewById(R.id.quantity);
         fromSpinner = v.findViewById(R.id.spinner1);
         toSpinner = v.findViewById(R.id.spinner2);
-        result = v.findViewById(R.id.result);
+        resultView = v.findViewById(R.id.result);
         currencyType = v.findViewById(R.id.currency_type);
         convert = v.findViewById(R.id.convertButton);
 
@@ -81,7 +81,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 //set result textview to the result
                 try
                 {
-                    result.setText(String.valueOf(conversionFactory()));
+                    resultView.setText(String.valueOf(conversionFactory()));
                 } catch (IOException e)
                 {
                     e.printStackTrace();
@@ -278,7 +278,9 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
 
     public double convertCurrency(final String urlRequest) throws IOException
     {
-        String url = urlRequest;
+        String mainUrl = "https://api.exchangeratesapi.io/latest";
+        String updatedUrl =mainUrl + "?base" +fromSpinner.getSelectedItem();
+        String url = updatedUrl;
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -310,7 +312,13 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                         {
                             JSONObject obj = new JSONObject(message);
                             //returns rates
-                            String result = obj.getString("rates");
+                            JSONObject result = obj.getJSONObject("rates");
+
+                            // quantity input
+                            double multiplier = Double.parseDouble(quantity.getText().toString());
+
+                            //final result
+                            double finResult = 0.0;
 
                             //gets the exchange rates of the currencies from this spinner
                             //String fromVal = result.getString(fromSpinner.toString());
@@ -318,10 +326,27 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
 
                             //But since were just comparing between two rates, it should just return that answer and that's it
                             //So I just need to be able to return the rate, that's it
-                            Double resultVal = Double.valueOf(result);
+                            //double rate = Double.valueOf(result);
 
+                            //double rate = 0;
+                            //the quantity variable to multiply the constant by
 
+                            String errorMessage = getString(R.string.error_message);
 
+                            //from dollar
+                            if(fromSpinner.getSelectedItem().equals(toSpinner.getSelectedItem()))
+                            {
+                                finResult = multiplier;
+                            }
+                            else
+                                {
+                                Double rateValue = Double.valueOf(result.getString((String)toSpinner.getSelectedItem()));
+                                Double resultValue = multiplier * rateValue;
+                                finResult = resultValue;
+                                }
+
+                            //the conversion results
+                            //double conversion = rate*multiplier;
                             //then outputs the quantity value times the value of rates
                             //double output = dollarval*Double.valueOf(val);
 
