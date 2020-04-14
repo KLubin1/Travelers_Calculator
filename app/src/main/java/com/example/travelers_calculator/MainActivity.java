@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.travelers_calculator.calculator.CalculatorFragment;
-import com.example.travelers_calculator.currency.CurrencyTest;
+import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.time.TimeFragment;
 import com.example.travelers_calculator.units.WeightFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
                     selectedFragment = new WeightFragment();
                     break;
                 case R.id.navigation_currency:
-                    selectedFragment = new CurrencyTest();
+                    selectedFragment = new CurrencyFragment();
                     break;
                 case R.id.navigation_time:
                     selectedFragment = new TimeFragment();

@@ -98,6 +98,24 @@
         <item>MXN</item>
         <item>JPY</item>
         <item>CNY</item>
+        <item>BGN</item>
+        <item>CZK</item>
+        <item>DKK</item>
+        <item>PLN</item>
+        <item>SEK</item>
+        <item>CHF</item>
+        <item>RUB</item>
+        <item>TRY</item>
+        <item>AUD</item>
+        <item>BRL</item>
+        <item>CAD</item>
+        <item>ILS</item>
+        <item>INR</item>
+        <item>KRW</item>
+        <item>ZAR</item>
+        <item>SGD</item>
+
+
 
     </string-array>
 
@@ -108,6 +126,22 @@
     <string name="Pesos">Mexican Peso</string>
     <string name="Yens">Japanese Yen</string>
     <string name="Yuans">Chinese Yuan</string>
+    <string name="Levs">Belgian Levs</string>
+    <string name="Korunas">Czech Koruna</string>
+    <string name="DKrones">Danish Krone</string>
+    <string name="Zlotys">Polish Zloty</string>
+    <string name="Kronas">Swedish Krona</string>
+    <string name="Francs">Swiss Franc</string>
+    <string name="Roubles">Russian Rouble</string>
+    <string name="Liras">Turkish Lira</string>
+    <string name="AusDollars">Australian\nDollar</string>
+    <string name="Reals">Brazilian Real</string>
+    <string name="CanDollars">Canadian Dollar</string>
+    <string name="Shekels">Israeli Shekel</string>
+    <string name="Rupees">Indian Rupee</string>
+    <string name="Wons">South Korean\nWon</string>
+    <string name="Rands">South African\nRand</string>
+    <string name="SingDollars">Singapore Dollar</string>
 
     <!--https request urls-->
     <!--Dollars-->

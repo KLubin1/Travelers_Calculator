@@ -1,7 +1,6 @@
 package com.example.travelers_calculator.currency;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,37 +18,47 @@ import androidx.fragment.app.Fragment;
 
 import com.example.travelers_calculator.R;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
-public class CurrencyFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
+
+public class CurrencyFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
-
     private EditText quantity;
     private Spinner fromSpinner, toSpinner;
-    private TextView resultView, currencyType;
+    private TextView resultView, currencyType, fromCurrencyType, toCurrencyType;
     private Button convert;
 
+    //the final value after all the calculations. Which really doesnt even need
+    //to be declared here, but whatever.
+    private static double finalValue;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.fragment_currency, container, false);
-        quantity = v.findViewById(R.id.quantity);
-        fromSpinner = v.findViewById(R.id.spinner1);
-        toSpinner = v.findViewById(R.id.spinner2);
-        resultView = v.findViewById(R.id.result);
-        currencyType = v.findViewById(R.id.currency_type);
-        convert = v.findViewById(R.id.convertButton);
+
+
+        convert = (Button) v.findViewById(R.id.convertButton);
+        resultView = (TextView) v.findViewById(R.id.result);
+        quantity = (EditText) v.findViewById(R.id.quantity);
+        fromSpinner = (Spinner) v.findViewById(R.id.spinner1);
+        toSpinner = (Spinner) v.findViewById(R.id.spinner2);
+        currencyType = (TextView) v.findViewById(R.id.currency_type);
+        fromCurrencyType = (TextView) v.findViewById(R.id.from_currency_type);
+        toCurrencyType = (TextView) v.findViewById(R.id.to_currency_type);
+
+        finalValue = 0.0;
+        //this will probably go in the onclick event for convert button
+        //resultView.setText(String.valueOf(finalValue));
 
         //for spinner 1
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.currencies_list, android.R.layout.simple_spinner_item);
@@ -63,309 +72,277 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         toSpinner.setAdapter(adapter2);
         toSpinner.setOnItemSelectedListener(this);
 
-
-
-        //when convert is pressed
-        convert.setOnClickListener(new View.OnClickListener()
+        final Thread thread = new Thread(new Runnable()
         {
             @Override
-            public void onClick(View v)
+            public void run()
             {
-                //defaulting to 0 if there is no input
-                if(quantity.getText().toString().length() == 0)
-                {
-                    quantity.setText("0");
-                }
-
-
-                //set result textview to the result
+                HttpURLConnection urlConnection = null;
                 try
                 {
-                    resultView.setText(String.valueOf(conversionFactory()));
-                } catch (IOException e)
+                    try
+                    {
+                        //sending url request
+                        String mainUrl = "https://api.exchangeratesapi.io/latest";
+                        String updatedUrl = mainUrl + "?base=" + fromSpinner.getSelectedItem();
+                        URL url = new URL(updatedUrl);
+                        urlConnection = (HttpURLConnection) url.openConnection();
+
+                        //string parsing
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader inReader = new BufferedReader(new InputStreamReader(in));
+                        String inputLine = "";
+                        String fullStr = "";
+                        while ((inputLine = inReader.readLine()) != null)
+                        {
+                            fullStr += inputLine;
+                        }
+
+                        //getting rates and set them to the corresponding currencies in spinners
+                        JSONObject jsonObj = new JSONObject(fullStr);
+                        JSONObject result = jsonObj.getJSONObject("rates");
+
+                        Double moneyValue = Double.valueOf(quantity.getText().toString());
+
+                        if (fromSpinner.getSelectedItem().equals(toSpinner.getSelectedItem()))
+                        {
+                            finalValue = moneyValue;
+                        }
+
+                        else
+                        {
+                            Double rateValue = Double.valueOf(result.getString((String) toSpinner.getSelectedItem()));
+                            Double resultValue = moneyValue * rateValue;
+                            finalValue = resultValue;
+                        }
+                    }
+                    finally
+                    {
+                        if (urlConnection != null)
+                            urlConnection.disconnect();
+                    }
+                }
+                catch (NumberFormatException e)
                 {
                     e.printStackTrace();
                 }
-                //set the type of result
-                currencyType.setText(toSpinner.getSelectedItem().toString());
-
-                //result.setText("changed to conversion");
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
 
+        convert.setOnClickListener(new View.OnClickListener()
+        {
 
+            @Override
+            public void onClick(View v)
+            {
+                Toast.makeText(getActivity(), getString(R.string.waiting_message), Toast.LENGTH_SHORT).show();
+                thread.start();
+                try {
+                    thread.join();
+                    resultView.setText(String.valueOf(finalValue));
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                currencyType.setText(toSpinner.getSelectedItem().toString());
+            }
+        });
 
-        return v;
+        return  v;
     }
 
+    //TODO: Since I cant find a way to contain the description within the spinner, then maybe just make a textview for it when the item is selected
     @Override
-    public void onClick(View v) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+        //from currency
+        if (fromSpinner.getSelectedItemPosition() == 0)
+        {
+            fromCurrencyType.setText(getString(R.string.Dollars));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 1)
+        {
+            fromCurrencyType.setText(getString(R.string.Euros));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 2)
+        {
+            fromCurrencyType.setText(getString(R.string.Pounds));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 3)
+        {
+            fromCurrencyType.setText(getString(R.string.Pesos));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 4)
+        {
+            fromCurrencyType.setText(getString(R.string.Yens));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 5)
+        {
+            fromCurrencyType.setText(getString(R.string.Yuans));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 6)
+        {
+            fromCurrencyType.setText(getString(R.string.Levs));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 7)
+        {
+            fromCurrencyType.setText(getString(R.string.Korunas));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 8)
+        {
+            fromCurrencyType.setText(getString(R.string.DKrones));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 9)
+        {
+            fromCurrencyType.setText(getString(R.string.Zlotys));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 10)
+        {
+            fromCurrencyType.setText(getString(R.string.Kronas));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 11)
+        {
+            fromCurrencyType.setText(getString(R.string.Francs));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 12)
+        {
+            fromCurrencyType.setText(getString(R.string.Roubles));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 13)
+        {
+            fromCurrencyType.setText(getString(R.string.Liras));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 14)
+        {
+            fromCurrencyType.setText(getString(R.string.AusDollars));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 15)
+        {
+            fromCurrencyType.setText(getString(R.string.Reals));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 16)
+        {
+            fromCurrencyType.setText(getString(R.string.CanDollars));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 17)
+        {
+            fromCurrencyType.setText(getString(R.string.Shekels));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 18)
+        {
+            fromCurrencyType.setText(getString(R.string.Rupees));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 19)
+        {
+            fromCurrencyType.setText(getString(R.string.Wons));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 20)
+        {
+            fromCurrencyType.setText(getString(R.string.Rands));
+        }
+        else if (fromSpinner.getSelectedItemPosition() == 21)
+        {
+            fromCurrencyType.setText(getString(R.string.Rands));
+        }
 
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        //to currency
+        if (toSpinner.getSelectedItemPosition() == 0)
+        {
+            toCurrencyType.setText(getString(R.string.Dollars));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 1)
+        {
+            toCurrencyType.setText(getString(R.string.Euros));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 2)
+        {
+            toCurrencyType.setText(getString(R.string.Pounds));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 3)
+        {
+            toCurrencyType.setText(getString(R.string.Pesos));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 4)
+        {
+            toCurrencyType.setText(getString(R.string.Yens));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 5)
+        {
+            toCurrencyType.setText(getString(R.string.Yuans));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 6)
+        {
+            toCurrencyType.setText(getString(R.string.Levs));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 7)
+        {
+            toCurrencyType.setText(getString(R.string.Korunas));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 8)
+        {
+            toCurrencyType.setText(getString(R.string.DKrones));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 9)
+        {
+            toCurrencyType.setText(getString(R.string.Zlotys));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 10)
+        {
+            toCurrencyType.setText(getString(R.string.Kronas));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 11)
+        {
+            toCurrencyType.setText(getString(R.string.Francs));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 12)
+        {
+            toCurrencyType.setText(getString(R.string.Roubles));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 13)
+        {
+            toCurrencyType.setText(getString(R.string.Liras));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 14)
+        {
+            toCurrencyType.setText(getString(R.string.AusDollars));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 15)
+        {
+            toCurrencyType.setText(getString(R.string.Reals));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 16)
+        {
+            toCurrencyType.setText(getString(R.string.CanDollars));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 17)
+        {
+            toCurrencyType.setText(getString(R.string.Shekels));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 18)
+        {
+            toCurrencyType.setText(getString(R.string.Rupees));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 19)
+        {
+            toCurrencyType.setText(getString(R.string.Wons));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 20)
+        {
+            toCurrencyType.setText(getString(R.string.Rands));
+        }
+        else if (toSpinner.getSelectedItemPosition() == 21)
+        {
+            toCurrencyType.setText(getString(R.string.Rands));
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-    public double conversionFactory() throws IOException {
-        //the constant that multiplies by the quantity;
-        double rate = 0;
-        //the quantity variable to multiply the constant by
-        double multiplier = Double.parseDouble(quantity.getText().toString());
-        String errorMessage = getString(R.string.error_message);
-
-        //from dollar
-        if(fromSpinner.getSelectedItemPosition() == 0)
-        {
-            //to dollar
-            if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 1;
-            //to euro
-            //TEST
-            else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = (convertCurrency(getString(R.string.USDtoEUR)));
-            //to pound
-            else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 6.87;
-            //to peso
-            else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 6.90;
-            //to yen
-            else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 5.89;
-            //to yuan
-            else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 3.02;
-
-            else return 0;
-        }
-
-        //from euro
-        else if(fromSpinner.getSelectedItemPosition() == 1)
-        {
-            //to dollar
-            if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 1.09;
-            //to euro
-            else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = 1;
-            //to pound
-            else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 2.08;
-            //to peso
-            else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 5.90;
-            //to yen
-            else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 4.98;
-            //to yuan
-            else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 5.89;
-            else return 0;
-        }
-
-        //from pound
-        else if(fromSpinner.getSelectedItemPosition() == 2)
-        {
-            //to dollar
-            if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 1.08;
-            //to euro
-            else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = 2.09;
-            //to pound
-            else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 1;
-            //to peso
-            else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 7.89;
-            //to yen
-            else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 3.90;
-            //to yuan
-            else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 3.0;
-            else return 0;
-
-        }
-        //from peso
-        else if(fromSpinner.getSelectedItemPosition() == 3)
-        {
-            //to dollar
-            if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 0.980;
-            //to euro
-            else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = 0.0254;
-            //to pound
-            else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 0.0000254;
-            //to peso
-            else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 1;
-            //to yen
-            else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 0.0000254;
-            //to yuan
-            else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 0.0000254;
-            else return 0;
-
-        }
-
-        //from yen
-        else if(fromSpinner.getSelectedItemPosition() == 4)
-        {
-            //to dollar
-            if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 0.980;
-                //to euro
-            else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = 0.0254;
-                //to pound
-            else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 0.0000254;
-                //to peso
-            else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 0.980;
-                //to yen
-            else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 1;
-                //to yuan
-            else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 0.0000254;
-            else return 0;
-
-        }
-        //from yuan
-        else if(fromSpinner.getSelectedItemPosition() == 5)
-        {
-            //to dollar
-            if(toSpinner.getSelectedItemPosition() == 0)
-                rate = 0.980;
-                //to euro
-            else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = 0.0254;
-                //to pound
-            else if(toSpinner.getSelectedItemPosition() == 2)
-                rate = 0.0000254;
-                //to peso
-            else if(toSpinner.getSelectedItemPosition() == 3)
-                rate = 0.758;
-                //to yen
-            else if(toSpinner.getSelectedItemPosition() == 4)
-                rate = 0.0000254;
-                //to yuan
-            else if(toSpinner.getSelectedItemPosition() == 5)
-                rate = 1;
-            else return 0;
-
-        }
-
-        else
-            return 0;
-
-        //the conversion results
-        double conversion = rate*multiplier;
-        return conversion;
-    }
-
-    public double convertCurrency(final String urlRequest) throws IOException
-    {
-        String mainUrl = "https://api.exchangeratesapi.io/latest";
-        String updatedUrl =mainUrl + "?base" +fromSpinner.getSelectedItem();
-        String url = updatedUrl;
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .header("Content-Type", "application/json")
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull okhttp3.Call call, @NotNull IOException e)
-            {
-                String message = e.getMessage().toString();
-                Log.w("failure Response", message);
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onResponse(@NotNull okhttp3.Call call, @NotNull Response response) throws IOException
-            {
-                final String message = response.body().string();
-                getActivity().runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        //Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                        // TODO: Change this function to be able to convert between the two types
-                        try
-                        {
-                            JSONObject obj = new JSONObject(message);
-                            //returns rates
-                            JSONObject result = obj.getJSONObject("rates");
-
-                            // quantity input
-                            double multiplier = Double.parseDouble(quantity.getText().toString());
-
-                            //final result
-                            double finResult = 0.0;
-
-                            //gets the exchange rates of the currencies from this spinner
-                            //String fromVal = result.getString(fromSpinner.toString());
-                            //String toVal = result.getString(toSpinner.toString());
-
-                            //But since were just comparing between two rates, it should just return that answer and that's it
-                            //So I just need to be able to return the rate, that's it
-                            //double rate = Double.valueOf(result);
-
-                            //double rate = 0;
-                            //the quantity variable to multiply the constant by
-
-                            String errorMessage = getString(R.string.error_message);
-
-                            //from dollar
-                            if(fromSpinner.getSelectedItem().equals(toSpinner.getSelectedItem()))
-                            {
-                                finResult = multiplier;
-                            }
-                            else
-                                {
-                                Double rateValue = Double.valueOf(result.getString((String)toSpinner.getSelectedItem()));
-                                Double resultValue = multiplier * rateValue;
-                                finResult = resultValue;
-                                }
-
-                            //the conversion results
-                            //double conversion = rate*multiplier;
-                            //then outputs the quantity value times the value of rates
-                            //double output = dollarval*Double.valueOf(val);
-
-                            //result.setText(String.valueOf(output));
-
-
-
-                        }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-
-        });
-        return 0;
-    }
 }
-
 
