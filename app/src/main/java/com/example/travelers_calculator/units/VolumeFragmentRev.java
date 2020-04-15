@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.travelers_calculator.R;
 
-public class TemperatureFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
+public class VolumeFragmentRev extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
     //Add com.example.Travelers_Calculator_Demo.units code here
     private Spinner spinner1, spinner2;
@@ -27,6 +27,8 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     private TextView unitType;
     private Button convert;
     //private Button calculatorWidget;
+    //TODO: ADD THE ARROW BUTTON
+    //TODO: CALL AND INSTANTIATE THE FRAGMENTSWITCHER CLASS
 
 
     @Nullable
@@ -35,7 +37,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     {
         // return inflater.inflate(R.layout.fragment_units, container, false);
         //TODO: CHANGE THE LAYOUT TO THE CLASS'S CORRESPONDING LAYOUT
-        View view = inflater.inflate(R.layout.fragment_units_temperature, container, false);
+        View view = inflater.inflate(R.layout.fragment_units_volume, container, false);
 
         //the conversion quantities
         quantity = (EditText) view.findViewById(R.id.quantity);
@@ -43,18 +45,19 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
         unitType = (TextView) view.findViewById(R.id.unit_type);
         convert = (Button) view.findViewById(R.id.convertButton);
         //calculator widget
-       // calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
+        //calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
 
+        //TODO: SWITCH SPINNER 1'S LAYOUT TO SPINNER 2'S AND VICEVERSA
         //for spinner 1
         spinner1 = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_temp, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_volume, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(this);
 
         //for spinner 2
         spinner2 = (Spinner) view.findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units_temp, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units_volume, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(this);
@@ -138,26 +141,66 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     }
 
     //operations
-    //TODO: CHANGE THE CONVERSION FACTORY TO WHATEVER UNITS THE FRAGMENT TAKES CARE OF
+    ////TODO: CHANGE THE CONVERSION FACTORY SPINNER 2 TO SPINNER 1
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {
-        //this factory wil be a little different given the nature converting from  fahrenheit to celsius and viceversa
+//        Object pound = spinner1.getItemAtPosition(0);
+//        Object foot = spinner1.getItemAtPosition(1);
+//        Object gallon = spinner1.getItemAtPosition(2);
+//        Object gram = spinner2.getItemAtPosition(0);
+//        Object meter = spinner2.getItemAtPosition(1);
+//        Object liter = spinner2.getItemAtPosition(2);
 
         //the constant that multiplies by the quantity;
         double constant = 0;
         //the quantity variable to multiply the constant by
         double multiplier = Double.parseDouble(quantity.getText().toString());
-        String errorMessage = getString(R.string.error_message);
+        //not really applicable here:
+       // String errorMessage = getString(R.string.error_message);
 
-        //from Fahrenheit
+        //from gallons
         if(spinner1.getSelectedItemPosition() == 0)
         {
-            //to Celsius
+            //to fluid ounces
             if(spinner2.getSelectedItemPosition() == 0)
-                //takes in the quantity, put that in the formula
-                constant = ((multiplier - 32)*5)/9;
+                constant = 128;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 3785.41178;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 3.785412;
+            else return 0;
+        }
 
+        //from pint
+        else if(spinner1.getSelectedItemPosition() == 1)
+        {
+            //to fluid ounces
+            if(spinner2.getSelectedItemPosition() == 0)
+                constant = 16;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 473.176473;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 0.473176;
+            else return 0;
+        }
+
+        //from quarts
+        else if(spinner1.getSelectedItemPosition() == 2)
+        {
+            //to fluid ounces
+            if(spinner2.getSelectedItemPosition() == 0)
+                constant = 32;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 1)
+                constant = 946.352946;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 2)
+                constant = 0.946353;
             else return 0;
         }
 
@@ -165,8 +208,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
             return 0;
 
         //the conversion results
-       // double conversion = constant*multiplier;
-        //pop out the result
-        return constant;
+        double conversion = constant*multiplier;
+        return conversion;
     }
 }

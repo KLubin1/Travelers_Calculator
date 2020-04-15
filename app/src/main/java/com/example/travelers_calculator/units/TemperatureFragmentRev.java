@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.travelers_calculator.R;
 
-public class TemperatureFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
+public class TemperatureFragmentRev extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
     //Add com.example.Travelers_Calculator_Demo.units code here
     private Spinner spinner1, spinner2;
@@ -27,6 +27,8 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     private TextView unitType;
     private Button convert;
     //private Button calculatorWidget;
+    //TODO: ADD THE ARROW BUTTON
+    //TODO: CALL AND INSTANTIATE THE FRAGMENTSWITCHER CLASS
 
 
     @Nullable
@@ -45,6 +47,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
         //calculator widget
        // calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
 
+        //TODO: SWITCH SPINNER 1'S LAYOUT TO SPINNER 2'S AND VICEVERSA
         //for spinner 1
         spinner1 = (Spinner) view.findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_temp, android.R.layout.simple_spinner_item);
@@ -138,7 +141,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     }
 
     //operations
-    //TODO: CHANGE THE CONVERSION FACTORY TO WHATEVER UNITS THE FRAGMENT TAKES CARE OF
+    ////TODO: CHANGE THE CONVERSION FACTORY SPINNER 2 TO SPINNER 1
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {

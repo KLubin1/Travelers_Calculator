@@ -103,7 +103,7 @@
         -->
 
     <Button
-        android:id="@+id/switch_button"
+        android:id="@+id/rev_switch_button"
         android:layout_width="64dp"
         android:layout_height="43dp"
         android:alpha="0.5"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/length_layout_rev"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -72,7 +73,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.664" />
+        app:layout_constraintVertical_bias="0.681" />
 
     <Button
         android:id="@+id/convertButton"
@@ -86,7 +87,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.477" />
-<!--
+
+    <!--
     <Button
         android:id="@+id/calculator_widget_unit"
         android:layout_width="54dp"
@@ -103,9 +105,9 @@
         -->
 
     <Button
-        android:id="@+id/switch_button"
-        android:layout_width="64dp"
-        android:layout_height="43dp"
+        android:id="@+id/rev_switch_button"
+        android:layout_width="60dp"
+        android:layout_height="44dp"
         android:alpha="0.5"
         android:background="@drawable/ic_conversion_arrow"
         app:layout_constraintBottom_toBottomOf="parent"

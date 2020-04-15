@@ -129,7 +129,7 @@ public class CurrencyTest extends Fragment implements AdapterView.OnItemSelected
                 //to euro
                 //TEST
             else if(toSpinner.getSelectedItemPosition() == 1)
-                rate = (convertCurrency(getString(R.string.USDtoEUR)));
+                rate = 8.9;
                 //to pound
             else if(toSpinner.getSelectedItemPosition() == 2)
                 rate = 6.87;
