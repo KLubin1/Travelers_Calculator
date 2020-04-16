@@ -161,7 +161,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.000772;
             //to miles²
             else if (rightSpinner.getSelectedItemPosition() == 3)
-                constant = 2.491E-10;
+                constant = 2.491e-10;
             //to centimeters²
             else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 6.4516;
@@ -170,7 +170,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.000645;
             //to kilometers²
             else if( rightSpinner.getSelectedItemPosition() == 6)
-                constant = 6.4516E-10;
+                constant = 6.4516e-10;
             else return 0;
         }
 
@@ -188,7 +188,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.11111;
             //to miles²
             else if (rightSpinner.getSelectedItemPosition() == 3)
-                constant = 3.587E-8;
+                constant = 3.587e-8;
             //to centimeters²
             else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 929.0304;
@@ -197,7 +197,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.092903;
             //to kilometers²
             else if( rightSpinner.getSelectedItemPosition() == 6)
-                constant = 9.2903E-8;
+                constant = 9.2903e-8;
             else return 0;
         }
 
@@ -215,7 +215,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 1;
             //to miles²
             else if (rightSpinner.getSelectedItemPosition() == 3)
-                constant = 3.2283E-7;
+                constant = 3.2283e-7;
             //to centimeters²
             else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 8361.2736;
@@ -224,7 +224,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.836127;
             //to kilometers²
             else if( rightSpinner.getSelectedItemPosition() == 6)
-                constant = 8.3613E-7;
+                constant = 8.3613e-7;
             else return 0;
         }
 
@@ -245,7 +245,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 1;
                 //to centimeters²
             else if(rightSpinner.getSelectedItemPosition() == 4)
-                constant = 2.5900E+10;
+                constant = 2.5900e+10;
                 //to meters²
             else if(rightSpinner.getSelectedItemPosition() == 5)
                 constant = 2589988.11;
@@ -268,7 +268,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.0012;
             //to miles²
             else if (rightSpinner.getSelectedItemPosition() == 3)
-                constant = 3.861E-11;
+                constant = 3.861e-11;
             //to centimeters²
             else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 1;
@@ -277,7 +277,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.0001;
             //to kilometers²
             else if( rightSpinner.getSelectedItemPosition() == 6)
-                constant = 1.01E-10;
+                constant = 1.01e-10;
             else return 0;
         }
         //from meters²
@@ -294,7 +294,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 1.19599;
                 //to miles²
             else if (rightSpinner.getSelectedItemPosition() == 3)
-                constant = 3.861E-7;
+                constant = 3.861e-7;
                 //to centimeters²
             else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 10000;
@@ -323,7 +323,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
                 constant = 0.386102;
             //to centimeters²
             else if(rightSpinner.getSelectedItemPosition() == 4)
-                constant = 1.0000E+12;
+                constant = 1.0000e+12;
             //to meters²
             else if(rightSpinner.getSelectedItemPosition() == 5)
                 constant = 1000000;
