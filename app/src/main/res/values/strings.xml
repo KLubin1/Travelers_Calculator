@@ -32,59 +32,49 @@
     <string name="error_message">"Can't Convert!"</string>
     <string name="waiting_message">Calculating...</string>
 
-    <!--TODO: HAVE THE ARRAYS FOR EACH UNIT TYPE AND SET THEM UP IN SO THAT CAN BE REFERENCED ACCORDINGLY IN THE CONVERSION FACTORY-->
+    <!--TODO: Make an array for each type instead of us and metric-->
     <!--length-->
-    <string-array name="us_units_length">
+    <string-array name="length_spinner">
         <item>inches(in)</item>
         <item>feet(ft)</item>
         <item>yards(yd)</item>
         <item>miles</item>
-    </string-array>
-    <string-array name="metric_units_length">
         <item>centimeters(cm)</item>
         <item>meters(m)</item>
         <item>kilometers(km)</item>
     </string-array>
 
     <!--area-->
-    <string-array name="us_units_area">
+    <string-array name="area_spinner">
         <item>inches²(in²)</item>
         <item>feet²(ft²)</item>
         <item>yards²(yd²)</item>
         <item>miles²</item>
-    </string-array>
-    <string-array name="metric_units_area">
         <item>centimeters²(cm²)</item>
         <item>meters²(m²)</item>
         <item>kilometers²(km²)</item>
     </string-array>
 
     <!--weight-->
-    <string-array name="us_units_weight">
+    <string-array name="weight_spinner">
         <item>pounds(lb)</item>
         <item>tons</item>
-    </string-array>
-    <string-array name="metric_units_weight">
         <item>ounces(oz)</item>
         <item>grams(g)</item>
         <item>kilograms(kg)</item>
     </string-array>
 
     <!--temperature-->
-    <string-array name="us_units_temp">
+    <string-array name="temp_spinner">
         <item>Fahrenheit(F°)</item>
-    </string-array>
-    <string-array name="metric_units_temp">
         <item>Celsius(C°)</item>
     </string-array>
 
     <!--volume-->
-    <string-array name="us_units_volume">
+    <string-array name="volume_spinner">
         <item>gallon(gal)</item>
         <item>pint(pt)</item>
         <item>quart(qt)</item>
-    </string-array>
-    <string-array name="metric_units_volume">
         <item>fluid ounces(fl oz)</item>
         <item>milliliters(mL)</item>
         <item>liters(L)</item>
