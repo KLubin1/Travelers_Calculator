@@ -14,7 +14,7 @@ import com.example.travelers_calculator.units.LengthFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
 {
 
     @Override
@@ -56,5 +56,24 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
     };
+
+    /*@Override
+    public void changeFragment(int id)
+    {
+        Fragment switcher = null;
+        if (id == 1) {
+            switcher = new LengthFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id, switcher);
+            ft.commit();
+        }
+        else if (id == 2) {
+            switcher = new LengthFragmentRev();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.length_layout, switcher);
+            ft.commit();
+        }
+
+    }*/
 }
 

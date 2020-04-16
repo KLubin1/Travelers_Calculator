@@ -15,14 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.travelers_calculator.R;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.List;
 
 public class LengthFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
@@ -35,6 +29,10 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
     //private Button calculatorWidget;
     //switcher
    public FragmentSwitcher fragmentSwitcher;
+   //interface
+   private OnFragmentInteractionListener listener;
+   //constructor, not sure if necessary
+   public LengthFragment(){}
 
 
 
@@ -59,14 +57,14 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
 
         //for spinner 1
         usSpinner = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.us_units_length, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.length_spinner, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         usSpinner.setAdapter(adapter1);
         usSpinner.setOnItemSelectedListener(this);
 
         //for spinner 2
         metricSpinner = (Spinner) view.findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.metric_units_length, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.length_spinner, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         metricSpinner.setAdapter(adapter2);
         metricSpinner.setOnItemSelectedListener(this);
@@ -96,11 +94,12 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         });
 
         //switching between views
-        switchButton.setOnClickListener(new View.OnClickListener() {
+        switchButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
-                FragmentManager fragmentManager = new FragmentManager() {
+                /*FragmentManager fragmentManager = new FragmentManager() {
                     @NonNull
                     @Override
                     public FragmentTransaction beginTransaction() {
@@ -228,25 +227,25 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                     public boolean isStateSaved() {
                         return false;
                     }
-                };
-                if (getFragmentManager().findFragmentById(R.id.length_layout) != null)
-                {
-                    //if the fragment exists, show the rev layout
-                    getFragmentManager().beginTransaction().show(getFragmentManager().findFragmentById(R.id.length_layout_rev)).commit();
+                };*/
+                if (getFragmentManager().findFragmentByTag(getString(R.string.us_switch_tag)) == null) {
+
+                    //if the normal fragment does not exist, add it to fragment manager.
+                    getFragmentManager().beginTransaction().add(R.id.length_layout, new LengthFragment(), getString(R.string.us_switch_tag)).commit();
+
                     //and hide the current one
                     //getFragmentManager().beginTransaction().hide(getFragmentManager().findFragmentById(R.id.length_layout)).commit();
-                }
-                else
-                {
-                    //if the fragment does not exist, add it to fragment manager.
-                    getFragmentManager().beginTransaction().add(R.id.length_layout, new LengthFragment()).commit();
+                } else {
+                    //if the normal fragment exists, show the rev layout
+                    getFragmentManager().beginTransaction().show(getFragmentManager().findFragmentByTag("uSSwitch")).commit();//causing probs
+
                 }
 
-                if (getFragmentManager().findFragmentById(R.id.length_layout_rev) != null)
-                {
-                    //if the other fragment is visible, hide the current layout.
-                    getFragmentManager().beginTransaction().hide(getFragmentManager().findFragmentById(R.id.length_layout)).commit();
+                if (getFragmentManager().findFragmentByTag(getString(R.string.metric_switch_tag)) != null) {
+                    //if the rev fragment is visible, hide the normal layout.
+                    getFragmentManager().beginTransaction().hide(getFragmentManager().findFragmentByTag("metricSwitch")).commit();
                 }
+                //listener.changeFragment(1);
 
             }
         });
@@ -271,6 +270,31 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
 
         return view;
     }
+
+   /* @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        try
+        {
+            listener = (OnFragmentInteractionListener) activity;
+
+        }
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+    }
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+        listener = null;
+
+    }*/
+
 
 
 
