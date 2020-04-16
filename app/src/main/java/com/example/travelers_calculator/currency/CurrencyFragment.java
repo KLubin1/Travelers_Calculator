@@ -24,6 +24,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -143,7 +145,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 thread.start();
                 try {
                     thread.join();
-                    resultView.setText(String.valueOf(finalValue));
+                    resultView.setText(String.valueOf(roundNumber(finalValue,2)));
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();
@@ -155,7 +157,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         return  v;
     }
 
-    //TODO: Since I cant find a way to contain the description within the spinner, then maybe just make a textview for it when the item is selected
+    //Since I cant find a way to contain the description within the spinner, then this method will be used to make a textview for each item when the item is selected
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
@@ -343,6 +345,15 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    //Number rounding to 2 decimal positions
+    public static double roundNumber(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
 
