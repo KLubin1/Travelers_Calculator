@@ -107,8 +107,6 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
         return view;
     }
 
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
@@ -141,13 +139,6 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {
-//        Object pound = spinner1.getItemAtPosition(0);
-//        Object foot = spinner1.getItemAtPosition(1);
-//        Object gallon = spinner1.getItemAtPosition(2);
-//        Object gram = spinner2.getItemAtPosition(0);
-//        Object meter = spinner2.getItemAtPosition(1);
-//        Object liter = spinner2.getItemAtPosition(2);
-
         //the constant that multiplies by the quantity;
         double constant = 0;
         //the quantity variable to multiply the constant by
@@ -158,14 +149,23 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
         //from gallons
         if(spinner1.getSelectedItemPosition() == 0)
         {
+            //to gallons
+            if(spinner2.getSelectedItemPosition()==0)
+                constant = 1;
+            //to pint
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant=8;
+            //to quarts
+            else if(spinner2.getSelectedItemPosition()==2)
+                constant = 4;
             //to fluid ounces
-            if(spinner2.getSelectedItemPosition() == 0)
+            else if(spinner2.getSelectedItemPosition() == 3)
                 constant = 128;
             //to milliliters
-            else if(spinner2.getSelectedItemPosition() == 1)
+            else if(spinner2.getSelectedItemPosition() == 4)
                 constant = 3785.41178;
             //to liters
-            else if(spinner2.getSelectedItemPosition() == 2)
+            else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 3.785412;
             else return 0;
         }
@@ -173,14 +173,23 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
         //from pint
         else if(spinner1.getSelectedItemPosition() == 1)
         {
+            //to gallons
+            if(spinner2.getSelectedItemPosition()==0)
+                constant = 0.125;
+            //to pint
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant=1;
+            //to quarts
+            else if(spinner2.getSelectedItemPosition()==2)
+                constant = 0.5;
             //to fluid ounces
-            if(spinner2.getSelectedItemPosition() == 0)
+            else if(spinner2.getSelectedItemPosition() == 3)
                 constant = 16;
             //to milliliters
-            else if(spinner2.getSelectedItemPosition() == 1)
+            else if(spinner2.getSelectedItemPosition() == 4)
                 constant = 473.176473;
             //to liters
-            else if(spinner2.getSelectedItemPosition() == 2)
+            else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 0.473176;
             else return 0;
         }
@@ -188,15 +197,93 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
         //from quarts
         else if(spinner1.getSelectedItemPosition() == 2)
         {
+            //to gallons
+            if(spinner2.getSelectedItemPosition()==0)
+                constant = 0.25;
+            //to pint
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant=2;
+            //to quarts
+            else if(spinner2.getSelectedItemPosition()==2)
+                constant = 1;
             //to fluid ounces
-            if(spinner2.getSelectedItemPosition() == 0)
+            else if(spinner2.getSelectedItemPosition() == 3)
                 constant = 32;
             //to milliliters
-            else if(spinner2.getSelectedItemPosition() == 1)
+            else if(spinner2.getSelectedItemPosition() == 4)
                 constant = 946.352946;
             //to liters
-            else if(spinner2.getSelectedItemPosition() == 2)
+            else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 0.946353;
+            else return 0;
+        }
+        //from fluid ounces
+        else if(spinner1.getSelectedItemPosition() == 3)
+        {
+            //to gallons
+            if(spinner2.getSelectedItemPosition()==0)
+                constant = 0.007812;
+            //to pint
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant=0.0625;
+            //to quarts
+            else if(spinner2.getSelectedItemPosition()==2)
+                constant = 0.03125;
+            //to fluid ounces
+            else if(spinner2.getSelectedItemPosition() == 3)
+                constant = 1;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 4)
+                constant = 29.57353;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 5)
+                constant = 0.029574;
+            else return 0;
+        }
+        //from milliliters
+        else if(spinner1.getSelectedItemPosition() == 4)
+        {
+            //to gallons
+            if(spinner2.getSelectedItemPosition()==0)
+                constant = 0.000264;
+            //to pint
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant=0.002113;
+            //to quarts
+            else if(spinner2.getSelectedItemPosition()==2)
+                constant = 0.001057;
+            //to fluid ounces
+            else if(spinner2.getSelectedItemPosition() == 3)
+                constant = 0.033814;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 4)
+                constant = 1;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 5)
+                constant = 0.001;
+            else return 0;
+        }
+        //from liters
+        else if(spinner1.getSelectedItemPosition() == 5)
+        {
+            //to gallons
+            if(spinner2.getSelectedItemPosition()==0)
+                constant = 0.264172;
+            //to pint
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant=2.113376;
+            //to quarts
+            else if(spinner2.getSelectedItemPosition()==2)
+                constant = 1.056688;
+            //to fluid ounces
+            else if(spinner2.getSelectedItemPosition() == 3)
+                constant = 33.814023;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 4)
+                constant = 1000;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 5)
+                constant = 1;
             else return 0;
         }
 

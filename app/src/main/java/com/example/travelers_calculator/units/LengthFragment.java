@@ -21,7 +21,7 @@ import com.example.travelers_calculator.R;
 public class LengthFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
     //Add units code here
-    private Spinner usSpinner, metricSpinner;
+    private Spinner leftSpinner, rightSpinner;
     private EditText quantity;
     private TextView result, unitType;
     private Button convert;
@@ -33,10 +33,6 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
    private OnFragmentInteractionListener listener;
    //constructor, not sure if necessary
    public LengthFragment(){}
-
-
-
-
 
     @Nullable
     @Override
@@ -56,20 +52,18 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         //calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
 
         //for spinner 1
-        usSpinner = (Spinner) view.findViewById(R.id.spinner1);
+        leftSpinner = (Spinner) view.findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.length_spinner, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        usSpinner.setAdapter(adapter1);
-        usSpinner.setOnItemSelectedListener(this);
+        leftSpinner.setAdapter(adapter1);
+        leftSpinner.setOnItemSelectedListener(this);
 
         //for spinner 2
-        metricSpinner = (Spinner) view.findViewById(R.id.spinner2);
+        rightSpinner= (Spinner) view.findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.length_spinner, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        metricSpinner.setAdapter(adapter2);
-        metricSpinner.setOnItemSelectedListener(this);
-
-
+        rightSpinner.setAdapter(adapter2);
+        rightSpinner.setOnItemSelectedListener(this);
 
         //when convert is pressed
         convert.setOnClickListener(new View.OnClickListener()
@@ -87,7 +81,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 //set result textview to the result
                 result.setText(String.valueOf(conversionFactory()));
                 //set the type of result
-                unitType.setText(metricSpinner.getSelectedItem().toString());
+                unitType.setText(rightSpinner.getSelectedItem().toString());
 
                 //result.setText("changed to conversion");
             }
@@ -344,72 +338,185 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         String errorMessage = getString(R.string.error_message);
 
         //from inch
-        if(usSpinner.getSelectedItemPosition() == 0)
+        if(leftSpinner.getSelectedItemPosition() == 0)
         {
+            //to inch
+            if(rightSpinner.getSelectedItemPosition() == 0)
+                constant = 1;
+            //to foot
+            else if(rightSpinner.getSelectedItemPosition() == 1)
+                constant = 0.08333;
+            //to yard
+            else if( rightSpinner.getSelectedItemPosition() == 2)
+                constant = 0.02778;
+            //to mile
+            else if(rightSpinner.getSelectedItemPosition() == 3)
+                constant = 0.000016;
             //to centimeter
-            if(metricSpinner.getSelectedItemPosition() == 0)
+            else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 2.54;
             //to meter
-            else if(metricSpinner.getSelectedItemPosition() == 1)
+            else if(rightSpinner.getSelectedItemPosition() == 5)
                 constant = 0.0254;
             //to kilometer
-            else if( metricSpinner.getSelectedItemPosition() == 2)
-                    constant = 0.0000254;
+            else if(rightSpinner.getSelectedItemPosition() == 6)
+                constant = 0.0000254;
+
             else return 0;
         }
-
-        //from feet
-        else if(usSpinner.getSelectedItemPosition() == 1)
+        //from foot
+        else if(leftSpinner.getSelectedItemPosition() == 1)
         {
+            //to inch
+            if(rightSpinner.getSelectedItemPosition() == 0)
+                constant = 12;
+            //to foot
+            else if(rightSpinner.getSelectedItemPosition() == 1)
+                constant = 1;
+            //to yard
+            else if( rightSpinner.getSelectedItemPosition() == 2)
+                constant = 0.333;
+            //to mile
+            else if(rightSpinner.getSelectedItemPosition() == 3)
+                constant = 0.000189;
             //to centimeter
-            if(metricSpinner.getSelectedItemPosition() == 0)
+            else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 30.48;
-
             //to meter
-            else if(metricSpinner.getSelectedItemPosition() == 1)
-                constant = 0.3048;
-
+            else if(rightSpinner.getSelectedItemPosition() == 5)
+                constant = 0.000189;
             //to kilometer
-            else if(metricSpinner.getSelectedItemPosition() == 2)
-                    constant = 0.0003048;
+            else if(rightSpinner.getSelectedItemPosition() == 6)
+                constant = 0.000305;
             else return 0;
         }
-
         //from yards
-        else if(usSpinner.getSelectedItemPosition() == 2)
+        else if(leftSpinner.getSelectedItemPosition() == 2)
         {
+            //to inch
+            if(rightSpinner.getSelectedItemPosition() == 0)
+                constant = 36;
+            //to foot
+            else if(rightSpinner.getSelectedItemPosition() == 1)
+                constant = 3;
+            //to yard
+            else if( rightSpinner.getSelectedItemPosition() == 2)
+                constant = 1;
+            //to mile
+            else if(rightSpinner.getSelectedItemPosition() == 3)
+                constant = 0.000568;
             //to centimeter
-            if(metricSpinner.getSelectedItemPosition() == 0)
+            else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 91.44;
-
             //to meter
-            else if(metricSpinner.getSelectedItemPosition() == 1)
+            else if(rightSpinner.getSelectedItemPosition() == 5)
                 constant = 0.9144;
-
             //to kilometer
-            else if(metricSpinner.getSelectedItemPosition() == 2)
+            else if(rightSpinner.getSelectedItemPosition() == 6)
                 constant = 0.000914;
             else return 0;
-
         }
         //from miles
-        else if(usSpinner.getSelectedItemPosition() == 3)
+        else if(leftSpinner.getSelectedItemPosition() == 3)
         {
+            //to inch
+            if(rightSpinner.getSelectedItemPosition() == 0)
+                constant = 63360;
+            //to foot
+            else if(rightSpinner.getSelectedItemPosition() == 1)
+                constant = 5280;
+            //to yard
+            else if( rightSpinner.getSelectedItemPosition() == 2)
+                constant = 1760;
+            //to mile
+            else if(rightSpinner.getSelectedItemPosition() == 3)
+                constant = 1;
             //to centimeter
-            if(metricSpinner.getSelectedItemPosition() == 0)
+            else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 160934.4;
-
             //to meter
-            else if(metricSpinner.getSelectedItemPosition() == 1)
+            else if(rightSpinner.getSelectedItemPosition() == 5)
                 constant = 1609.344;
-
             //to kilometer
-            else if(metricSpinner.getSelectedItemPosition() == 2)
+            else if(rightSpinner.getSelectedItemPosition() == 6)
                 constant = 1.609344;
             else return 0;
-
         }
-
+        //from centimeter
+        else if(leftSpinner.getSelectedItemPosition() == 4)
+        {
+            //to inch
+            if(rightSpinner.getSelectedItemPosition() == 0)
+                constant = 0.393701;
+            //to foot
+            else if(rightSpinner.getSelectedItemPosition() == 1)
+                constant = 0.032808;
+            //to yard
+            else if( rightSpinner.getSelectedItemPosition() == 2)
+                constant = 0.010936;
+            //to mile
+            else if(rightSpinner.getSelectedItemPosition() == 3)
+                constant = 9;
+            //to centimeter
+            else if(rightSpinner.getSelectedItemPosition() == 4)
+                constant = 1;
+            //to meter
+            else if(rightSpinner.getSelectedItemPosition() == 5)
+                constant = 0.01;
+            //to kilometer
+            else if(rightSpinner.getSelectedItemPosition() == 6)
+                constant = 0.000001;
+        }
+        //from meter
+        else if(leftSpinner.getSelectedItemPosition() == 5)
+        {
+            //to inch
+            if(rightSpinner.getSelectedItemPosition() == 0)
+                constant = 39.370;
+            //to foot
+            else if(rightSpinner.getSelectedItemPosition() == 1)
+                constant = 3.28084;
+            //to yard
+            else if( rightSpinner.getSelectedItemPosition() == 2)
+                constant = 1.093613;
+            //to mile
+            else if(rightSpinner.getSelectedItemPosition() == 3)
+                constant = 0.000621;
+            //to centimeter
+            else if(rightSpinner.getSelectedItemPosition() == 4)
+                constant = 100;
+            //to meter
+            else if(rightSpinner.getSelectedItemPosition() == 5)
+                constant = 1;
+            //to kilometer
+            else if(rightSpinner.getSelectedItemPosition() == 6)
+                constant = 0.001;
+        }
+        //from kilometer
+        else if(leftSpinner.getSelectedItemPosition() == 6)
+        {
+            //to inch
+            if(rightSpinner.getSelectedItemPosition() == 0)
+                constant = 39370.0787;
+            //to foot
+            else if(rightSpinner.getSelectedItemPosition() == 1)
+                constant = 3280.8399;
+            //to yard
+            else if( rightSpinner.getSelectedItemPosition() == 2)
+                constant = 1093.6133;
+            //to mile
+            else if(rightSpinner.getSelectedItemPosition() == 3)
+                constant = 0.621271;
+            //to centimeter
+            else if(rightSpinner.getSelectedItemPosition() == 4)
+                constant = 100000;
+            //to meter
+            else if(rightSpinner.getSelectedItemPosition() == 5)
+                constant = 1000;
+            //to kilometer
+            else if(rightSpinner.getSelectedItemPosition() == 6)
+                constant = 1;
+        }
         else
             return 0;
 

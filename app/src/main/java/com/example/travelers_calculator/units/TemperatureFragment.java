@@ -153,11 +153,24 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
         //from Fahrenheit
         if(spinner1.getSelectedItemPosition() == 0)
         {
-            //to Celsius
+            //to Fahrenheit
             if(spinner2.getSelectedItemPosition() == 0)
-                //takes in the quantity, put that in the formula
+               constant = 1;
+            //to Celsius
+            else if(spinner2.getSelectedItemPosition()==1)
+            //takes in the quantity, put that in the formula
                 constant = ((multiplier - 32)*5)/9;
-
+            else return 0;
+        }
+        //from Celsius
+        else if(spinner1.getSelectedItemPosition() == 1)
+        {
+            //to Fahrenheit
+            if(spinner2.getSelectedItemPosition()== 0)
+                constant = ((multiplier*(9/5)+32));
+            //to Celsius
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant = 1;
             else return 0;
         }
 
