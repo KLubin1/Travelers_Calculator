@@ -134,5 +134,19 @@
     <string name="Rands">South African\nRand</string>
     <string name="SingDollars">Singapore Dollar</string>
 
+    <!--cities-->
+    <string-array name="time_cities">
+        <item>New York</item>
+        <item>London</item>
+        <item>Los Angeles</item>
+        <item>Dubai</item>
+        <item>Paris</item>
+        <item>Moscow</item>
+        <item>Cairo</item>
+        <item>Beijing</item>
+        <item>Hong Kong</item>
+        <item>Brasilia</item>
+    </string-array>
+
 
 </resources>
