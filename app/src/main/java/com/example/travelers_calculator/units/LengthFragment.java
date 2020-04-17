@@ -324,13 +324,6 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {
-//        Object pound = usSpinner.getItemAtPosition(0);
-//        Object foot = usSpinner.getItemAtPosition(1);
-//        Object gallon = usSpinner.getItemAtPosition(2);
-//        Object gram = metricSpinner.getItemAtPosition(0);
-//        Object meter = metricSpinner.getItemAtPosition(1);
-//        Object liter = metricSpinner.getItemAtPosition(2);
-
         //the constant that multiplies by the quantity;
         double constant = 0;
         //the quantity variable to multiply the constant by

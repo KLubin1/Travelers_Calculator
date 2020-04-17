@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="232dp"
-        android:layout_marginBottom="133dp" />
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="135dp" />
 
     <Spinner
         android:id="@+id/convert_spinner"
@@ -41,10 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-129dp"
-        android:layout_marginEnd="79dp"
-        android:layout_marginBottom="132dp"
-        android:layout_toEndOf="@id/convert_clock" />
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="135dp" />
 
 
 </RelativeLayout>

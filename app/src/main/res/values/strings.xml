@@ -136,6 +136,7 @@
 
     <!--cities-->
     <string-array name="time_cities">
+        <item>Local Time</item>
         <item>New York</item>
         <item>London</item>
         <item>Los Angeles</item>
