@@ -52,14 +52,25 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     {
         //TODO: all the conversion code must go here
         //for each item selected, the convert clock must change its time accordingly
-        //so by default, when the tab opens, it will be on local time, in which nothing will happen but display the currenct time
+        //so by default, when the tab opens, it will be on local time, in which nothing will happen but display the current time
         //if the current or convert time spinners are selected to a city, the time will change according to that time.
-        //so theres no need fora convert button
+        //so theres no need for a convert button
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+
+    //TODO: conversion factory
+    //take in a string key for each city, then pass that in a switch case to return the correct hour difference
+    //then pass that in the if-else ifs of onItemSelected
+    public double conversionFactory()
+    {
+        double diff = 0;
+        return diff;
 
     }
 }
