@@ -28,18 +28,18 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View v= inflater.inflate(R.layout.fragment_time, currentSpinner, false);
-        currentTime = v.findViewById(R.id.current_clock);
+        View v= inflater.inflate(R.layout.fragment_time, container, false);
+        //currentTime = v.findViewById(R.id.current_clock);
         convertTime = v.findViewById(R.id.convert_clock);
-        currentSpinner = v.findViewById(R.id.current_spinner);
+        //currentSpinner = v.findViewById(R.id.current_spinner);
         convertSpinner = v.findViewById(R.id.convert_spinner);
 
         //for current spinner
-        currentSpinner= v.findViewById(R.id.current_spinner);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.time_cities, android.R.layout.simple_spinner_item);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        currentSpinner.setAdapter(adapter1);
-        currentSpinner.setOnItemSelectedListener(this);
+        //currentSpinner= v.findViewById(R.id.current_spinner);
+        //ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.time_cities, android.R.layout.simple_spinner_item);
+        //adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //currentSpinner.setAdapter(adapter1);
+        //currentSpinner.setOnItemSelectedListener(this);
 
         //for convert spinner
         convertSpinner= v.findViewById(R.id.convert_spinner);
@@ -63,7 +63,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         //and call the conversion factory and set the hour to its corresponding city or timezone
 
         //for current spinner
-        if(currentSpinner.getSelectedItemPosition() == 0)
+        /*if(currentSpinner.getSelectedItemPosition() == 0)
         {
           //display current/local time
             Calendar c = Calendar.getInstance();
@@ -96,7 +96,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             currentTime.setHour(conversionFactory("New Delhi"));
         else if(currentSpinner.getSelectedItemPosition() ==12)
             currentTime.setHour(conversionFactory("Mexico City"));
-
+*/
         //for convert spinner
         if(convertSpinner.getSelectedItemPosition() == 0)
         {
