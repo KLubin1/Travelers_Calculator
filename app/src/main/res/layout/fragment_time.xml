@@ -27,7 +27,8 @@
         android:layout_marginTop="-80dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
-        android:timePickerMode="clock" />
+        android:timePickerMode="clock"
+        android:clickable="false"/>
 
     <TimePicker
         android:id="@+id/convert_clock"

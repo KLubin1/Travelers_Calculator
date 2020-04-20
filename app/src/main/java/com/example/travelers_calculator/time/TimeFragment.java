@@ -29,10 +29,11 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View v= inflater.inflate(R.layout.fragment_time, container, false);
-        //currentTime = v.findViewById(R.id.current_clock);
+        currentTime = v.findViewById(R.id.current_clock);
         convertTime = v.findViewById(R.id.convert_clock);
         //currentSpinner = v.findViewById(R.id.current_spinner);
         convertSpinner = v.findViewById(R.id.convert_spinner);
+
 
         //for current spinner
         //currentSpinner= v.findViewById(R.id.current_spinner);
@@ -41,8 +42,8 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         //currentSpinner.setAdapter(adapter1);
         //currentSpinner.setOnItemSelectedListener(this);
 
+
         //for convert spinner
-        convertSpinner= v.findViewById(R.id.convert_spinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),R.array.time_cities, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         convertSpinner.setAdapter(adapter2);
@@ -106,6 +107,8 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             int minute = c.get(Calendar.MINUTE);
             convertTime.setHour(hour);
             convertTime.setMinute(minute);
+            currentTime.setHour(hour);
+            currentTime.setMinute(minute);
         }
         else if(convertSpinner.getSelectedItemPosition()== 1)
             convertTime.setHour(conversionFactory("New York"));
@@ -157,28 +160,40 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         {
             case "New York":
                 offset = utcTime-4;
+                break;
             case "London":
                 offset = utcTime+1;
+                break;
             case "Los Angeles":
                 offset = utcTime-7;
+                break;
             case "Dubai":
                 offset = utcTime+4;
+                break;
             case "Paris":
                 offset = utcTime+2;
+                break;
             case "Moscow":
                 offset = utcTime+3;
+                break;
             case "Cairo":
                 offset = utcTime+2;
+                break;
             case "Hong Kong":
                 offset = utcTime+8;
+                break;
             case "Beijing":
                 offset = utcTime+8;
+                break;
             case "New Delhi":
                 offset=utcTime+5;
+                break;
             case "Mexico City":
                 offset = utcTime-5;
+                break;
             case "Brasilia":
                 offset = utcTime-3;
+                break;
         }
 
         return offset;
