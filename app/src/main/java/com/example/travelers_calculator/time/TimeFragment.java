@@ -24,6 +24,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     private TimePicker currentTime, convertTime;
     private Spinner currentSpinner, convertSpinner;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -33,6 +34,13 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         convertTime = v.findViewById(R.id.convert_clock);
         //currentSpinner = v.findViewById(R.id.current_spinner);
         convertSpinner = v.findViewById(R.id.convert_spinner);
+
+        Calendar c= Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        currentTime.setHour(hour);
+        currentTime.setMinute(minute);
+
 
 
         //for current spinner
