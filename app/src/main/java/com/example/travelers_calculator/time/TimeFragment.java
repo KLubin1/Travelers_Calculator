@@ -22,7 +22,7 @@ import java.util.TimeZone;
 
 public class TimeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private TimePicker currentTime, convertTime;
-    private Spinner currentSpinner, convertSpinner;
+    private Spinner convertSpinner;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
@@ -35,11 +35,13 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         //currentSpinner = v.findViewById(R.id.current_spinner);
         convertSpinner = v.findViewById(R.id.convert_spinner);
 
+        //to ensure that the currentTime always shows the current system time by default regardless of which time zone is changed to and if its never "reset" with LocalTime
         Calendar c= Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
         currentTime.setHour(hour);
         currentTime.setMinute(minute);
+        currentTime.setClickable(false);
 
 
 

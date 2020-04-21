@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/primary_light">
 
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
     <!--
     <Spinner
         android:id="@+id/current_spinner"
@@ -20,6 +16,19 @@
         android:layout_marginEnd="160dp"
         android:layout_marginBottom="135dp" />-->
 
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="279dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="206dp"
+        android:background="@drawable/ic_conversion_arrow_down"
+        android:text="Current\n Time" />
+
     <TimePicker
         android:id="@+id/current_clock"
         android:layout_width="299dp"
@@ -29,6 +38,7 @@
         android:scaleY="0.5"
         android:timePickerMode="clock"
         android:clickable="false"/>
+
 
     <TimePicker
         android:id="@+id/convert_clock"
@@ -56,6 +66,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="207dp" />
+
+
 
 
 </RelativeLayout>
