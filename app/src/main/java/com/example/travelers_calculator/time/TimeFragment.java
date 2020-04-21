@@ -99,16 +99,14 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             currentTime.setHour(conversionFactory("Mexico City"));
 */
         //for convert spinner
+        Calendar c = Calendar.getInstance();
+
         if(convertSpinner.getSelectedItemPosition() == 0)
         {
             //display current/local time
-            Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
             convertTime.setHour(hour);
-            convertTime.setMinute(minute);
             currentTime.setHour(hour);
-            currentTime.setMinute(minute);
         }
         else if(convertSpinner.getSelectedItemPosition()== 1)
             convertTime.setHour(conversionFactory("New York"));
@@ -136,6 +134,11 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             convertTime.setHour(conversionFactory("Mexico City"));
         else
             convertTime.setHour(12);
+
+        //update the minutes as the hour changes to keep the time accurate
+        int minute = c.get(Calendar.MINUTE);
+        convertTime.setMinute(minute);
+        currentTime.setMinute(minute);
     }
 
     @Override
@@ -151,54 +154,50 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     {
         //Result of taking in the UTC time and adding/subtracting the offset
         int offset = 0;
-        //Calendar c = Calendar.getInstance();
-        //int utcOffset = c.get(Calendar.ZONE_OFFSET) + c.get(Calendar.DST_OFFSET);
-
 
         //gets the calender instance of time with GMT standard, then getting hour of day
         Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int UTC = c.get(Calendar.HOUR_OF_DAY);
 
         switch(city)
         {
             case "New York":
-                offset = hour-4;
+                offset = UTC-4;
                 break;
             case "London":
-                offset = hour+1;
+                offset = UTC+1;
                 break;
             case "Los Angeles":
-                offset = hour-7;
+                offset = UTC-7;
                 break;
             case "Dubai":
-                offset = hour+4;
+                offset = UTC+4;
                 break;
             case "Paris":
-                offset = hour+2;
+                offset = UTC+2;
                 break;
             case "Moscow":
-                offset = hour+3;
+                offset = UTC+3;
                 break;
             case "Cairo":
-                offset = hour+2;
+                offset = UTC+2;
                 break;
             case "Hong Kong":
-                offset = hour+8;
+                offset = UTC+8;
                 break;
             case "Beijing":
-                offset = hour+8;
+                offset = UTC+8;
                 break;
             case "New Delhi":
-                offset=hour+5;
+                offset= UTC+5;
                 break;
             case "Mexico City":
-                offset = hour-5;
+                offset = UTC-5;
                 break;
             case "Brasilia":
-                offset = hour-3;
+                offset = UTC-3;
                 break;
         }
-
         return offset;
 
     }
