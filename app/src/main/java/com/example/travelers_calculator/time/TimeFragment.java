@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.travelers_calculator.R;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.TimeZone;
 
 public class TimeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private TimePicker currentTime, convertTime;
@@ -134,6 +134,8 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             convertTime.setHour(conversionFactory("New Delhi"));
         else if(convertSpinner.getSelectedItemPosition() ==12)
             convertTime.setHour(conversionFactory("Mexico City"));
+        else
+            convertTime.setHour(12);
     }
 
     @Override
@@ -152,47 +154,48 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         //Calendar c = Calendar.getInstance();
         //int utcOffset = c.get(Calendar.ZONE_OFFSET) + c.get(Calendar.DST_OFFSET);
 
-        //Date::getTime allegedly uses UTC timezone.
-        Date d = new Date();
-        int utcTime = (int)d.getTime();
+
+        //gets the calender instance of time with GMT standard, then getting hour of day
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        int hour = c.get(Calendar.HOUR_OF_DAY);
 
         switch(city)
         {
             case "New York":
-                offset = utcTime-4;
+                offset = hour-4;
                 break;
             case "London":
-                offset = utcTime+1;
+                offset = hour+1;
                 break;
             case "Los Angeles":
-                offset = utcTime-7;
+                offset = hour-7;
                 break;
             case "Dubai":
-                offset = utcTime+4;
+                offset = hour+4;
                 break;
             case "Paris":
-                offset = utcTime+2;
+                offset = hour+2;
                 break;
             case "Moscow":
-                offset = utcTime+3;
+                offset = hour+3;
                 break;
             case "Cairo":
-                offset = utcTime+2;
+                offset = hour+2;
                 break;
             case "Hong Kong":
-                offset = utcTime+8;
+                offset = hour+8;
                 break;
             case "Beijing":
-                offset = utcTime+8;
+                offset = hour+8;
                 break;
             case "New Delhi":
-                offset=utcTime+5;
+                offset=hour+5;
                 break;
             case "Mexico City":
-                offset = utcTime-5;
+                offset = hour-5;
                 break;
             case "Brasilia":
-                offset = utcTime-3;
+                offset = hour-3;
                 break;
         }
 

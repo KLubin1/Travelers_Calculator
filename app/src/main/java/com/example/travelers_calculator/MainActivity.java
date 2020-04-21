@@ -13,7 +13,6 @@ import com.example.travelers_calculator.time.TimeFragment;
 import com.example.travelers_calculator.units.WeightFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
 public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
 {
 

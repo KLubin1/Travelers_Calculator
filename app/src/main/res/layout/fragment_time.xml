@@ -36,7 +36,6 @@
         android:layout_height="336dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="-72dp"
         android:scaleX="0.5"
