@@ -14,4 +14,5 @@
     <color name ="clear_orange">#FF5722</color>
     <color name="black">#090000</color>
     <color name="bold_blue">#03A9F4</color>
+    <color name="background_white">#FBFCFD</color>
 </resources>
