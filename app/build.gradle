@@ -37,8 +37,9 @@ dependencies {
     //external libraries
     //javaluator (for calculator)
     implementation 'com.fathzer:javaluator:3.0.3'
-
     //http request ( for currency conversion)
     implementation 'com.squareup.okhttp3:okhttp:4.5.0'
+    //for splash screen
+    implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
 
 }
