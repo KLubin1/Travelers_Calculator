@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Travelers_Calculator</string>
+    <string name="app_name">Travelers Calculator</string>
     <string name="calculator_tab">Calculator</string>
     <string name="units_tab">Units</string>
     <string name="currency_tab">Currency</string>
@@ -150,6 +150,11 @@
         <item>New Delhi</item>
         <item>Mexico City</item>
     </string-array>
+
+    <!--for toolbar-->
+    <string name="Settings">Settings</string>
+    <string name="About">About</string>
+    <string name="Customize">Customize</string>
 
 
 </resources>
