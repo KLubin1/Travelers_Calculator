@@ -35,13 +35,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         //currentSpinner = v.findViewById(R.id.current_spinner);
         convertSpinner = v.findViewById(R.id.convert_spinner);
 
-        //to ensure that the currentTime always shows the current system time by default regardless of which time zone is changed to and if its never "reset" with LocalTime
-        Calendar c= Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
-        currentTime.setHour(hour);
-        currentTime.setMinute(minute);
-        currentTime.setClickable(false);
+
 
 
 
@@ -146,9 +140,13 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             convertTime.setHour(12);
 
         //update the minutes as the hour changes to keep the time accurate
+        //and update the hour to ensure that the currentTime always shows the current system time by default
+        //regardless of which time zone is changed to and if its never "reset" with LocalTime
         int minute = c.get(Calendar.MINUTE);
         convertTime.setMinute(minute);
         currentTime.setMinute(minute);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        currentTime.setHour(hour);
     }
 
     @Override
