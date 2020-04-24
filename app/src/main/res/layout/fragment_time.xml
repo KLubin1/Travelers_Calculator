@@ -23,33 +23,33 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="279dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="206dp"
+        android:layout_marginTop="257dp"
+        android:layout_marginRight="167dp"
+        android:layout_marginBottom="228dp"
         android:background="@drawable/ic_conversion_arrow_down"
         android:text="Current\n Time" />
 
     <TimePicker
         android:id="@+id/current_clock"
-        android:layout_width="299dp"
+        android:layout_width="337dp"
         android:layout_height="337dp"
-        android:layout_marginTop="-80dp"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
+        android:layout_marginTop="-75dp"
+        android:scaleX="0.53"
+        android:scaleY="0.53"
         android:timePickerMode="clock"
         android:clickable="false"/>
 
 
     <TimePicker
         android:id="@+id/convert_clock"
-        android:layout_width="283dp"
-        android:layout_height="336dp"
+        android:layout_width="337dp"
+        android:layout_height="337dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="-72dp"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="-75dp"
+        android:scaleX="0.53"
+        android:scaleY="0.53"
         android:timePickerMode="clock"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,12 +62,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="87dp"
-        android:layout_marginBottom="195dp"
+        android:layout_marginBottom="189dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="207dp" />
-
-
 
 
 </RelativeLayout>

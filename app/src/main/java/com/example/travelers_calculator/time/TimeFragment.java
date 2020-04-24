@@ -32,12 +32,10 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         View v= inflater.inflate(R.layout.fragment_time, container, false);
         currentTime = v.findViewById(R.id.current_clock);
         convertTime = v.findViewById(R.id.convert_clock);
-        //currentSpinner = v.findViewById(R.id.current_spinner);
         convertSpinner = v.findViewById(R.id.convert_spinner);
 
-
-
-
+       // currentTime.setIs24HourView(false);
+        //convertTime.setIs24HourView(false);
 
         //for current spinner
         //currentSpinner= v.findViewById(R.id.current_spinner);
@@ -145,7 +143,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         int minute = c.get(Calendar.MINUTE);
         convertTime.setMinute(minute);
         currentTime.setMinute(minute);
-        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int hour = c.get(Calendar.HOUR);
         currentTime.setHour(hour);
     }
 
@@ -161,11 +159,17 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     public int conversionFactory(String city)
     {
         //Result of taking in the UTC time and adding/subtracting the offset
+        int offsetTime;
         int offset = 0;
+
+        currentTime.setIs24HourView(false);
+        convertTime.setIs24HourView(false);
 
         //gets the calender instance of time with GMT standard, then getting hour of day
         Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-        int UTC = c.get(Calendar.HOUR_OF_DAY);
+        int UTC = c.get(Calendar.HOUR);
+        int ampm = c.get(Calendar.AM_PM);
+
 
         switch(city)
         {
@@ -179,7 +183,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
                 offset = UTC-7;
                 break;
             case "Dubai":
-                offset = UTC+4;
+                offset= UTC+4;
                 break;
             case "Paris":
                 offset = UTC+2;
@@ -206,7 +210,21 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
                 offset = UTC-3;
                 break;
         }
-        return offset;
 
+        //if the offset is in the AM
+        if(offset < 12)
+        {
+            //set am
+            offset = offset+12;
+        }
+        //if the offset is in the PM
+        else if(offset > 12)
+        {
+            offset = offset-12;
+        }
+        else
+            offset = 12;
+
+        return offset;
     }
 }
