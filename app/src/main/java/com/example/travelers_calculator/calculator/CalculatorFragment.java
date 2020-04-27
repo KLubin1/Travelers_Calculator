@@ -1,5 +1,7 @@
 package com.example.travelers_calculator.calculator;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -55,7 +58,13 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
         //assign the output button and text display
         outputResult = (TextView) view.findViewById(R.id.display);
-        outputResult.setText("");
+        //saving
+        if(savedInstanceState== null)
+        {
+            outputResult.setText("");
+        }
+        else
+            outputResult.setText(savedInstanceState.getString("Calculation"));
 
         mCalculator = new CalculatorFunctionality();
 
@@ -103,6 +112,12 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
             }
         });*/
+
+        //load the saved data with SharedPreferences
+        SharedPreferences settings = getActivity().getSharedPreferences("CalcResult", Context.MODE_PRIVATE);
+        String data = settings.getString("calc", null);
+        outputResult.setText(data);
+
 
 
         //set on click listener events for numbers and operations
@@ -296,5 +311,23 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             return formattingInput.substring(0, dotPosition);
         }
         return formattingInput;
+    }
+
+
+    //saving
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("Calculation", "lol");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //save the data with shared preferences
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("CalcResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("calc", outputResult.getText().toString());
+        editor.commit();
     }
 }

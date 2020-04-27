@@ -1,5 +1,7 @@
 package com.example.travelers_calculator;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.time.TimeFragment;
-import com.example.travelers_calculator.units.WeightFragment;
+import com.example.travelers_calculator.units.LengthFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
@@ -29,6 +31,20 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
 
         //start on calculator by default
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
+
+        //tp clear data at start
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+        if(firstStart)
+        {
+            clearData();
+            //to clear data at start
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstStart", false);
+            editor.apply();
+        }
+
+
     }
 
     //switch between fragments
@@ -44,7 +60,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                     selectedFragment = new CalculatorFragment();
                     break;
                 case R.id.navigation_units:
-                    selectedFragment = new WeightFragment();
+                    selectedFragment = new LengthFragment();
                     break;
                 case R.id.navigation_currency:
                     selectedFragment = new CurrencyFragment();
@@ -58,6 +74,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         }
     };
 
+    //for the toolbar menu options
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -87,5 +104,38 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         }
 
     }*/
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        clearData();
+    }
+
+    public void clearData()
+    {
+        //for basic calculator
+        SharedPreferences calc = getSharedPreferences("CalcResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor calcEditor = calc.edit();
+        calcEditor.clear();
+        calcEditor.apply();
+
+        //for units
+        SharedPreferences unit = getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor unitEditor = unit.edit();
+        unitEditor.clear();
+        unitEditor.apply();
+
+        //for currency
+        SharedPreferences curr = getSharedPreferences("CurrResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor currEditor = curr.edit();
+        currEditor.clear();
+        currEditor.apply();
+
+        //for time
+        SharedPreferences time = getSharedPreferences("TimeResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor timeEditor = time.edit();
+        timeEditor.clear();
+        timeEditor.apply();
+    }
 }
 

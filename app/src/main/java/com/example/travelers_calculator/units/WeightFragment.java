@@ -99,12 +99,8 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
             }
         });*/
 
-
-
-
         return view;
     }
-
 
 
     @Override
@@ -139,13 +135,6 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {
-//        Object pound = spinner1.getItemAtPosition(0);
-//        Object foot = spinner1.getItemAtPosition(1);
-//        Object gallon = spinner1.getItemAtPosition(2);
-//        Object gram = spinner2.getItemAtPosition(0);
-//        Object meter = spinner2.getItemAtPosition(1);
-//        Object liter = spinner2.getItemAtPosition(2);
-
         //the constant that multiplies by the quantity;
         double constant = 0;
         //the quantity variable to multiply the constant by

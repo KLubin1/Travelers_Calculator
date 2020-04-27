@@ -1,5 +1,7 @@
 package com.example.travelers_calculator.currency;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +43,14 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
     //the final value after all the calculations. Which really doesnt even need
     //to be declared here, but whatever.
     private static double finalValue;
+    private  static final String SAVE_TAG = "saved_bundle";
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -57,10 +67,13 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         currencyType = (TextView) v.findViewById(R.id.currency_type);
         fromCurrencyType = (TextView) v.findViewById(R.id.from_currency_type);
         toCurrencyType = (TextView) v.findViewById(R.id.to_currency_type);
-
         finalValue = 0.0;
-        //this will probably go in the onclick event for convert button
-        //resultView.setText(String.valueOf(finalValue));
+
+        //saving
+        if(savedInstanceState != null){
+            resultView.setText(savedInstanceState.getString("Calculation"));
+
+        }
 
         //for spinner 1
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.currencies_list, android.R.layout.simple_spinner_item);
@@ -153,6 +166,21 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 currencyType.setText(toSpinner.getSelectedItem().toString());
             }
         });
+
+        //loading
+        SharedPreferences settings = getActivity().getSharedPreferences("CurrResult", Context.MODE_PRIVATE);
+        String data = settings.getString("currcalc", null);
+        int fPos = settings.getInt("fspin",0);
+        int tPos = settings.getInt("tspin",0);
+        String quan = settings.getString("quan", null);
+        String type = settings.getString("currtype", null);
+
+        resultView.setText(data);
+        fromSpinner.setSelection(fPos);
+        toSpinner.setSelection(tPos);
+        quantity.setText(quan);
+        currencyType.setText(type);
+
 
         return  v;
     }
@@ -355,5 +383,36 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+    //to save and load
+    /*@Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("Calculation", (resultView.getText().toString()));
+    }*/
+
+    /*@Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        //getting string is null
+        assert savedInstanceState != null;
+        resultView.setText(String.valueOf(savedInstanceState.getBundle("Calculation")));
+
+    }*/
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("CurrResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("currcalc", resultView.getText().toString());
+        editor.putInt("fspin",fromSpinner.getSelectedItemPosition());
+        editor.putInt("tspin", toSpinner.getSelectedItemPosition());
+        editor.putString("quan", quantity.getText().toString());
+        editor.putString("currtype", currencyType.getText().toString());
+        editor.commit();
+
+    }
+
 }
 

@@ -1,6 +1,8 @@
 package com.example.travelers_calculator.units;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,140 +90,14 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         });
 
         //switching between views
-        switchButton.setOnClickListener(new View.OnClickListener()
+       /* switchButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                /*FragmentManager fragmentManager = new FragmentManager() {
-                    @NonNull
-                    @Override
-                    public FragmentTransaction beginTransaction() {
-                        return null;
-                    }
+                *//*FragmentManager fragmentManager = new FragmentManager() {
 
-                    @Override
-                    public boolean executePendingTransactions() {
-                        return false;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Fragment findFragmentById(int id) {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Fragment findFragmentByTag(@Nullable String tag) {
-                        return null;
-                    }
-
-                    @Override
-                    public void popBackStack() {
-
-                    }
-
-                    @Override
-                    public boolean popBackStackImmediate() {
-                        return false;
-                    }
-
-                    @Override
-                    public void popBackStack(@Nullable String name, int flags) {
-
-                    }
-
-                    @Override
-                    public boolean popBackStackImmediate(@Nullable String name, int flags) {
-                        return false;
-                    }
-
-                    @Override
-                    public void popBackStack(int id, int flags) {
-
-                    }
-
-                    @Override
-                    public boolean popBackStackImmediate(int id, int flags) {
-                        return false;
-                    }
-
-                    @Override
-                    public int getBackStackEntryCount() {
-                        return 0;
-                    }
-
-                    @NonNull
-                    @Override
-                    public BackStackEntry getBackStackEntryAt(int index) {
-                        return null;
-                    }
-
-                    @Override
-                    public void addOnBackStackChangedListener(@NonNull OnBackStackChangedListener listener) {
-
-                    }
-
-                    @Override
-                    public void removeOnBackStackChangedListener(@NonNull OnBackStackChangedListener listener) {
-
-                    }
-
-                    @Override
-                    public void putFragment(@NonNull Bundle bundle, @NonNull String key, @NonNull Fragment fragment) {
-
-                    }
-
-                    @Nullable
-                    @Override
-                    public Fragment getFragment(@NonNull Bundle bundle, @NonNull String key) {
-                        return null;
-                    }
-
-                    @NonNull
-                    @Override
-                    public List<Fragment> getFragments() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public SavedState saveFragmentInstanceState(@NonNull Fragment f) {
-                        return null;
-                    }
-
-                    @Override
-                    public boolean isDestroyed() {
-                        return false;
-                    }
-
-                    @Override
-                    public void registerFragmentLifecycleCallbacks(@NonNull FragmentLifecycleCallbacks cb, boolean recursive) {
-
-                    }
-
-                    @Override
-                    public void unregisterFragmentLifecycleCallbacks(@NonNull FragmentLifecycleCallbacks cb) {
-
-                    }
-
-                    @Nullable
-                    @Override
-                    public Fragment getPrimaryNavigationFragment() {
-                        return null;
-                    }
-
-                    @Override
-                    public void dump(@NonNull String prefix, @Nullable FileDescriptor fd, @NonNull PrintWriter writer, @Nullable String[] args) {
-
-                    }
-
-                    @Override
-                    public boolean isStateSaved() {
-                        return false;
-                    }
-                };*/
+                };*//*
                 if (getFragmentManager().findFragmentByTag(getString(R.string.us_switch_tag)) == null) {
 
                     //if the normal fragment does not exist, add it to fragment manager.
@@ -242,7 +118,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 //listener.changeFragment(1);
 
             }
-        });
+        });*/
 
         //saving calculations
        /* calculatorWidget.setOnClickListener(new View.OnClickListener() {
@@ -261,6 +137,21 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 toast.show();
             }
         });*/
+
+
+       //loading
+        SharedPreferences settings = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        String data = settings.getString("unitcalc", null);
+        int lPos = settings.getInt("lspin",0);
+        int rPos = settings.getInt("rspin",0);
+        String quan = settings.getString("quan", null);
+        String type = settings.getString("unittype", null);
+
+        result.setText(data);
+        leftSpinner.setSelection(lPos);
+        rightSpinner.setSelection(rPos);
+        quantity.setText(quan);
+        unitType.setText(type);
 
         return view;
     }
@@ -288,8 +179,6 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         listener = null;
 
     }*/
-
-
 
 
     @Override
@@ -516,5 +405,19 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         //the conversion results
         double conversion = constant*multiplier;
         return conversion;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("unitcalc", result.getText().toString());
+        editor.putInt("lspin",leftSpinner.getSelectedItemPosition());
+        editor.putInt("rspin", rightSpinner.getSelectedItemPosition());
+        editor.putString("unittype", unitType.getText().toString());
+        editor.putString("quan", quantity.getText().toString());
+        editor.commit();
+
     }
 }

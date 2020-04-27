@@ -1,5 +1,7 @@
 package com.example.travelers_calculator.time;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,8 +36,8 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         convertTime = v.findViewById(R.id.convert_clock);
         convertSpinner = v.findViewById(R.id.convert_spinner);
 
-       // currentTime.setIs24HourView(false);
-        //convertTime.setIs24HourView(false);
+        currentTime.setIs24HourView(true);
+        convertTime.setIs24HourView(true);
 
         //for current spinner
         //currentSpinner= v.findViewById(R.id.current_spinner);
@@ -50,6 +52,12 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         convertSpinner.setAdapter(adapter2);
         convertSpinner.setOnItemSelectedListener(this);
+
+
+        //saving
+        SharedPreferences settings = getActivity().getSharedPreferences("TimeResult", Context.MODE_PRIVATE);
+        int city = settings.getInt("city",0);
+        convertSpinner.setSelection(city);
 
         return v;
     }
@@ -143,7 +151,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         int minute = c.get(Calendar.MINUTE);
         convertTime.setMinute(minute);
         currentTime.setMinute(minute);
-        int hour = c.get(Calendar.HOUR);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
         currentTime.setHour(hour);
     }
 
@@ -162,12 +170,12 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         int offsetTime;
         int offset = 0;
 
-        currentTime.setIs24HourView(false);
-        convertTime.setIs24HourView(false);
+        //currentTime.setIs24HourView(true);
+        //convertTime.setIs24HourView(true);
 
         //gets the calender instance of time with GMT standard, then getting hour of day
         Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-        int UTC = c.get(Calendar.HOUR);
+        int UTC = c.get(Calendar.HOUR_OF_DAY);
         int ampm = c.get(Calendar.AM_PM);
 
 
@@ -226,5 +234,14 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             offset = 12;
 
         return offset;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("TimeResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("city", convertSpinner.getSelectedItemPosition());
+        editor.commit();
     }
 }
