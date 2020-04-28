@@ -27,7 +27,7 @@ public class SplashScreen extends AppCompatActivity
                 .withAfterLogoText("Traveler's Calculator")
                 .withLogo(R.mipmap.ic_logo_foreground);
 
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         //animating logo
         config.getLogo()
                 .animate()

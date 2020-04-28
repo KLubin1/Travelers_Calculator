@@ -2,6 +2,7 @@ package com.example.travelers_calculator.calculator;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.travelers_calculator.R;
@@ -45,6 +46,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -56,15 +58,13 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //hide the action bar
         //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
+        //set toolbar
+        //Toolbar toolbar = view.findViewById(R.id.toolbar);
+        //getActivity().setActionBar(toolbar);
+
         //assign the output button and text display
         outputResult = (TextView) view.findViewById(R.id.display);
-        //saving
-        if(savedInstanceState== null)
-        {
-            outputResult.setText("");
-        }
-        else
-            outputResult.setText(savedInstanceState.getString("Calculation"));
+        outputResult.setText("");
 
         mCalculator = new CalculatorFunctionality();
 
@@ -314,12 +314,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     }
 
 
-    //saving
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("Calculation", "lol");
-    }
 
     @Override
     public void onDestroyView() {

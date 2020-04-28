@@ -69,12 +69,6 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         toCurrencyType = (TextView) v.findViewById(R.id.to_currency_type);
         finalValue = 0.0;
 
-        //saving
-        if(savedInstanceState != null){
-            resultView.setText(savedInstanceState.getString("Calculation"));
-
-        }
-
         //for spinner 1
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.currencies_list, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -383,22 +377,6 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-
-    //to save and load
-    /*@Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("Calculation", (resultView.getText().toString()));
-    }*/
-
-    /*@Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        //getting string is null
-        assert savedInstanceState != null;
-        resultView.setText(String.valueOf(savedInstanceState.getBundle("Calculation")));
-
-    }*/
 
     @Override
     public void onDestroyView() {

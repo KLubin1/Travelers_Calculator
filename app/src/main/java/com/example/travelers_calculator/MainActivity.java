@@ -1,6 +1,7 @@
 package com.example.travelers_calculator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,11 +10,13 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.time.TimeFragment;
+import com.example.travelers_calculator.toolbar.About;
 import com.example.travelers_calculator.units.LengthFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
 
         //start on calculator by default
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
+
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         //tp clear data at start
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
@@ -75,6 +82,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
     };
 
     //for the toolbar menu options
+    //to inflate the toolbar menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -82,9 +90,23 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         return super.onCreateOptionsMenu(menu);
     }
 
+    //to select the toolbar options, similar to how the fragments are selected
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        if(id == R.id.action_about)
+        {
+            Intent i = new Intent(MainActivity.this, About.class);
+            startActivity(i);
+            return true;
+        }
+
+
         return super.onOptionsItemSelected(item);
+
+
+
     }
     /*@Override
     public void changeFragment(int id)
@@ -111,6 +133,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         clearData();
     }
 
+    //to clear the saved data of Shared Preferences
     public void clearData()
     {
         //for basic calculator

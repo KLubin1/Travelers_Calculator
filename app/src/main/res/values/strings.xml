@@ -157,5 +157,12 @@
     <string name="Customize">Customize</string>
     <string name="Help">Help</string>
 
+    <!--About message-->
+    <string name="About_Message">
+        Traveler\'s Calculator Created by Kaleah Lubin\n
+        Project and Portfolio II\n
+        March-May 2020
+    </string>
+
 
 </resources>

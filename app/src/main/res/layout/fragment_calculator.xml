@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/icons"
     android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/display_screen"
         android:layout_width="match_parent"
