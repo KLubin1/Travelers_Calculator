@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Travelers Calculator</string>
+    <string name="app_name">Traveler\'s Calculator</string>
     <string name="calculator_tab">Calculator</string>
     <string name="units_tab">Units</string>
     <string name="currency_tab">Currency</string>
@@ -155,13 +155,16 @@
     <string name="Settings">Settings</string>
     <string name="About">About</string>
     <string name="Customize">Customize</string>
-    <string name="Help">Help</string>
+    <string name="Exit">Exit</string>
 
     <!--About message-->
     <string name="About_Message">
-        Traveler\'s Calculator Created by Kaleah Lubin\n
+         Traveler\'s Calculator Created by Kaleah Lubin\n
         Project and Portfolio II\n
-        March-May 2020
+        March-May 2020\n
+        Currency rates retrieved from:\n https://exchangeratesapi.io,
+        courtesy of  European Central Bank.\n
+
     </string>
 
 

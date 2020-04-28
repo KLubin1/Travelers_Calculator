@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             editor.apply();
         }
 
-
     }
 
     //switch between fragments
@@ -95,18 +94,19 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
-        if(id == R.id.action_about)
+
+        switch (item.getItemId())
         {
-            Intent i = new Intent(MainActivity.this, About.class);
-            startActivity(i);
-            return true;
+            case R.id.action_about:
+                Intent about = new Intent(MainActivity.this, About.class);
+                startActivity(about);
+                return true;
+            case R.id.action_exit:
+                finish();
+                return true;
         }
 
-
         return super.onOptionsItemSelected(item);
-
-
-
     }
     /*@Override
     public void changeFragment(int id)
