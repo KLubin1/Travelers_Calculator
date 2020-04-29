@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/background_white">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <!--
     <Spinner
         android:id="@+id/current_spinner"
@@ -17,28 +21,15 @@
         android:layout_marginBottom="135dp" />-->
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="257dp"
-        android:layout_marginRight="167dp"
-        android:layout_marginBottom="228dp"
-        android:background="@drawable/ic_conversion_arrow_down"
-        android:text="Current\n Time" />
-
     <TimePicker
         android:id="@+id/current_clock"
         android:layout_width="337dp"
         android:layout_height="337dp"
-        android:layout_marginTop="-75dp"
+        android:layout_marginTop="-25dp"
+        android:clickable="false"
         android:scaleX="0.53"
         android:scaleY="0.53"
-        android:timePickerMode="clock"
-        android:clickable="false"/>
-
+        android:timePickerMode="clock" />
 
     <TimePicker
         android:id="@+id/convert_clock"
@@ -46,14 +37,12 @@
         android:layout_height="337dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="1dp"
         android:layout_marginBottom="-75dp"
         android:scaleX="0.53"
         android:scaleY="0.53"
         android:timePickerMode="clock"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+       />
 
     <Spinner
         android:id="@+id/convert_spinner"

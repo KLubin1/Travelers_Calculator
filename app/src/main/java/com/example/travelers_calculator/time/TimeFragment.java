@@ -36,8 +36,9 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         convertTime = v.findViewById(R.id.convert_clock);
         convertSpinner = v.findViewById(R.id.convert_spinner);
 
-        currentTime.setIs24HourView(true);
-        convertTime.setIs24HourView(true);
+        currentTime.setIs24HourView(false);
+        convertTime.setIs24HourView(false);
+        convertTime.setClickable(false);
 
         //for current spinner
         //currentSpinner= v.findViewById(R.id.current_spinner);
