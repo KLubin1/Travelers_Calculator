@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_calculator"
-        android:icon="@drawable/ic_5_calculator"
+        android:icon="@drawable/ic_calculator"
         android:title="@string/calculator_tab"
         />
     <item
         android:id="@+id/navigation_units"
-        android:icon="@drawable/ic_timer_units"
+        android:icon="@drawable/ic_kg_units"
         android:title="@string/units_tab"/>
     <item
         android:id="@+id/navigation_currency"
