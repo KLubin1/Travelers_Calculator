@@ -324,4 +324,5 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         editor.putString("calc", outputResult.getText().toString());
         editor.commit();
     }
+
 }

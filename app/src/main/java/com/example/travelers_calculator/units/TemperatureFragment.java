@@ -1,6 +1,8 @@
 package com.example.travelers_calculator.units;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -104,6 +106,19 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
 
 
 
+        //loading
+        SharedPreferences settings = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        String data = settings.getString("unitcalc", null);
+        int lPos = settings.getInt("lspin",0);
+        int rPos = settings.getInt("rspin",0);
+        String quan = settings.getString("quan", null);
+        String type = settings.getString("unittype", null);
+
+        result.setText(data);
+        spinner1.setSelection(lPos);
+        spinner2.setSelection(rPos);
+        quantity.setText(quan);
+        unitType.setText(type);
 
         return view;
     }
@@ -181,5 +196,19 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
        // double conversion = constant*multiplier;
         //pop out the result
         return constant;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("unitcalc", result.getText().toString());
+        editor.putInt("lspin",spinner1.getSelectedItemPosition());
+        editor.putInt("rspin", spinner1.getSelectedItemPosition());
+        editor.putString("unittype", unitType.getText().toString());
+        editor.putString("quan", quantity.getText().toString());
+        editor.commit();
+
     }
 }

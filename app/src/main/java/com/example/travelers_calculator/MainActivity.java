@@ -17,7 +17,7 @@ import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.time.TimeFragment;
 import com.example.travelers_calculator.toolbar.About;
-import com.example.travelers_calculator.units.LengthFragment;
+import com.example.travelers_calculator.units.AreaFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                     selectedFragment = new CalculatorFragment();
                     break;
                 case R.id.navigation_units:
-                    selectedFragment = new LengthFragment();
+                    selectedFragment = new AreaFragment();
                     break;
                 case R.id.navigation_currency:
                     selectedFragment = new CurrencyFragment();

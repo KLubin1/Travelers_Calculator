@@ -1,6 +1,8 @@
 package com.example.travelers_calculator.units;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,6 +103,19 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
             }
         });*/
 
+        //loading
+        SharedPreferences settings = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        String data = settings.getString("unitcalc", null);
+        int lPos = settings.getInt("lspin",0);
+        int rPos = settings.getInt("rspin",0);
+        String quan = settings.getString("quan", null);
+        String type = settings.getString("unittype", null);
+
+        result.setText(data);
+        leftSpinner.setSelection(lPos);
+        rightSpinner.setSelection(rPos);
+        quantity.setText(quan);
+        unitType.setText(type);
 
 
 
@@ -339,4 +354,19 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
         double conversion = constant*multiplier;
         return conversion;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("unitcalc", result.getText().toString());
+        editor.putInt("lspin",leftSpinner.getSelectedItemPosition());
+        editor.putInt("rspin", rightSpinner.getSelectedItemPosition());
+        editor.putString("unittype", unitType.getText().toString());
+        editor.putString("quan", quantity.getText().toString());
+        editor.commit();
+
+    }
+
 }
