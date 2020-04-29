@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     android:background="@color/background_white">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
@@ -19,7 +23,7 @@
         app:layout_constraintRight_toRightOf="@id/spinner2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintVertical_bias="0.474" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -32,7 +36,7 @@
         app:layout_constraintLeft_toLeftOf="@id/spinner1"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintVertical_bias="0.474" />
 
     <EditText
         android:id="@+id/quantity"
@@ -47,7 +51,7 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintVertical_bias="0.443" />
 
 
     <TextView
@@ -61,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintVertical_bias="0.738" />
 
     <TextView
         android:id="@+id/unit_type"
@@ -72,7 +76,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.679" />
+        app:layout_constraintVertical_bias="0.797" />
 
     <Button
         android:id="@+id/convertButton"
@@ -86,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.597" />
 
     <!--
     <Button
@@ -112,10 +116,10 @@
         android:background="@drawable/ic_conversion_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintVertical_bias="0.235" />
 
 
 
