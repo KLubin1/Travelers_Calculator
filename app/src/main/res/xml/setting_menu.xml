@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ListPreference
+        android:defaultValue="Default"
+        android:key="@string/colorSchemeKey"
+        android:summary="Change color theme of app"
+        android:title="Color Scheme"
+        android:entries="@array/color_scheme_entries"
+        android:entryValues="@array/color_scheme_values"/>
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="@string/darkModeKey"
+        android:summary="Toggle Dark Mode"
+        android:title="Dark Mode"/>
+    <ListPreference
+        android:defaultValue="Default"
+        android:key="@string/fontSizeKey"
+        android:summary="Change font size of text"
+        android:title="Font Size"/>
+
+</PreferenceScreen>

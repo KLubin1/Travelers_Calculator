@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="color_scheme_entries">
+        <item>Default Traveler</item>
+        <item>Pina Colada</item>
+        <item>Sunkissed</item>
+        <item>Herbivore</item>
+        <item>Down-Low</item>
+    </string-array>
+    
+    <string-array name="color_scheme_values">
+        <item>Default</item>
+        <item>Yellow</item>
+        <item>Orange-Red</item>
+        <item>Green</item>
+        <item>Brown</item>
+
+    </string-array>
+
+</resources>

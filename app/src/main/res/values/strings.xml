@@ -168,6 +168,12 @@
         Calculator(calculator) icon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
     </string>
+    
+    
+    <!--Settings Keys-->
+    <string name="colorSchemeKey">ColorScheme</string>
+    <string name="darkModeKey">DarkMode</string>
+    <string name="fontSizeKey">FontSize</string>
 
 
 </resources>

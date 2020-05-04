@@ -17,7 +17,8 @@ import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.time.TimeFragment;
 import com.example.travelers_calculator.toolbar.About;
-import com.example.travelers_calculator.units.AreaFragment;
+import com.example.travelers_calculator.toolbar.settings.SettingsToolbar;
+import com.example.travelers_calculator.units.LengthFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         bottomNav.setOnNavigationItemSelectedListener(tabListener);
 
         //start on calculator by default
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
+       getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
 
         //set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                     selectedFragment = new CalculatorFragment();
                     break;
                 case R.id.navigation_units:
-                    selectedFragment = new AreaFragment();
+                    selectedFragment = new LengthFragment();
                     break;
                 case R.id.navigation_currency:
                     selectedFragment = new CurrencyFragment();
@@ -91,12 +92,16 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
 
     //to select the toolbar options, similar to how the fragments are selected
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
 
         switch (item.getItemId())
         {
+            case R.id.action_settings:
+                Intent settings = new Intent(MainActivity.this, SettingsToolbar.class);
+                startActivity(settings);
+
+                return true;
             case R.id.action_about:
                 Intent about = new Intent(MainActivity.this, About.class);
                 startActivity(about);
@@ -104,6 +109,8 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             case R.id.action_exit:
                 finish();
                 return true;
+
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -131,6 +138,12 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
     protected void onDestroy() {
         super.onDestroy();
         clearData();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     //to clear the saved data of Shared Preferences
