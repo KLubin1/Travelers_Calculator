@@ -1,17 +1,36 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/bold_blue</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
-<style name="SunKissedTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">#F83A2C</item>
-    <item name="colorPrimaryVariant">#E68B6E</item>
-    <item name="colorAccent">#FACD49</item>
-</style>
+
+    <style name="SunKissedTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#F83A2C</item>
+        <item name="colorPrimaryDark">#E68B6E</item>
+        <item name="colorAccent">#FACD49</item>
+    </style>
+
+    <style name="PinaColadaTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#FFEB3B</item>
+        <item name="colorPrimaryDark">#955B06</item>
+        <item name="colorAccent">#8FF11E</item>
+    </style>
+
+    <style name="HerbivoreTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#024C05</item>
+        <item name="colorAccent">#B2C307</item>
+    </style>
+
+
+    <style name="DownLowTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#0B0C0B</item>
+        <item name="colorPrimaryDark">#CEEAD0</item>
+        <item name="colorAccent">#909181</item>
+    </style>
 
 </resources>

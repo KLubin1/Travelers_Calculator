@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        //setTheme(R.style.SunKissedTheme);
+        onColorsChanged();
+        onDarkMode();
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNav = findViewById(R.id.tab_navigation_bar);
@@ -51,6 +57,8 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             editor.putBoolean("firstStart", false);
             editor.apply();
         }
+
+        //onSettingsChanged();
 
     }
 
@@ -100,7 +108,6 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             case R.id.action_settings:
                 Intent settings = new Intent(MainActivity.this, SettingsToolbar.class);
                 startActivity(settings);
-
                 return true;
             case R.id.action_about:
                 Intent about = new Intent(MainActivity.this, About.class);
@@ -147,7 +154,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
     }
 
     //to clear the saved data of Shared Preferences
-    public void clearData()
+    private void clearData()
     {
         //for basic calculator
         SharedPreferences calc = getSharedPreferences("CalcResult", Context.MODE_PRIVATE);
@@ -172,6 +179,71 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         SharedPreferences.Editor timeEditor = time.edit();
         timeEditor.clear();
         timeEditor.apply();
+    }
+
+    public void onColorsChanged()
+    {
+        //get the pref values
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
+        //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
+       /* SharedPreferences.Editor editor = settings.edit();
+        editor.clear();
+        editor.apply();*/
+
+       //TODO: Use the exact value names to pass in the case
+        switch (colorSelect)
+        {
+            case "Orange-Red":
+                //Utils.changeToTheme(this, Utils.THEME_ORANGE);
+                setTheme(R.style.SunKissedTheme);
+                //getApplicationContext().setTheme(R.style.SunKissedTheme);
+                Toast.makeText(getApplicationContext(),"SunKissed", Toast.LENGTH_SHORT).show();
+                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
+                break;
+            case "Yellow":
+                //Utils.changeToTheme(this, Utils.THEME_YELLOW);
+                setTheme(R.style.PinaColadaTheme);
+                Toast.makeText(getApplicationContext(),"PinaColada", Toast.LENGTH_SHORT).show();
+                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
+                break;
+            case "Green":
+                //Utils.changeToTheme(this, Utils.THEME_DEFAULT);
+                setTheme(R.style.HerbivoreTheme);
+                Toast.makeText(getApplicationContext(),"Herbivore", Toast.LENGTH_SHORT).show();
+                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
+                break;
+            case "Dark":
+                //Utils.changeToTheme(this, Utils.THEME_DEFAULT);
+                setTheme(R.style.DownLowTheme);
+                Toast.makeText(getApplicationContext(),"Down-Low", Toast.LENGTH_SHORT).show();
+                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
+                break;
+            default:
+                //Utils.changeToTheme(this, Utils.THEME_DEFAULT);
+                setTheme(R.style.AppTheme);
+                Toast.makeText(getApplicationContext(),"Default", Toast.LENGTH_SHORT).show();
+                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
+                break;
+        }
+    }
+
+    public void onDarkMode()
+    {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey), false);
+
+        if(darkMode != false)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            Toast.makeText(getApplicationContext(), "Dark Mode Enabled", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            Toast.makeText(getApplicationContext(), "Dark Mode Disabled", Toast.LENGTH_SHORT).show();
+        }
+        
     }
 }
 
