@@ -11,7 +11,7 @@
     <style name="SunKissedTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">#F83A2C</item>
         <item name="colorPrimaryDark">#E68B6E</item>
-        <item name="colorAccent">#FACD49</item>
+        <item name="colorAccent">#E13802</item>
     </style>
 
     <style name="PinaColadaTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -27,7 +27,7 @@
     </style>
 
 
-    <style name="DownLowTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="NoirTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">#0B0C0B</item>
         <item name="colorPrimaryDark">#CEEAD0</item>
         <item name="colorAccent">#909181</item>

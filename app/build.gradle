@@ -43,5 +43,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.5.0'
     //for splash screen
     implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+    //for quick restarting app
+    implementation 'com.jakewharton:process-phoenix:2.0.0'
 
 }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.R;
 
@@ -119,6 +120,7 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
 
 
 
+        changeColor();
         return view;
     }
 
@@ -355,6 +357,36 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
         return conversion;
     }
 
+    public void changeColor()
+    {
+        //works, I just need to find out how to get it to show when the corresponding theme is on
+        //get the pref values
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
+        //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
+
+        switch (colorSelect)
+        {
+            case "Orange-Red":
+                convert.setBackgroundColor(getResources().getColor(R.color.clear_orange));
+                break;
+            case "Yellow":
+                convert.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                break;
+            case "Green":
+                convert.setBackgroundColor(getResources().getColor(R.color.herbal_green));
+                break;
+            case "Dark":
+                convert.setBackgroundColor(getResources().getColor(R.color.downy_gray));
+                break;
+            default:
+                convert.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+
+        }
+
+
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

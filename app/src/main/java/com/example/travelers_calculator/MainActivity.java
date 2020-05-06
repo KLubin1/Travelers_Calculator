@@ -26,6 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
 {
+    private SettingsToolbar set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,8 +59,31 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             editor.apply();
         }
 
-        //onSettingsChanged();
+        //Change too/bar color depending on theme
+        //get the pref values
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
+        //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
 
+        switch (colorSelect)
+        {
+            case "Orange-Red":
+                toolbar.setBackgroundColor(getResources().getColor(R.color.clear_orange));
+                break;
+            case "Yellow":
+                toolbar.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                break;
+            case "Green":
+                toolbar.setBackgroundColor(getResources().getColor(R.color.herbal_green));
+                break;
+            case "Dark":
+                toolbar.setBackgroundColor(getResources().getColor(R.color.downy_gray));
+                break;
+            default:
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+
+        }
     }
 
     //switch between fragments
@@ -116,7 +140,6 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             case R.id.action_exit:
                 finish();
                 return true;
-
 
         }
 
@@ -191,12 +214,16 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         editor.clear();
         editor.apply();*/
 
+
+        /*ChangeDialog changeDialog = new ChangeDialog();
+        changeDialog.show(getSupportFragmentManager(), "change dialog");*/
        //TODO: Use the exact value names to pass in the case
         switch (colorSelect)
         {
             case "Orange-Red":
                 //Utils.changeToTheme(this, Utils.THEME_ORANGE);
                 setTheme(R.style.SunKissedTheme);
+
                 //getApplicationContext().setTheme(R.style.SunKissedTheme);
                 Toast.makeText(getApplicationContext(),"SunKissed", Toast.LENGTH_SHORT).show();
                 //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
@@ -215,8 +242,8 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                 break;
             case "Dark":
                 //Utils.changeToTheme(this, Utils.THEME_DEFAULT);
-                setTheme(R.style.DownLowTheme);
-                Toast.makeText(getApplicationContext(),"Down-Low", Toast.LENGTH_SHORT).show();
+                setTheme(R.style.NoirTheme);
+                Toast.makeText(getApplicationContext(),"Noir", Toast.LENGTH_SHORT).show();
                 //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
                 break;
             default:
@@ -226,7 +253,9 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                 //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
                 break;
         }
+
     }
+
 
     public void onDarkMode()
     {
@@ -243,7 +272,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             Toast.makeText(getApplicationContext(), "Dark Mode Disabled", Toast.LENGTH_SHORT).show();
         }
-        
+
     }
 }
 

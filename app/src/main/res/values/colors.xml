@@ -12,7 +12,21 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name ="clear_orange">#FF5722</color>
+    <color name="sun_kissed">#E68B6E</color>
     <color name="black">#090000</color>
     <color name="bold_blue">#03A9F4</color>
     <color name="background_white">#FBFCFD</color>
+    <color name="dark_yellow">#FFC107</color>
+    <color name="herbal_green">#8BC34A</color>
+    <color name="downy_gray">#B3AB94</color>
+    <color name="fiery_red">#E13802</color>
+    <color name="calm_rage">#782004</color>
+    <color name="light_yellow">#FFEB3B</color>
+    <color name="leaf_green">#8FF11E</color>
+    <color name="dark_green">#4CAF50</color>
+    <color name="stew_green">#024C05</color>
+    <color name="dark_brown">#634543</color>
+    <color name="light">#CEEAD0</color>
+    <color name="gray">#909181</color>
+
 </resources>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.R;
 
@@ -94,6 +95,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         openParen = (Button) view.findViewById(R.id.open_paren);
         closeParen = (Button) view.findViewById(R.id.close_paren);
 
+
         //widget assignment for loading conversions unto calculator
        // calculatorWidgetCalc = (Button) view.findViewById(R.id.calculator_widget_calc);
         /*calculatorWidgetCalc.setOnClickListener(new View.OnClickListener()
@@ -145,6 +147,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         exponent.setOnClickListener(this);
         openParen.setOnClickListener(this);
         closeParen.setOnClickListener(this);
+
+        changeColor();
         return view;
     }
 
@@ -314,6 +318,148 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     }
 
 
+    public void changeColor()
+    {
+        //works, I just need to find out how to get it to show when the corresponding theme is on
+        //get the pref values
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
+        //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
+
+        switch (colorSelect)
+        {
+            case "Orange-Red":
+                //the lighter toned buttons - numbers (clear orange)
+                one.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                two.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                three.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                four.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                five.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                six.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                seven.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                eight.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                nine.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+                zero.setBackgroundColor(getResources().getColor(R.color.sun_kissed));
+
+                //the darker toned buttons - operations (fiery red)
+                exponent.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                square.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                sqrt.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                base10.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                multiply.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                plus.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                subtract.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                divide.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                openParen.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                closeParen.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                dot.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+                negative.setBackgroundColor(getResources().getColor(R.color.fiery_red));
+
+                //the blue buttons - AC and equal (calm rage)
+                ac.setBackgroundColor(getResources().getColor(R.color.calm_rage));
+                equal.setBackgroundColor(getResources().getColor(R.color.calm_rage));
+
+                break;
+            case "Yellow":
+                //the lighter toned buttons - numbers (light yellow)
+                one.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                two.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                three.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                four.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                five.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                six.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                seven.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                eight.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                nine.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+                zero.setBackgroundColor(getResources().getColor(R.color.light_yellow));
+
+                //the darker toned buttons - operations (dark yellow)
+                exponent.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                square.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                sqrt.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                base10.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                multiply.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                plus.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                subtract.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                divide.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                openParen.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                closeParen.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                dot.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+                negative.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
+
+                //the blue buttons - AC and equal (leafy green)
+                ac.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                equal.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                break;
+            case "Green":
+                //the lighter toned buttons - numbers (leaf green)
+                one.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                two.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                three.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                four.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                five.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                six.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                seven.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                eight.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                nine.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                zero.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+
+                //the darker toned buttons - operations (dark green)
+                exponent.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                square.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                sqrt.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                base10.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                multiply.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                plus.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                subtract.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                divide.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                openParen.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                closeParen.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                dot.setBackgroundColor(getResources().getColor(R.color.dark_green));
+                negative.setBackgroundColor(getResources().getColor(R.color.dark_green));
+
+                //the blue buttons - AC and equal (leafy green)
+                ac.setBackgroundColor(getResources().getColor(R.color.stew_green));
+                equal.setBackgroundColor(getResources().getColor(R.color.stew_green));
+                break;
+            case "Dark":
+                //the lighter toned buttons - numbers (light)
+                one.setBackgroundColor(getResources().getColor(R.color.light));
+                two.setBackgroundColor(getResources().getColor(R.color.light));
+                three.setBackgroundColor(getResources().getColor(R.color.light));
+                four.setBackgroundColor(getResources().getColor(R.color.light));
+                five.setBackgroundColor(getResources().getColor(R.color.light));
+                six.setBackgroundColor(getResources().getColor(R.color.light));
+                seven.setBackgroundColor(getResources().getColor(R.color.light));
+                eight.setBackgroundColor(getResources().getColor(R.color.light));
+                nine.setBackgroundColor(getResources().getColor(R.color.light));
+                zero.setBackgroundColor(getResources().getColor(R.color.light));
+
+                //the darker toned buttons - operations (gray)
+                exponent.setBackgroundColor(getResources().getColor(R.color.gray));
+                square.setBackgroundColor(getResources().getColor(R.color.gray));
+                sqrt.setBackgroundColor(getResources().getColor(R.color.gray));
+                base10.setBackgroundColor(getResources().getColor(R.color.gray));
+                multiply.setBackgroundColor(getResources().getColor(R.color.gray));
+                plus.setBackgroundColor(getResources().getColor(R.color.gray));
+                subtract.setBackgroundColor(getResources().getColor(R.color.gray));
+                divide.setBackgroundColor(getResources().getColor(R.color.gray));
+                openParen.setBackgroundColor(getResources().getColor(R.color.gray));
+                closeParen.setBackgroundColor(getResources().getColor(R.color.gray));
+                dot.setBackgroundColor(getResources().getColor(R.color.gray));
+                negative.setBackgroundColor(getResources().getColor(R.color.gray));
+
+                //the blue buttons - AC and equal (dark brown)
+                ac.setBackgroundColor(getResources().getColor(R.color.dark_brown));
+                equal.setBackgroundColor(getResources().getColor(R.color.dark_brown));
+                break;
+            default:
+                break;
+
+        }
+
+
+    }
 
     @Override
     public void onDestroyView() {
