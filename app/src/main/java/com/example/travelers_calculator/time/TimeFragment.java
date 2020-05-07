@@ -237,6 +237,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         return offset;
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

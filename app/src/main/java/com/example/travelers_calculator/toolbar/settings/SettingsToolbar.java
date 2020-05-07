@@ -31,6 +31,8 @@ public class SettingsToolbar extends AppCompatActivity
                 .replace(android.R.id.content, new SettingFragment())
                 .commit();
 
+        setTheme(R.style.HerbivoreTheme);
+
 
 
         //ChangeDialog changeDialog = new ChangeDialog();

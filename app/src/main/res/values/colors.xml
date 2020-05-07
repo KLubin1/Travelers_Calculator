@@ -28,5 +28,8 @@
     <color name="dark_brown">#634543</color>
     <color name="light">#CEEAD0</color>
     <color name="gray">#909181</color>
-
+    <!--Darkmode-->
+    <color name="highlight_gray">#FBF7F7</color>
+    <color name="dark_primary">#1F1B24</color>
+    <color name="dark_secondary">#121212</color>
 </resources>

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
     private EditText quantity;
     private TextView result, unitType;
     private Button convert;
-    private Button switchButton;
+    private ImageView switchButton;
     //private Button calculatorWidget;
     //switcher
    public FragmentSwitcher fragmentSwitcher;
@@ -52,7 +53,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         result = (TextView) view.findViewById(R.id.result);
         unitType = (TextView) view.findViewById(R.id.unit_type);
         convert = (Button) view.findViewById(R.id.convertButton);
-        switchButton = (Button)view.findViewById(R.id.switch_button);
+        switchButton = (ImageView) view.findViewById(R.id.switch_button);
         //calculator widget
         //calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
 
@@ -156,7 +157,9 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
         quantity.setText(quan);
         unitType.setText(type);
 
+        //change colors and toggle darkmode when selected
         changeColor();
+        darkModeToggle();
 
         return view;
     }
@@ -343,7 +346,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 constant = 0.010936;
             //to mile
             else if(rightSpinner.getSelectedItemPosition() == 3)
-                constant = 9;
+                constant = 0.000006;
             //to centimeter
             else if(rightSpinner.getSelectedItemPosition() == 4)
                 constant = 1;
@@ -438,7 +441,18 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 convert.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 break;
         }
+    }
 
+    public void darkModeToggle()
+    {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey),false);
+
+        if(darkMode != false)
+        {
+            convert.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            switchButton.setBackground(getResources().getDrawable(R.drawable.ic_white_conversion_arrow));
+        }
 
     }
 

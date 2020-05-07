@@ -2,8 +2,8 @@
 <resources>
     <string-array name="color_scheme_entries">
         <item>Default Traveler</item>
-        <item>Pina Colada</item>
-        <item>Sunkissed</item>
+        <item>Piña Colada</item>
+        <item>Sun-Kissed</item>
         <item>Herbivore</item>
         <item>Noir</item>
     </string-array>

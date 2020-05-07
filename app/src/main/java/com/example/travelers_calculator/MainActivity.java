@@ -26,16 +26,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
 {
-    private SettingsToolbar set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        //setTheme(R.style.SunKissedTheme);
         onColorsChanged();
         onDarkMode();
+        super.onCreate(savedInstanceState);
+        //setTheme(R.style.SunKissedTheme);
         setContentView(R.layout.activity_main);
+
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         BottomNavigationView bottomNav = findViewById(R.id.tab_navigation_bar);
         bottomNav.setOnNavigationItemSelectedListener(tabListener);
@@ -43,28 +46,11 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         //start on calculator by default
        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
 
-        //set toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //tp clear data at start
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        boolean firstStart = prefs.getBoolean("firstStart", true);
-        if(firstStart)
-        {
-            clearData();
-            //to clear data at start
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("firstStart", false);
-            editor.apply();
-        }
-
-        //Change too/bar color depending on theme
-        //get the pref values
+        //Change toolbar color depending on theme
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
-        //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
 
+        //change toolbar color as there's a switch between themes
         switch (colorSelect)
         {
             case "Orange-Red":
@@ -84,6 +70,24 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                 break;
 
         }
+        //change toolbar color as dark mode is enabled/disabled
+        boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey), false);
+        if(darkMode == true)
+            toolbar.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+
+        //tp clear data at start
+        SharedPreferences prefsDelete = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefsDelete.getBoolean("firstStart", true);
+        if(firstStart)
+        {
+            clearData();
+            //to clear data at start
+            SharedPreferences.Editor prefsEditor = prefsDelete.edit();
+            prefsEditor.putBoolean("firstStart", false);
+            prefsEditor.apply();
+
+        }
+
     }
 
     //switch between fragments
@@ -249,6 +253,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         if(darkMode != false)
         {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            setTheme(R.style.DarkModeTheme);
             Toast.makeText(getApplicationContext(), "Dark Mode Enabled", Toast.LENGTH_SHORT).show();
         }
         else

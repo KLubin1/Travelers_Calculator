@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
     private Spinner fromSpinner, toSpinner;
     private TextView resultView, currencyType, fromCurrencyType, toCurrencyType;
     private Button convert;
+    private ImageView imageView;
 
     //the final value after all the calculations. Which really doesnt even need
     //to be declared here, but whatever.
@@ -68,6 +70,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         currencyType = (TextView) v.findViewById(R.id.currency_type);
         fromCurrencyType = (TextView) v.findViewById(R.id.from_currency_type);
         toCurrencyType = (TextView) v.findViewById(R.id.to_currency_type);
+        imageView = (ImageView)v.findViewById(R.id.imageView);
         finalValue = 0.0;
 
         //for spinner 1
@@ -178,6 +181,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
 
 
         changeColor();
+        darkModeToggle();
         return  v;
     }
 
@@ -405,6 +409,19 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
             default:
                 convert.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 break;
+        }
+
+    }
+
+    public void darkModeToggle()
+    {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey),false);
+
+        if(darkMode != false)
+        {
+            convert.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            imageView.setBackground(getResources().getDrawable(R.drawable.ic_white_conversion_arrow));
         }
 
     }

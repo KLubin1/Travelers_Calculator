@@ -148,6 +148,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         closeParen.setOnClickListener(this);
 
         changeColor();
+        darkModeToggle();
         return view;
     }
 
@@ -456,6 +457,55 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 break;
 
         }
+
+
+    }
+
+    public void darkModeToggle()
+    {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey),false);
+
+        if(darkMode != false)
+        {
+            //the lighter toned buttons - numbers (clear orange)
+            one.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            two.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            three.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            four.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            five.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            six.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            seven.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            eight.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            nine.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            zero.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+
+            //the darker toned buttons - operations (fiery red)
+            exponent.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            square.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            sqrt.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            base10.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            multiply.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            plus.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            subtract.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            divide.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            openParen.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            closeParen.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            dot.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            negative.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+
+            //the blue buttons - AC and equal (calm rage)
+            ac.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            equal.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+
+            //making sure it sets the color to bright white  when dark mode is on
+            outputResult.setTextColor(getResources().getColor(R.color.background_white));
+
+        }
+        else
+            //making sure it sets the color to dark nlack when dark mode is off
+          outputResult.setTextColor(getResources().getColor(R.color.black));
+
 
 
     }
