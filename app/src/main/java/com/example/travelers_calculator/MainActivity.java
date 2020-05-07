@@ -210,10 +210,6 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
         //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
-       /* SharedPreferences.Editor editor = settings.edit();
-        editor.clear();
-        editor.apply();*/
-
 
         /*ChangeDialog changeDialog = new ChangeDialog();
         changeDialog.show(getSupportFragmentManager(), "change dialog");*/
@@ -221,36 +217,24 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         switch (colorSelect)
         {
             case "Orange-Red":
-                //Utils.changeToTheme(this, Utils.THEME_ORANGE);
                 setTheme(R.style.SunKissedTheme);
-
-                //getApplicationContext().setTheme(R.style.SunKissedTheme);
                 Toast.makeText(getApplicationContext(),"SunKissed", Toast.LENGTH_SHORT).show();
-                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
                 break;
             case "Yellow":
-                //Utils.changeToTheme(this, Utils.THEME_YELLOW);
                 setTheme(R.style.PinaColadaTheme);
                 Toast.makeText(getApplicationContext(),"PinaColada", Toast.LENGTH_SHORT).show();
-                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
                 break;
             case "Green":
-                //Utils.changeToTheme(this, Utils.THEME_DEFAULT);
                 setTheme(R.style.HerbivoreTheme);
                 Toast.makeText(getApplicationContext(),"Herbivore", Toast.LENGTH_SHORT).show();
-                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
                 break;
             case "Dark":
-                //Utils.changeToTheme(this, Utils.THEME_DEFAULT);
                 setTheme(R.style.NoirTheme);
                 Toast.makeText(getApplicationContext(),"Noir", Toast.LENGTH_SHORT).show();
-                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
                 break;
             default:
-                //Utils.changeToTheme(this, Utils.THEME_DEFAULT);
                 setTheme(R.style.AppTheme);
                 Toast.makeText(getApplicationContext(),"Default", Toast.LENGTH_SHORT).show();
-                //settings.edit().putString(getString(R.string.colorSchemeKey), colorSelect).apply();
                 break;
         }
 
@@ -272,6 +256,28 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             Toast.makeText(getApplicationContext(), "Dark Mode Disabled", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        recreate();
+        /*SharedPreferences settings = getSharedPreferences("colorChanged", MODE_PRIVATE);
+        boolean settingsChanged = settings.getBoolean( getString(R.string.colorSchemeKey), false);
+
+        if(settingsChanged == true)
+        {
+            //recreate();
+            //ChangeDialog changeDialog = new ChangeDialog();
+            //changeDialog.show(getSupportFragmentManager(), "change dialog");
+            Toast.makeText(getApplicationContext(), "Restarted", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor edit = settings.edit();
+            edit.putBoolean("colorChanged", false);
+        }
+        else
+            settingsChanged = false;*/
 
     }
 }

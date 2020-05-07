@@ -45,8 +45,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     public CalculatorFragment(){}
     //shared preferences to retrieve data
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
@@ -66,6 +64,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //assign the output button and text display
         outputResult = (TextView) view.findViewById(R.id.display);
         outputResult.setText("");
+
 
         mCalculator = new CalculatorFunctionality();
 

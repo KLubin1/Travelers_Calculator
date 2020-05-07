@@ -437,7 +437,6 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
             default:
                 convert.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 break;
-
         }
 
 
