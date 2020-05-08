@@ -1,12 +1,15 @@
 package com.example.travelers_calculator.toolbar.settings;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.R;
 
@@ -15,13 +18,23 @@ public class SettingsToolbar extends AppCompatActivity
     //initial creation
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
-        //set back button
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);*/
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);*/
+
+//       if(toolbar != null)
+//       {
+//           getSupportActionBar().setHomeButtonEnabled(true);
+//           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//       }
+        //set back button
+
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
 
         ListPreference listPreference = new ListPreference(getApplicationContext());
         Preference preference = new Preference(getApplicationContext());
@@ -31,15 +44,13 @@ public class SettingsToolbar extends AppCompatActivity
                 .replace(android.R.id.content, new SettingFragment())
                 .commit();
 
-        setTheme(R.style.HerbivoreTheme);
-
-
 
         //ChangeDialog changeDialog = new ChangeDialog();
         //changeDialog.show(getSupportFragmentManager(), "change dialog");
 
         //preference.setOnPreferenceChangeListener(changeListener);
 
+        onColorsChanged();
 
     }
     //load the fragment that contains the settings view
@@ -59,5 +70,50 @@ public class SettingsToolbar extends AppCompatActivity
             return false;
         }
     };
+
+    public void onColorsChanged()
+    {
+        //get the pref values
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
+        //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
+
+        /*ChangeDialog changeDialog = new ChangeDialog();
+        changeDialog.show(getSupportFragmentManager(), "change dialog");*/
+        //TODO: Use the exact value names to pass in the case
+        switch (colorSelect)
+        {
+            case "Orange-Red":
+                setTheme(R.style.SunKissedTheme);
+                break;
+            case "Yellow":
+                setTheme(R.style.PinaColadaTheme);
+                break;
+            case "Green":
+                setTheme(R.style.HerbivoreTheme);
+                break;
+            case "Dark":
+                setTheme(R.style.NoirTheme);
+                break;
+            default:
+                setTheme(R.style.AppTheme);
+                break;
+        }
+
+        boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey), false);
+
+        if(darkMode != false)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+           setTheme(R.style.DarkModeTheme);
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+    }
+
+
 
 }

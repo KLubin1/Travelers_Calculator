@@ -125,16 +125,6 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        //this is to make toast, but can put anything in here when a item is selected) maybe pull up the second spinner?
-        // String text = parent.getItemAtPosition(position).toString();
-       /* String errorMessage = getString(R.string.error_message);
-        if(spinner1.getSelectedItemPosition() == 0)
-        {
-        if(spinner2.getSelectedItemPosition() == 1 || spinner2.getSelectedItemPosition() == 2)
-            result.setText(errorMessage);
-        else return;
-        }
-        */
     }
 
     @Override

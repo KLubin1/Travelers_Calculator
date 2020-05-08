@@ -20,8 +20,6 @@
         android:id="@+id/action_exit"
         android:title="@string/Exit"
         app:showAsAction="never">
-
     </item>
-
 
 </menu>

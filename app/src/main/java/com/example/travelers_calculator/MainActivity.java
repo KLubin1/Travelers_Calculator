@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         if(darkMode == true)
             toolbar.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
 
-        //tp clear data at start
+        //to clear data at start
         SharedPreferences prefsDelete = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = prefsDelete.getBoolean("firstStart", true);
         if(firstStart)
@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             case R.id.action_settings:
                 Intent settings = new Intent(MainActivity.this, SettingsToolbar.class);
                 startActivity(settings);
+                //getSupportActionBar().setHomeButtonEnabled(true);
+                //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 return true;
             case R.id.action_about:
                 Intent about = new Intent(MainActivity.this, About.class);
@@ -149,24 +151,6 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
 
         return super.onOptionsItemSelected(item);
     }
-    /*@Override
-    public void changeFragment(int id)
-    {
-        Fragment switcher = null;
-        if (id == 1) {
-            switcher = new LengthFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id, switcher);
-            ft.commit();
-        }
-        else if (id == 2) {
-            switcher = new LengthFragmentRev();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.length_layout, switcher);
-            ft.commit();
-        }
-
-    }*/
 
     @Override
     protected void onDestroy() {
@@ -215,8 +199,6 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
         //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
 
-        /*ChangeDialog changeDialog = new ChangeDialog();
-        changeDialog.show(getSupportFragmentManager(), "change dialog");*/
        //TODO: Use the exact value names to pass in the case
         switch (colorSelect)
         {
@@ -243,7 +225,6 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         }
 
     }
-
 
     public void onDarkMode()
     {

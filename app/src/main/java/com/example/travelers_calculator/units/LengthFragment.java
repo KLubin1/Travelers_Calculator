@@ -31,10 +31,7 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
     private Button convert;
     private ImageView switchButton;
     //private Button calculatorWidget;
-    //switcher
-   public FragmentSwitcher fragmentSwitcher;
-   //interface
-   private OnFragmentInteractionListener listener;
+
    //constructor, not sure if necessary
    public LengthFragment(){}
 
@@ -92,37 +89,6 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 //result.setText("changed to conversion");
             }
         });
-
-        //switching between views
-       /* switchButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                *//*FragmentManager fragmentManager = new FragmentManager() {
-
-                };*//*
-                if (getFragmentManager().findFragmentByTag(getString(R.string.us_switch_tag)) == null) {
-
-                    //if the normal fragment does not exist, add it to fragment manager.
-                    getFragmentManager().beginTransaction().add(R.id.length_layout, new LengthFragment(), getString(R.string.us_switch_tag)).commit();
-
-                    //and hide the current one
-                    //getFragmentManager().beginTransaction().hide(getFragmentManager().findFragmentById(R.id.length_layout)).commit();
-                } else {
-                    //if the normal fragment exists, show the rev layout
-                    getFragmentManager().beginTransaction().show(getFragmentManager().findFragmentByTag("uSSwitch")).commit();//causing probs
-
-                }
-
-                if (getFragmentManager().findFragmentByTag(getString(R.string.metric_switch_tag)) != null) {
-                    //if the rev fragment is visible, hide the normal layout.
-                    getFragmentManager().beginTransaction().hide(getFragmentManager().findFragmentByTag("metricSwitch")).commit();
-                }
-                //listener.changeFragment(1);
-
-            }
-        });*/
 
         //saving calculations
        /* calculatorWidget.setOnClickListener(new View.OnClickListener() {
