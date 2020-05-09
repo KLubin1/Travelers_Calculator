@@ -373,8 +373,8 @@ public class AreaFragment extends Fragment implements AdapterView.OnItemSelected
 
         }
 
-
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

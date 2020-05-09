@@ -16,33 +16,38 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter
 
     private int numOfTabs;
 
-    public SectionsPagerAdapter(@NonNull FragmentManager fm, int numOfTabs) {
+    public SectionsPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        this.numOfTabs = numOfTabs;
     }
 
     /*public SectionsPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }*/
 
-
-    public void addFragment(Fragment fragment, String title)
-    {
-        fragmentList.add(fragment);
-        fragmentNames.add(title);
-
-    }
-
     @Override
     public int getCount()
     {
-        return numOfTabs;
+        return 5;
     }
 
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return fragmentNames.get(position);
+        switch (position)
+        {
+            case 0:
+                return "Length";
+            case 1:
+                return "Area";
+            case 2:
+                return "Weight";
+            case 3:
+                return "Temper-\nature";
+            case 4:
+                return "Volume";
+            default:
+                return null;
+        }
     }
 
     @NonNull
@@ -66,10 +71,10 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter
        }
     }
 
-    @Override
+    /*@Override
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
-    }
+    }*/
 /*  @NonNull
     @Override
     public Fragment createFragment(int position) {
@@ -81,6 +86,12 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter
     {
         return fragmentList.size();
     }*/
+   /*public void addFragment(Fragment fragment, String title)
+   {
+       fragmentList.add(fragment);
+       fragmentNames.add(title);
+
+   }*/
 
 
 

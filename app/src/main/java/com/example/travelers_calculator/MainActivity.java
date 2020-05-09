@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,7 @@ import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.time.TimeFragment;
 import com.example.travelers_calculator.toolbar.About;
 import com.example.travelers_calculator.toolbar.settings.SettingsToolbar;
-import com.example.travelers_calculator.units.LengthFragment;
+import com.example.travelers_calculator.units.UnitsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                     selectedFragment = new CalculatorFragment();
                     break;
                 case R.id.navigation_units:
-                    selectedFragment = new LengthFragment();
+                    selectedFragment = new UnitsFragment();
                     break;
                 case R.id.navigation_currency:
                     selectedFragment = new CurrencyFragment();
@@ -204,23 +203,23 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         {
             case "Orange-Red":
                 setTheme(R.style.SunKissedTheme);
-                Toast.makeText(getApplicationContext(),"SunKissed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"SunKissed", Toast.LENGTH_SHORT).show();
                 break;
             case "Yellow":
                 setTheme(R.style.PinaColadaTheme);
-                Toast.makeText(getApplicationContext(),"PinaColada", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"PinaColada", Toast.LENGTH_SHORT).show();
                 break;
             case "Green":
                 setTheme(R.style.HerbivoreTheme);
-                Toast.makeText(getApplicationContext(),"Herbivore", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Herbivore", Toast.LENGTH_SHORT).show();
                 break;
             case "Dark":
                 setTheme(R.style.NoirTheme);
-                Toast.makeText(getApplicationContext(),"Noir", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Noir", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 setTheme(R.style.AppTheme);
-                Toast.makeText(getApplicationContext(),"Default", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Default", Toast.LENGTH_SHORT).show();
                 break;
         }
 
@@ -235,12 +234,12 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             setTheme(R.style.DarkModeTheme);
-            Toast.makeText(getApplicationContext(), "Dark Mode Enabled", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Dark Mode Enabled", Toast.LENGTH_SHORT).show();
         }
         else
         {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            Toast.makeText(getApplicationContext(), "Dark Mode Disabled", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Dark Mode Disabled", Toast.LENGTH_SHORT).show();
         }
 
     }

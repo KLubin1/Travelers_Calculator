@@ -7,9 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/background_white">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
 
     <Spinner
         android:id="@+id/spinner1"

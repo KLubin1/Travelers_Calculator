@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.travelers_calculator.R;
 import com.google.android.material.tabs.TabItem;
@@ -17,7 +18,7 @@ public class UnitsFragment extends Fragment
 {
    private SectionsPagerAdapter mSectionsPagerAdapter;
    private TabLayout tabLayout;
-   private ViewPagerOverride viewPager;
+   private ViewPager viewPager;
    private TabItem lengthTab, areaTab, weightTab, tempTab, volumeTab;
 
     @Nullable
@@ -27,17 +28,17 @@ public class UnitsFragment extends Fragment
         //where it comes together, what usually comes in the units main activity goes here
 
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager(), 5);//suspect causing crash
-        tabLayout = v.findViewById(R.id.tab_layout);
-        viewPager = v.findViewWithTag(R.id.view_page_layout);
+
+
+               /*
         lengthTab = v.findViewById(R.id.length_tab);
         areaTab = v.findViewById(R.id.area_tab);
         weightTab = v.findViewById(R.id.weight_tab);
         tempTab = v.findViewById(R.id.temp_tab);
         volumeTab = v.findViewById(R.id.volume_tab);
+*/
+        //viewPager.setAdapter(mSectionsPagerAdapter);//where its crashing
 
-        viewPager.setAdapter(mSectionsPagerAdapter);//where its crashing
-        tabLayout.setupWithViewPager(viewPager);
         //setupViewPager(viewPager);
 
         //tabLayout mediator needed for ViewPager2
@@ -50,7 +51,7 @@ public class UnitsFragment extends Fragment
         tabLayoutMediator.attach();*/
 
         //------------From here on is deprecated territory----------------//
-       tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+       /*tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
        {
             @Override
             public void onTabSelected(TabLayout.Tab tab)
@@ -74,21 +75,36 @@ public class UnitsFragment extends Fragment
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });
+        });*/
 //       viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         return v;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());//suspect causing crash
+
+        viewPager = view.findViewById(R.id.view_page_layout);
+        viewPager.setAdapter(mSectionsPagerAdapter);
+
+        tabLayout = view.findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+    }
+
     //I don't trust the efficacy of this method anymore
-    private void  setupViewPager(ViewPagerOverride _viewPager){
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getFragmentManager(), tabLayout.getTabCount());// or lifecycleowner
+    /*private void  setupViewPager(ViewPager _viewPager){
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getFragmentManager());// or lifecycleowner
         adapter.addFragment(new LengthFragment(), "Length");
         adapter.addFragment(new AreaFragment(), "Area");
         adapter.addFragment(new WeightFragment(), "Weight");
         adapter.addFragment(new TemperatureFragment(), "Temperature");
         adapter.addFragment(new VolumeFragment(), "Volume");
         _viewPager.setAdapter(adapter);
-    }
+    }*/
 
 }
