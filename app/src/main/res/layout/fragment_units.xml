@@ -49,7 +49,7 @@
                 android:id="@+id/temp_tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temper-ature" />
+                android:text="Temp" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/volume_tab"

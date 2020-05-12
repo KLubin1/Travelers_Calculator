@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     private TextView result;
     private TextView unitType;
     private Button convert;
+    private ImageView switchButton;
     //private Button calculatorWidget;
 
 
@@ -45,6 +47,7 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
         result = (TextView) view.findViewById(R.id.result);
         unitType = (TextView) view.findViewById(R.id.unit_type);
         convert = (Button) view.findViewById(R.id.convertButton);
+        switchButton =(ImageView) view.findViewById(R.id.switch_button);
         //calculator widget
        // calculatorWidget = (Button) view.findViewById((R.id.calculator_widget_unit));
 
@@ -122,9 +125,9 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
         unitType.setText(type);
 
         changeColor();
+        darkModeToggle();
         return view;
     }
-
 
 
     @Override
@@ -215,9 +218,19 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
             default:
                 convert.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 break;
-
         }
+    }
 
+    public void darkModeToggle()
+    {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey),false);
+
+        if(darkMode != false)
+        {
+            convert.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            switchButton.setBackground(getResources().getDrawable(R.drawable.ic_white_conversion_arrow));
+        }
 
     }
 

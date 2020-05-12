@@ -42,7 +42,7 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter
             case 2:
                 return "Weight";
             case 3:
-                return "Temper-\nature";
+                return "Temp";
             case 4:
                 return "Volume";
             default:

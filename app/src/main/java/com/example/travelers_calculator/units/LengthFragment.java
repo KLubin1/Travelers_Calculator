@@ -423,8 +423,8 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onPause() {
+        super.onPause();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("unitcalc", result.getText().toString());
