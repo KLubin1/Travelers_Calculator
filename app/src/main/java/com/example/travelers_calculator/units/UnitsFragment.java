@@ -1,7 +1,5 @@
 package com.example.travelers_calculator.units;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,15 +40,15 @@ public class UnitsFragment extends Fragment
         tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
-        prefs.getAll();
+        //SharedPreferences prefs = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        //prefs.getAll();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SharedPreferences prefs = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        //SharedPreferences prefs = getActivity().getSharedPreferences("UnitResult", Context.MODE_PRIVATE);
+        //SharedPreferences.Editor editor = prefs.edit();
 
 
 

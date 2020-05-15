@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group>
     <item
         android:id="@+id/action_settings"
         android:title="@string/Settings"
-        app:showAsAction="never">
-    </item>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_customize"
         android:title="@string/Customize"
-        app:showAsAction="never">
-    </item>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_about"
         android:title="@string/About"
-        app:showAsAction="never">
-    </item>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_exit"
         android:title="@string/Exit"
-        app:showAsAction="never">
-    </item>
+        app:showAsAction="never"/>
+    </group>
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_save_white"
+        android:title="@string/History"
+        app:showAsAction="always"
+        />
+
+
+
 
 </menu>

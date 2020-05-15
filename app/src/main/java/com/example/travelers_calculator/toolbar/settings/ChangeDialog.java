@@ -10,29 +10,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.jakewharton.processphoenix.ProcessPhoenix;
-
 public class ChangeDialog extends AppCompatDialogFragment
 {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Restart App?")
-                .setMessage("Color change requires app restart.")
+        builder.setTitle("This is History")
+                .setMessage("This is where history would be if it was in a list view, but it\'s at least something like this. :)")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 })
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ok, whatever", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
                         //restart app
-                       ProcessPhoenix.triggerRebirth(getContext());
-                       Toast.makeText(getActivity().getApplicationContext(), "App Restarted", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getActivity().getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
                         //getActivity().recreate();
 
                     }

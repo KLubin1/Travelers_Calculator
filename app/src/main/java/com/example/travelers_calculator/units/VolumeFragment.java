@@ -84,6 +84,11 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
                 result.setText(String.valueOf(conversionFactory()));
                 //set the type of result
                 unitType.setText(spinner2.getSelectedItem().toString());
+                //TODO: Get history shared preference and add value of result to it
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("calcUV", result.getText().toString());
+                editor.commit();
 
                 //result.setText("changed to conversion");
             }

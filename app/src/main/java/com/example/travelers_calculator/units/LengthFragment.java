@@ -85,6 +85,12 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                 result.setText(String.valueOf(conversionFactory()));
                 //set the type of result
                 unitType.setText(rightSpinner.getSelectedItem().toString());
+                //TODO: Get history shared preference and add value of result to it
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("calcUL", result.getText().toString());
+                editor.commit();
+
 
                 //result.setText("changed to conversion");
             }

@@ -16,10 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.R;
+import com.example.travelers_calculator.toolbar.history.HistoryData;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 
-public class CalculatorFragment extends Fragment implements View.OnClickListener
-{
+public class CalculatorFragment extends Fragment implements View.OnClickListener // AdapterView.OnItemClickListener
+ {
     //Add calculator code here
 
     //calculator data members
@@ -38,12 +42,17 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     //last result
     private String obtainLastResult = "";
     //output
-    private TextView outputResult;
+    public TextView outputResult;
     //calculator functionality class
     private CalculatorFunctionality mCalculator;
+    //history data list
+    private ArrayList<HistoryData> historyData;
     //constructor
     public CalculatorFragment(){}
-    //shared preferences to retrieve data
+    //to get list that holds the saved results
+    LinkedList<String> getData = new LinkedList<>();
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
@@ -93,6 +102,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         exponent  = (Button) view.findViewById(R.id.exponent);
         openParen = (Button) view.findViewById(R.id.open_paren);
         closeParen = (Button) view.findViewById(R.id.close_paren);
+
+
 
 
         //widget assignment for loading conversions unto calculator
@@ -272,6 +283,9 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view)
     {
+
+
+
         Button button = (Button) view;
         String data = button.getText().toString();
         //to display a toast, isnt really needed
@@ -288,17 +302,49 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //for equal button
         else if (data.equals("="))
         {
-            String enteredInput = outputResult.getText().toString();
-            //enteredInput += obtainLastResult;
-            // calls the function that will return the result of the calculation.
-            String resultObject = mCalculator.getResult(currentDisplayedInput, inputToBeParsed);
-            outputResult.setText(removeTrailingZero(resultObject));
+                int entry = 0;
+                String enteredInput = outputResult.getText().toString();
+                //enteredInput += obtainLastResult;
+                // calls the function that will return the result of the calculation.
+                String resultObject = mCalculator.getResult(currentDisplayedInput, inputToBeParsed);
+                outputResult.setText(removeTrailingZero(resultObject));
+                //TODO: add the calculated result to the history shared preferences
+                //shared preferences version
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putInt("entry", 0);
+                editor.putString("calcB", outputResult.getText().toString());
+                editor.commit();
+
+            //historyData.add(new HistoryData(outputResult.getText().toString()));
+
+               // sharedPreferences.getString("calc", outputResult.getText().toString());
+
+
+            //int entry = sharedPreferences.getInt("entry", 0);
+                //getData.add(sharedPreferences.getString("calc" + i, "0"));
+
+                //make a loop that adds 1 to the calc so that every entry has its own name,
+                // so "calc0" for the first entry, "calc1" for the second entry, etc.
+                //this is working, it does change the calc name
+                //but this wont ever update with a actual new entry with output result, so its pretty useless
+            /*for(int i = 0; i<11; ++i)
+            {
+                String plus = "calc" + i;
+                if(data.equals("="))
+                editor.putString(plus + i, outputResult.getText().toString());
+            }*/
+                //editor.commit();
+                //so by the end here, we should have a History shared prefrence for 10 entries.
         }
+
         //call the parser
         else
         {
             obtainInputValues(data);
         }
+
 
     }
     //subtract leading zeros (reformat numbers)
@@ -519,5 +565,67 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         editor.putString("calc", outputResult.getText().toString());
         editor.commit();
     }
+    //outputResult is null, why?  Only I can think of is that by the time it reaches this point, its no longer initialized after onCreateView
+    public TextView getTextView() {return outputResult; }
 
+    public void setTextView(TextView mtextView)
+    {
+        this.outputResult = mtextView;
+    }
+
+    public void getData(String data)
+    {
+        getTextView().setText(data);
+    }
+
+   /* public void setHistory()
+    {
+        //however this goes, all the history functionality would have to come together in here
+
+
+        //for history
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
+
+
+        //String[] letters ={"A","B","C","D", "E", "F", "G"};
+        //maybe i could use a linked list instead of array list?
+        LinkedList<String> data = new LinkedList<>();
+        int entry = sharedPreferences.getInt("entry", 0);
+
+        *//*for(int i = 0; i<=entry; i++){
+            data.add(sharedPreferences.getString("calc", "0"));
+        }*//*
+
+        data.add(sharedPreferences.getString("calc", "0"));
+        data.add(sharedPreferences.getString("calc1", "0"));
+        data.add(sharedPreferences.getString("calc2", "0"));
+        data.add(sharedPreferences.getString("calc3", "0"));
+        data.add(sharedPreferences.getString("calc4", "0"));
+        data.add(sharedPreferences.getString("calc5", "0"));
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View convertView = inflater.inflate(R.layout.history_layout, null);
+        //this sets the list view to the dialog box
+        ListView lv = convertView.findViewById(R.id.history_list);
+        alertDialog.setView(convertView);
+        alertDialog.setTitle("History");
+
+        ArrayAdapter adapter = new ArrayAdapter<>(getContext(),R.layout.history_textview, R.id.history_textview, data);
+        lv.setAdapter(adapter);
+        alertDialog.show();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String calc = parent.getItemAtPosition(position).toString();
+                outputResult.setText(calc);
+            }
+        });
+        alertDialog.setCancelable(true);
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    }*/
 }

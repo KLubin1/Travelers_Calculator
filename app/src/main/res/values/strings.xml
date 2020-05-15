@@ -156,6 +156,7 @@
     <string name="About">About</string>
     <string name="Customize">Customize</string>
     <string name="Exit">Exit</string>
+    <string name="History">History</string>
 
     <!--About message-->
     <string name="About_Message">
@@ -174,6 +175,7 @@
     <string name="colorSchemeKey">ColorScheme</string>
     <string name="darkModeKey">DarkMode</string>
     <string name="fontSizeKey">FontSize</string>
+
 
 
 </resources>

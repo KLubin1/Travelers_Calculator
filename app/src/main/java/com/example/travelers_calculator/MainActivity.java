@@ -4,11 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -23,8 +29,15 @@ import com.example.travelers_calculator.toolbar.settings.SettingsToolbar;
 import com.example.travelers_calculator.units.UnitsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity //implements OnFragmentInteractionListener
+import java.util.LinkedList;
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener //implements OnFragmentInteractionListener
 {
+ private CalculatorFragment calculatorFragment;
+ private UnitsFragment unitsFragment;
+ private CurrencyFragment currencyFragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,6 +86,10 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey), false);
         if(darkMode == true)
             toolbar.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+
+        calculatorFragment = new CalculatorFragment();
+        unitsFragment = new UnitsFragment();
+        currencyFragment = new CurrencyFragment();
 
         //to clear data at start
         SharedPreferences prefsDelete = getSharedPreferences("prefs", MODE_PRIVATE);
@@ -142,6 +159,12 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
                 Intent about = new Intent(MainActivity.this, About.class);
                 startActivity(about);
                 return true;
+            case R.id.action_history:
+                setHistory();
+                /*Intent history = new Intent(MainActivity.this, History.class);
+                startActivity(history);*/
+                //Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
+                return  true;
             case R.id.action_exit:
                 finish();
                 return true;
@@ -155,6 +178,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
     protected void onDestroy() {
         super.onDestroy();
         clearData();
+        //finish();
 
     }
 
@@ -189,6 +213,12 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
         SharedPreferences.Editor timeEditor = time.edit();
         timeEditor.clear();
         timeEditor.apply();
+
+        //for history
+        SharedPreferences history = getSharedPreferences("History", Context.MODE_PRIVATE);
+        SharedPreferences.Editor historyEditor = history.edit();
+        historyEditor.clear();
+        historyEditor.apply();
     }
 
     public void onColorsChanged()
@@ -244,6 +274,83 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
 
     }
 
+   private void setHistory()
+    {
+        //however this goes, all the history functionality would have to come together in here
+
+       /* SharedPreferences sharedPreferences = getSharedPreferences("History", MODE_PRIVATE);
+        //String[] letters ={"A","B","C","D", "E", "F", "G"};
+        //maybe i could use a linked list instead of array list?
+        List<HistoryData> data = new ArrayList<HistoryData>();
+
+        //add the stored value to the array/list
+        data.add(new HistoryData(sharedPreferences.getString("calc", "0" ), "Calculator"));
+        data.add(new HistoryData(sharedPreferences.getString("calcUL", "0"), "Unit-Length"));
+        data.add(new HistoryData(sharedPreferences.getString("calcUA", "0"), "Unit-Area"));
+        data.add(new HistoryData(sharedPreferences.getString("calcUW", "0"), "Unit-Weigth"));
+        data.add(new HistoryData(sharedPreferences.getString("calcUT", "0"), "Unit-Temp"));
+        data.add(new HistoryData(sharedPreferences.getString("calcUV", "0"), "Unit-Volume"));
+        data.add(new HistoryData(sharedPreferences.getString("calcC", "0"), "Currency"));
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View convertView = inflater.inflate(R.layout.history_layout, null);
+        //this sets the list view to the dialog box
+        ListView lv = convertView.findViewById(R.id.history_list);
+        alertDialog.setView(convertView);
+        alertDialog.setTitle("History");
+        HistoryAdapter adapter = new HistoryAdapter(MainActivity.this, R.layout.history_textview,data);
+        lv.setAdapter(adapter);
+        alertDialog.show();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //String calc = parent.getItemAtPosition(position).toString();
+                //calculatorFragment.getData(calc);
+            }
+        });
+        alertDialog.setCancelable(true);*/
+
+        SharedPreferences sharedPreferences = getSharedPreferences("History", MainActivity.MODE_PRIVATE);
+        //String[] letters ={"A","B","C","D", "E", "F", "G"};
+        //maybe i could use a linked list instead of array list?
+        LinkedList<String> data = new LinkedList<>();
+
+        //add the stored value to the array/list
+        data.add(sharedPreferences.getString("calcB", "0" ));
+        data.add(sharedPreferences.getString("calcUL", "0"));
+        data.add(sharedPreferences.getString("calcUA", "0"));
+        data.add(sharedPreferences.getString("calcUW", "0"));
+        data.add(sharedPreferences.getString("calcUT", "0"));
+        data.add(sharedPreferences.getString("calcUV", "0"));
+        data.add(sharedPreferences.getString("calcC", "0"));
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View convertView = inflater.inflate(R.layout.history_layout, null);
+        //this sets the list view to the dialog box
+        ListView lv = convertView.findViewById(R.id.history_list);
+        alertDialog.setView(convertView);
+        alertDialog.setTitle("History");
+        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, R.layout.history_textview, R.id.history_textview, data);
+        lv.setAdapter(adapter);
+        alertDialog.show();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //String calc = parent.getItemAtPosition(position).toString();
+                //calculatorFragment.getData(calc);
+            }
+        });
+        alertDialog.setCancelable(true);
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+    }
+
     @Override
     protected void onRestart()
     {
@@ -265,5 +372,7 @@ public class MainActivity extends AppCompatActivity //implements OnFragmentInter
             settingsChanged = false;*/
 
     }
+
+
 }
 

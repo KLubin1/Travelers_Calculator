@@ -7,7 +7,15 @@
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
-    style="@style/PreferenceThemeOverlay"
->
+    style="@style/PreferenceThemeOverlay">
+    <!--<Button
+        android:id="@+id/history_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_save_white"
+        android:layout_marginStart="280dp"/>-->
+
+
+
 
 </androidx.appcompat.widget.Toolbar>
