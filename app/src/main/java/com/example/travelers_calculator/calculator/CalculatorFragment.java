@@ -564,6 +564,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("calc", outputResult.getText().toString());
         editor.commit();
+
     }
     //outputResult is null, why?  Only I can think of is that by the time it reaches this point, its no longer initialized after onCreateView
     public TextView getTextView() {return outputResult; }

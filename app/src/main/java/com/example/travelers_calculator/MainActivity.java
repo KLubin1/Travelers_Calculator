@@ -23,6 +23,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
+import com.example.travelers_calculator.splash.Onboarding;
 import com.example.travelers_calculator.time.TimeFragment;
 import com.example.travelers_calculator.toolbar.About;
 import com.example.travelers_calculator.toolbar.settings.SettingsToolbar;
@@ -55,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         BottomNavigationView bottomNav = findViewById(R.id.tab_navigation_bar);
         bottomNav.setOnNavigationItemSelectedListener(tabListener);
 
-        //start on calculator by default
-       getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
 
         //Change toolbar color depending on theme
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -92,17 +91,87 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         currencyFragment = new CurrencyFragment();
 
         //to clear data at start
+        //and initialize onboarding
         SharedPreferences prefsDelete = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = prefsDelete.getBoolean("firstStart", true);
+        SharedPreferences.Editor prefsEditor = prefsDelete.edit();
         if(firstStart)
         {
             clearData();
             //to clear data at start
-            SharedPreferences.Editor prefsEditor = prefsDelete.edit();
             prefsEditor.putBoolean("firstStart", false);
             prefsEditor.apply();
+            Intent onboard = new Intent(MainActivity.this, Onboarding.class);
+            startActivity(onboard);
 
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Onboarding()).commit();
         }
+        else
+            {
+
+            //for development purposes
+            prefsEditor.putBoolean("firstStart", true);
+            prefsEditor.apply();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
+            }
+
+
+
+        // Intent onboard = new Intent(MainActivity.this, Onboarding.class);
+            //startActivity(onboard);
+
+       /* //to set onboarding
+        setContentView(R.layout.onboarding_layout);
+        PaperOnboardingPage p1 = new PaperOnboardingPage(
+                "Welcome to Traveler's Calculator!",
+                "Do basic calculations.",
+                getResources().getColor(R.color.colorAccent),
+                R.mipmap.pic_calculator_foreground,
+                R.drawable.ic_calculator);
+        PaperOnboardingPage p2 = new PaperOnboardingPage(
+                "Convert with ease",
+                "US and metric units and up-to-date currency conversion.",
+                getResources().getColor(R.color.colorAccent),
+                R.mipmap.pic_units_foreground,
+                R.drawable.ic_kg_units);
+        PaperOnboardingPage p3 = new PaperOnboardingPage(
+                "Save your calculations",
+                "History to keep up with your last saved calculations.",
+                getResources().getColor(R.color.colorAccent),
+                R.mipmap.pic_history_foreground,
+                R.drawable.ic_save);
+
+        ArrayList<PaperOnboardingPage> onboardingPages = new ArrayList<>();
+        onboardingPages.add(p1);
+        onboardingPages.add(p2);
+        onboardingPages.add(p3);
+
+        PaperOnboardingFragment onboardingFragment = PaperOnboardingFragment.newInstance(onboardingPages);
+        // FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        // fragmentTransaction.replace(R.id.fragment_container, onboardingFragment);
+        //fragmentTransaction.commit();
+
+        // getSupportActionBar().hide();
+        getSupportFragmentManager().beginTransaction().add(R.id.onboarding_layout, onboardingFragment).commit();
+
+        onboardingFragment.setOnRightOutListener(new PaperOnboardingOnRightOutListener() {
+            @Override
+            public void onRightOut() {
+                //start on calculator by default
+                //getSupportActionBar().show();
+                //Intent proceed = new Intent(Onboarding.this, MainActivity.class);
+                //startActivity(proceed);
+                //so maybe make a frgament, not activity, for onboarding, then replace it here
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
+            }
+        });*/
+
+
+        //}
+
+
+
+
 
     }
 
@@ -348,6 +417,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+    }
+
+    public void doOnBoarding()
     {
     }
 

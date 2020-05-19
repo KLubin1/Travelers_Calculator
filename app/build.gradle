@@ -45,5 +45,7 @@ dependencies {
     implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
     //for quick restarting app
     implementation 'com.jakewharton:process-phoenix:2.0.0'
+    //for onboarding
+    implementation 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
 
 }

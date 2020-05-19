@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".splash.Onboarding"
+    android:id="@+id/onboarding_layout"
+    android:background="@color/colorAccent">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/onboardingViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dots_layout"
+        android:layout_marginBottom="-2dp" />
+
+    <LinearLayout
+        android:id="@+id/dots_layout"
+        android:layout_width="109dp"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal" />
+
+    <Button
+        android:id="@+id/buttonPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>
