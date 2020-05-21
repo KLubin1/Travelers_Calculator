@@ -19,8 +19,7 @@ public class Onboarding extends AppCompatActivity
     private LinearLayout dotLayout;
     private OnboardingAdapter onboardingAdapter;
     private TextView[] dots;
-    private Button nextButton, prevButton;
-    private int currentPage;
+    private Button goButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -30,8 +29,8 @@ public class Onboarding extends AppCompatActivity
 
         viewpager = findViewById(R.id.onboardingViewPager);
         dotLayout = findViewById(R.id.dots_layout);
-        nextButton = findViewById(R.id.buttonNext);
-        prevButton = findViewById(R.id.buttonPrev);
+        goButton = findViewById(R.id.buttonNext);
+        //prevButton = findViewById(R.id.buttonPrev);
 
 
         onboardingAdapter = new OnboardingAdapter(this);
@@ -39,22 +38,10 @@ public class Onboarding extends AppCompatActivity
 
         viewpager.addOnPageChangeListener(viewPagerListener);
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewpager.setCurrentItem(currentPage + 1);
-
-
-
-                if(nextButton.getText() == "Get Calculating!"){
                     finish();
-                }
-            }
-        });
-        prevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewpager.setCurrentItem(currentPage - 1);
             }
         });
 
@@ -94,35 +81,20 @@ public class Onboarding extends AppCompatActivity
         public void onPageSelected(int position) {
 
             addDotsIndicator(position);
-            currentPage= position;
 
-            //maybe change it so that there's only one button, "Get Calculating!", and set an on click listener event for that
+            //changed it so that there's only one button, "Get Calculating!", and set an on click listener event for that
             //when the last page is reached, this should bypass the third page problem.
-            if(position== 0)
+            if(position==dots.length-1)
             {
-                nextButton.setEnabled(true);
-                prevButton.setEnabled(false);
-                prevButton.setVisibility(View.INVISIBLE);
-                nextButton.setText("Next");
-                prevButton.setText("");
-            }
-            else if(position==dots.length-1)
-            {
-                nextButton.setEnabled(true);
-                prevButton.setEnabled(true);
-                prevButton.setVisibility(View.VISIBLE);
-                nextButton.setText("Get Calculating!");
-                prevButton.setText("Back");
+                goButton.setEnabled(true);
+                goButton.setVisibility(View.VISIBLE);
+                goButton.setText("Get Calculating!");
 
             }
-            else
-            {
-                nextButton.setEnabled(true);
-                prevButton.setEnabled(true);
-                prevButton.setVisibility(View.VISIBLE);
-                nextButton.setText("Next");
-                prevButton.setText("Back");
-
+            //to disable button unless its on the last page, not really a big deal, though, and maybe shouldnt be?
+            else{
+                goButton.setEnabled(false);
+                goButton.setVisibility(View.INVISIBLE);
             }
 
         }
