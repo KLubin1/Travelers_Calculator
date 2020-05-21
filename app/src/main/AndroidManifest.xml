@@ -21,7 +21,7 @@
         <activity android:name=".toolbar.history.History"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name="com.example.travelers_calculator.splash.SplashScreen">
+        <activity android:name="com.example.travelers_calculator.onboarding.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

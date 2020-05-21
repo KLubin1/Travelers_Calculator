@@ -1,4 +1,4 @@
-package com.example.travelers_calculator.splash;
+package com.example.travelers_calculator.onboarding;
 
 import android.content.Context;
 import android.view.LayoutInflater;

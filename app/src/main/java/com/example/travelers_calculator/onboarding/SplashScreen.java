@@ -1,4 +1,4 @@
-package com.example.travelers_calculator.splash;
+package com.example.travelers_calculator.onboarding;
 
 import android.graphics.Color;
 import android.os.Bundle;

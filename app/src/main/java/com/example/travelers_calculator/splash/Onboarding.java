@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.travelers_calculator.R;
+import com.example.travelers_calculator.onboarding.OnboardingAdapter;
 
 public class Onboarding extends AppCompatActivity
 {
@@ -45,6 +46,9 @@ public class Onboarding extends AppCompatActivity
             }
         });
 
+        //to ensure the dots will appear on default on the first page
+        addDotsIndicator(0);
+
     }
 
 
@@ -52,6 +56,7 @@ public class Onboarding extends AppCompatActivity
     {
         dots = new TextView[4];
         dotLayout.removeAllViews();
+
         for(int d = 0; d<dots.length; d++)
         {
             dots[d] =new TextView(this);
