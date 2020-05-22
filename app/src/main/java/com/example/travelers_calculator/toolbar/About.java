@@ -19,6 +19,7 @@ public class About extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onColorChanged();
         setContentView(R.layout.about_layout);
 
         //set the toolbar and set the back button action
@@ -38,31 +39,52 @@ public class About extends AppCompatActivity
         {
             case "Orange-Red":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.clear_orange));
-                setTheme(R.style.SunKissedTheme);
                 break;
             case "Yellow":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
-                setTheme(R.style.PinaColadaTheme);
                 break;
             case "Green":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.herbal_green));
-                setTheme(R.style.HerbivoreTheme);
                 break;
             case "Dark":
                 toolbar.setBackgroundColor(getResources().getColor(R.color.downy_gray));
-                setTheme(R.style.HerbivoreTheme);
                 break;
             default:
                 toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                setTheme(R.style.AppTheme);
                 break;
 
         }
+
         //change toolbar color as dark mode is enabled/disabled
         boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey), false);
         if(darkMode == true)
             toolbar.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+    }
 
+    public void onColorChanged()
+    {
+        //Change theme
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
+        switch (colorSelect)
+        {
+            case "Orange-Red":
+                setTheme(R.style.SunKissedTheme);
+                break;
+            case "Yellow":
+                setTheme(R.style.PinaColadaTheme);
+                break;
+            case "Green":
+                setTheme(R.style.HerbivoreTheme);
+                break;
+            case "Dark":
+                setTheme(R.style.HerbivoreTheme);
+                break;
+            default:
+                setTheme(R.style.AppTheme);
+                break;
+
+        }
 
     }
 }
