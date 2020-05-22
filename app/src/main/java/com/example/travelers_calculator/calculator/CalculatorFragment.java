@@ -19,7 +19,6 @@ import com.example.travelers_calculator.R;
 import com.example.travelers_calculator.toolbar.history.HistoryData;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 
 public class CalculatorFragment extends Fragment implements View.OnClickListener // AdapterView.OnItemClickListener
@@ -50,7 +49,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     //constructor
     public CalculatorFragment(){}
     //to get list that holds the saved results
-    LinkedList<String> getData = new LinkedList<>();
+    ArrayList<String> calculationList =  new ArrayList<>();
 
 
 
@@ -312,10 +311,13 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 //shared preferences version
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-
                 editor.putInt("entry", 0);
                 editor.putString("calcB", outputResult.getText().toString());
                 editor.commit();
+
+
+            //add the calculation to the list
+            calculationList.add(outputResult.getText().toString());
 
             //historyData.add(new HistoryData(outputResult.getText().toString()));
 
@@ -364,7 +366,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     }
 
 
-    public void changeColor()
+    private void changeColor()
     {
         //works, I just need to find out how to get it to show when the corresponding theme is on
         //get the pref values
@@ -507,7 +509,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
     }
 
-    public void darkModeToggle()
+    private void darkModeToggle()
     {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         boolean darkMode = settings.getBoolean(getString(R.string.darkModeKey),false);
@@ -574,37 +576,39 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         this.outputResult = mtextView;
     }
 
-    public void getData(String data)
+    //getter for calculation list
+    public ArrayList<String> getList()
     {
-        getTextView().setText(data);
-    }
 
-   /* public void setHistory()
+       return calculationList;
+    }
+/*
+    public void setHistory()
     {
         //however this goes, all the history functionality would have to come together in here
 
 
         //for history
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
+        //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
 
 
         //String[] letters ={"A","B","C","D", "E", "F", "G"};
         //maybe i could use a linked list instead of array list?
         LinkedList<String> data = new LinkedList<>();
-        int entry = sharedPreferences.getInt("entry", 0);
+        //int entry = sharedPreferences.getInt("entry", 0);
 
         *//*for(int i = 0; i<=entry; i++){
             data.add(sharedPreferences.getString("calc", "0"));
         }*//*
 
-        data.add(sharedPreferences.getString("calc", "0"));
+        *//*data.add(sharedPreferences.getString("calc", "0"));
         data.add(sharedPreferences.getString("calc1", "0"));
         data.add(sharedPreferences.getString("calc2", "0"));
         data.add(sharedPreferences.getString("calc3", "0"));
         data.add(sharedPreferences.getString("calc4", "0"));
         data.add(sharedPreferences.getString("calc5", "0"));
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+*//*
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity().getApplicationContext());
         LayoutInflater inflater = getLayoutInflater();
         View convertView = inflater.inflate(R.layout.history_layout, null);
         //this sets the list view to the dialog box
@@ -612,7 +616,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         alertDialog.setView(convertView);
         alertDialog.setTitle("History");
 
-        ArrayAdapter adapter = new ArrayAdapter<>(getContext(),R.layout.history_textview, R.id.history_textview, data);
+        ArrayAdapter adapter = new ArrayAdapter<>(getContext(),R.layout.history_textview, R.id.history_textview, calculationList);
         lv.setAdapter(adapter);
         alertDialog.show();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

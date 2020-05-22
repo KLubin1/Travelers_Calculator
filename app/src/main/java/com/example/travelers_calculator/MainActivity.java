@@ -23,22 +23,21 @@ import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
-import com.example.travelers_calculator.splash.Onboarding;
+import com.example.travelers_calculator.onboarding.Onboarding;
 import com.example.travelers_calculator.time.TimeFragment;
 import com.example.travelers_calculator.toolbar.About;
 import com.example.travelers_calculator.toolbar.settings.SettingsToolbar;
 import com.example.travelers_calculator.units.UnitsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener //implements OnFragmentInteractionListener
 {
  private CalculatorFragment calculatorFragment;
  private UnitsFragment unitsFragment;
  private CurrencyFragment currencyFragment;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,68 +109,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             {
 
             //for development purposes
-            prefsEditor.putBoolean("firstStart", true);
-            prefsEditor.apply();
+            //prefsEditor.putBoolean("firstStart", true);
+            //prefsEditor.apply();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
             }
-
-
-
-        // Intent onboard = new Intent(MainActivity.this, Onboarding.class);
-            //startActivity(onboard);
-
-       /* //to set onboarding
-        setContentView(R.layout.onboarding_layout);
-        PaperOnboardingPage p1 = new PaperOnboardingPage(
-                "Welcome to Traveler's Calculator!",
-                "Do basic calculations.",
-                getResources().getColor(R.color.colorAccent),
-                R.mipmap.pic_calculator_foreground,
-                R.drawable.ic_calculator);
-        PaperOnboardingPage p2 = new PaperOnboardingPage(
-                "Convert with ease",
-                "US and metric units and up-to-date currency conversion.",
-                getResources().getColor(R.color.colorAccent),
-                R.mipmap.pic_units_foreground,
-                R.drawable.ic_kg_units);
-        PaperOnboardingPage p3 = new PaperOnboardingPage(
-                "Save your calculations",
-                "History to keep up with your last saved calculations.",
-                getResources().getColor(R.color.colorAccent),
-                R.mipmap.pic_history_foreground,
-                R.drawable.ic_save);
-
-        ArrayList<PaperOnboardingPage> onboardingPages = new ArrayList<>();
-        onboardingPages.add(p1);
-        onboardingPages.add(p2);
-        onboardingPages.add(p3);
-
-        PaperOnboardingFragment onboardingFragment = PaperOnboardingFragment.newInstance(onboardingPages);
-        // FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        // fragmentTransaction.replace(R.id.fragment_container, onboardingFragment);
-        //fragmentTransaction.commit();
-
-        // getSupportActionBar().hide();
-        getSupportFragmentManager().beginTransaction().add(R.id.onboarding_layout, onboardingFragment).commit();
-
-        onboardingFragment.setOnRightOutListener(new PaperOnboardingOnRightOutListener() {
-            @Override
-            public void onRightOut() {
-                //start on calculator by default
-                //getSupportActionBar().show();
-                //Intent proceed = new Intent(Onboarding.this, MainActivity.class);
-                //startActivity(proceed);
-                //so maybe make a frgament, not activity, for onboarding, then replace it here
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
-            }
-        });*/
-
-
-        //}
-
-
-
-
 
     }
 
@@ -230,9 +171,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return true;
             case R.id.action_history:
                 setHistory();
-                /*Intent history = new Intent(MainActivity.this, History.class);
-                startActivity(history);*/
-                //Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
                 return  true;
             case R.id.action_exit:
                 finish();
@@ -343,84 +281,42 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-   private void setHistory()
-    {
-        //however this goes, all the history functionality would have to come together in here
+   private void setHistory() {
+       //however this goes, all the history functionality would have to come together in here
 
-       /* SharedPreferences sharedPreferences = getSharedPreferences("History", MODE_PRIVATE);
-        //String[] letters ={"A","B","C","D", "E", "F", "G"};
-        //maybe i could use a linked list instead of array list?
-        List<HistoryData> data = new ArrayList<HistoryData>();
+       SharedPreferences sharedPreferences = getSharedPreferences("History", MODE_PRIVATE);
+       //String[] letters ={"A","B","C","D", "E", "F", "G"};
+       //maybe i could use a linked list instead of array list?
+       List<String> data = new ArrayList<String>();
 
-        //add the stored value to the array/list
-        data.add(new HistoryData(sharedPreferences.getString("calc", "0" ), "Calculator"));
-        data.add(new HistoryData(sharedPreferences.getString("calcUL", "0"), "Unit-Length"));
-        data.add(new HistoryData(sharedPreferences.getString("calcUA", "0"), "Unit-Area"));
-        data.add(new HistoryData(sharedPreferences.getString("calcUW", "0"), "Unit-Weigth"));
-        data.add(new HistoryData(sharedPreferences.getString("calcUT", "0"), "Unit-Temp"));
-        data.add(new HistoryData(sharedPreferences.getString("calcUV", "0"), "Unit-Volume"));
-        data.add(new HistoryData(sharedPreferences.getString("calcC", "0"), "Currency"));
+       for(int i = 0; i<calculatorFragment.getList().size(); i++)
+       {
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-        LayoutInflater inflater = getLayoutInflater();
-        View convertView = inflater.inflate(R.layout.history_layout, null);
-        //this sets the list view to the dialog box
-        ListView lv = convertView.findViewById(R.id.history_list);
-        alertDialog.setView(convertView);
-        alertDialog.setTitle("History");
-        HistoryAdapter adapter = new HistoryAdapter(MainActivity.this, R.layout.history_textview,data);
-        lv.setAdapter(adapter);
-        alertDialog.show();
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String calc = parent.getItemAtPosition(position).toString();
-                //calculatorFragment.getData(calc);
-            }
-        });
-        alertDialog.setCancelable(true);*/
-
-        SharedPreferences sharedPreferences = getSharedPreferences("History", MainActivity.MODE_PRIVATE);
-        //String[] letters ={"A","B","C","D", "E", "F", "G"};
-        //maybe i could use a linked list instead of array list?
-        LinkedList<String> data = new LinkedList<>();
-
-        //add the stored value to the array/list
-        data.add(sharedPreferences.getString("calcB", "0" ));
-        data.add(sharedPreferences.getString("calcUL", "0"));
-        data.add(sharedPreferences.getString("calcUA", "0"));
-        data.add(sharedPreferences.getString("calcUW", "0"));
-        data.add(sharedPreferences.getString("calcUT", "0"));
-        data.add(sharedPreferences.getString("calcUV", "0"));
-        data.add(sharedPreferences.getString("calcC", "0"));
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-        LayoutInflater inflater = getLayoutInflater();
-        View convertView = inflater.inflate(R.layout.history_layout, null);
-        //this sets the list view to the dialog box
-        ListView lv = convertView.findViewById(R.id.history_list);
-        alertDialog.setView(convertView);
-        alertDialog.setTitle("History");
-        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, R.layout.history_textview, R.id.history_textview, data);
-        lv.setAdapter(adapter);
-        alertDialog.show();
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String calc = parent.getItemAtPosition(position).toString();
-                //calculatorFragment.getData(calc);
-            }
-        });
-        alertDialog.setCancelable(true);
-
+       //add the stored value to the array/list
+       data.add(calculatorFragment.getList().toString());
+       }
+       AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+       LayoutInflater inflater = getLayoutInflater();
+       View convertView = inflater.inflate(R.layout.history_layout, null);
+       //this sets the list view to the dialog box
+       ListView lv = convertView.findViewById(R.id.history_list);
+       alertDialog.setView(convertView);
+       alertDialog.setTitle("History");
+       ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, R.layout.history_textview, R.id.history_textview, data);
+       lv.setAdapter(adapter);
+       alertDialog.show();
+       lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               //String calc = parent.getItemAtPosition(position).toString();
+               //calculatorFragment.getData(calc);
+           }
+       });
+       alertDialog.setCancelable(true);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-    }
-
-    public void doOnBoarding()
     {
     }
 
@@ -429,6 +325,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     {
         super.onRestart();
         recreate();
+    }
+}
         /*SharedPreferences settings = getSharedPreferences("colorChanged", MODE_PRIVATE);
         boolean settingsChanged = settings.getBoolean( getString(R.string.colorSchemeKey), false);
 
@@ -444,8 +342,4 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         else
             settingsChanged = false;*/
 
-    }
-
-
-}
 

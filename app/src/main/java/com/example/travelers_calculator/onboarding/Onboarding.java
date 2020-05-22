@@ -1,4 +1,4 @@
-package com.example.travelers_calculator.splash;
+package com.example.travelers_calculator.onboarding;
 
 import android.os.Bundle;
 import android.text.Html;
@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.travelers_calculator.R;
-import com.example.travelers_calculator.onboarding.OnboardingAdapter;
 
 public class Onboarding extends AppCompatActivity
 {
@@ -97,10 +96,10 @@ public class Onboarding extends AppCompatActivity
 
             }
             //to disable button unless its on the last page, not really a big deal, though, and maybe shouldnt be?
-            else{
+            /*else{
                 goButton.setEnabled(false);
                 goButton.setVisibility(View.INVISIBLE);
-            }
+            }*/
 
         }
 
