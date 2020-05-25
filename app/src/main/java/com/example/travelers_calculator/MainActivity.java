@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         unitsFragment = new UnitsFragment();
         currencyFragment = new CurrencyFragment();
 
-        //to clear data at start
-        //and initialize onboarding
+        //to clear data at start and initialize onboarding
+        //if its the first time the app is opened
         SharedPreferences prefsDelete = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = prefsDelete.getBoolean("firstStart", true);
         SharedPreferences.Editor prefsEditor = prefsDelete.edit();
@@ -103,16 +103,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Intent onboard = new Intent(MainActivity.this, Onboarding.class);
             startActivity(onboard);
 
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Onboarding()).commit();
         }
         else
-            {
-
+        {
             //for development purposes
-            //prefsEditor.putBoolean("firstStart", true);
-            //prefsEditor.apply();
+            prefsEditor.putBoolean("firstStart", true);
+            prefsEditor.apply();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
-            }
+        }
 
     }
 

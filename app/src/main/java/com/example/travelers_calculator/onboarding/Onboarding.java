@@ -60,7 +60,7 @@ public class Onboarding extends AppCompatActivity
         {
             dots[d] =new TextView(this);
             dots[d].setText(Html.fromHtml("&#8226"));
-            dots[d].setTextSize(40);
+            dots[d].setTextSize(45);
             dots[d].setTextColor(getResources().getColor(R.color.background_white));
 
             dotLayout.addView(dots[d]);
