@@ -32,7 +32,7 @@ public class UnitsFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());//suspect causing crash
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         viewPager = view.findViewById(R.id.view_page_layout);
         viewPager.setAdapter(mSectionsPagerAdapter);
