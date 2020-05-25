@@ -7,10 +7,6 @@
         android:title="@string/Settings"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_customize"
-        android:title="@string/Customize"
-        app:showAsAction="never"/>
-    <item
         android:id="@+id/action_about"
         android:title="@string/About"
         app:showAsAction="never"/>
@@ -25,8 +21,5 @@
         android:title="@string/History"
         app:showAsAction="always"
         />
-
-
-
 
 </menu>
