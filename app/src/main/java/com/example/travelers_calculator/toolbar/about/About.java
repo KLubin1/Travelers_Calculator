@@ -1,4 +1,4 @@
-package com.example.travelers_calculator.toolbar;
+package com.example.travelers_calculator.toolbar.about;
 
 import android.content.SharedPreferences;
 import android.os.Build;

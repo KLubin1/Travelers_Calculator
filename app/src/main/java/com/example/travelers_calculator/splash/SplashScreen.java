@@ -25,7 +25,7 @@ public class SplashScreen extends AppCompatActivity
                 .withSplashTimeOut(3000)
                 .withBackgroundColor(Color.parseColor("#03DAC5"))
                 .withAfterLogoText("Traveler's Calculator")
-                .withLogo(R.mipmap.ic_logo_foreground);
+                .withLogo(R.mipmap.ic_logo2_foreground);
 
         //getSupportActionBar().hide();
         //animating logo

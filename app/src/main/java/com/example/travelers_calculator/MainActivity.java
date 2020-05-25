@@ -25,7 +25,7 @@ import com.example.travelers_calculator.calculator.CalculatorFragment;
 import com.example.travelers_calculator.currency.CurrencyFragment;
 import com.example.travelers_calculator.onboarding.Onboarding;
 import com.example.travelers_calculator.time.TimeFragment;
-import com.example.travelers_calculator.toolbar.About;
+import com.example.travelers_calculator.toolbar.about.About;
 import com.example.travelers_calculator.toolbar.settings.SettingsToolbar;
 import com.example.travelers_calculator.units.UnitsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
