@@ -21,7 +21,7 @@ import com.example.travelers_calculator.toolbar.history.HistoryData;
 import java.util.ArrayList;
 
 
-public class CalculatorFragment extends Fragment implements View.OnClickListener // AdapterView.OnItemClickListener
+public class CalculatorFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener // AdapterView.OnItemClickListener
  {
     //Add calculator code here
 
@@ -31,7 +31,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     //operations
     private Button plus, subtract, multiply, divide, sqrt, square, base10, exponent;
     //signs
-    private Button ac, dot, negative, equal, openParen, closeParen;
+    private Button clear, dot, negative, equal, openParen, closeParen;
     //calculator widget(loads the calculation to display)
     //private Button calculatorWidgetCalc;
     //input to be parsed
@@ -91,7 +91,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         subtract = (Button) view.findViewById(R.id.minus);
         multiply = (Button) view.findViewById(R.id.multiply);
         divide = (Button) view.findViewById(R.id.divide);
-        ac = (Button) view.findViewById(R.id.ac);
+        clear = (Button) view.findViewById(R.id.clear);
         dot = (Button) view.findViewById(R.id.dot);
         negative = (Button) view.findViewById(R.id.negative);
         equal = (Button) view.findViewById(R.id.equal);
@@ -146,7 +146,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         subtract.setOnClickListener(this);
         divide.setOnClickListener(this);
         multiply.setOnClickListener(this);
-        ac.setOnClickListener(this);
+        clear.setOnClickListener(this);
+        clear.setOnLongClickListener(this);
         dot.setOnClickListener(this);
         equal.setOnClickListener(this);
         negative.setOnClickListener(this);
@@ -267,11 +268,12 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
         //regarding evaluating the input
         //what im trying to say here is that if there is a placed in value without actual input, then evaluate it
+        //input to be parsed might be a thing.
         //SharedPreferences settings = getActivity().getSharedPreferences("Conversions Storage", Context.MODE_PRIVATE);
         //if(currentDisplayedInput.length() != 0)
         //{
-        //mCalculator.evaluator.evaluate(currentDisplayedInput);
-        // outputResult.setText(currentDisplayedInput);
+         //outputResult.setText(currentDisplayedInput);
+         //inputToBeParsed = currentDisplayedInput;
         //}
 
         //and display the input
@@ -282,21 +284,30 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view)
     {
-
-
-
         Button button = (Button) view;
         String data = button.getText().toString();
-        //to display a toast, isnt really needed
-        //Toast.makeText(getContext(), "Clicked" + data, Toast.LENGTH_LONG).show();
+
+        if(outputResult.getText().toString().equals("Error"))
+        {
+            if(data.equals("C/AC"))
+            {
+                currentDisplayedInput = "";
+                inputToBeParsed = "";
+                outputResult.setText("");
+            }
+        }
 
         //for clear button
-        if (data.equals("AC"))
+        if (data.equals("C/AC"))
         {
-
-            currentDisplayedInput = "";
-            inputToBeParsed = "";
-            outputResult.setText("");
+            String eI = outputResult.getText().toString();
+            if(eI.length() > 0)
+            {
+                eI = eI.substring(0, eI.length() - 1);
+                currentDisplayedInput = eI;
+                inputToBeParsed = eI;
+                outputResult.setText(currentDisplayedInput);
+            }
         }
         //for equal button
         else if (data.equals("="))
@@ -341,6 +352,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 //so by the end here, we should have a History shared prefrence for 10 entries.
         }
 
+
+
         //call the parser
         else
         {
@@ -349,6 +362,24 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
 
     }
+
+     //for clearing on hold
+     @Override
+     public boolean onLongClick(View v)
+     {
+         Button button = (Button) v;
+         String data = button.getText().toString();
+         if(data.equals("C/AC"))
+         {
+             currentDisplayedInput = "";
+             inputToBeParsed = "";
+             outputResult.setText("");
+             return true;
+         }
+
+         return false;
+     }
+
     //subtract leading zeros (reformat numbers)
     private String removeTrailingZero(String formattingInput)
     {
@@ -404,7 +435,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 negative.setBackgroundColor(getResources().getColor(R.color.fiery_red));
 
                 //the blue buttons - AC and equal (calm rage)
-                ac.setBackgroundColor(getResources().getColor(R.color.calm_rage));
+                clear.setBackgroundColor(getResources().getColor(R.color.calm_rage));
                 equal.setBackgroundColor(getResources().getColor(R.color.calm_rage));
 
                 break;
@@ -436,7 +467,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 negative.setBackgroundColor(getResources().getColor(R.color.dark_yellow));
 
                 //the blue buttons - AC and equal (leafy green)
-                ac.setBackgroundColor(getResources().getColor(R.color.leaf_green));
+                clear.setBackgroundColor(getResources().getColor(R.color.leaf_green));
                 equal.setBackgroundColor(getResources().getColor(R.color.leaf_green));
                 break;
             case "Green":
@@ -467,7 +498,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 negative.setBackgroundColor(getResources().getColor(R.color.dark_green));
 
                 //the blue buttons - AC and equal (leafy green)
-                ac.setBackgroundColor(getResources().getColor(R.color.stew_green));
+                clear.setBackgroundColor(getResources().getColor(R.color.stew_green));
                 equal.setBackgroundColor(getResources().getColor(R.color.stew_green));
                 break;
             case "Dark":
@@ -498,7 +529,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 negative.setBackgroundColor(getResources().getColor(R.color.gray));
 
                 //the blue buttons - AC and equal (dark brown)
-                ac.setBackgroundColor(getResources().getColor(R.color.dark_brown));
+                clear.setBackgroundColor(getResources().getColor(R.color.dark_brown));
                 equal.setBackgroundColor(getResources().getColor(R.color.dark_brown));
                 break;
             default:
@@ -543,7 +574,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             negative.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
 
             //the blue buttons - AC and equal (calm rage)
-            ac.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
+            clear.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
             equal.setBackgroundColor(getResources().getColor(R.color.dark_secondary));
 
             //making sure it sets the color to bright white  when dark mode is on
@@ -582,6 +613,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
        return calculationList;
     }
+
+
 /*
     public void setHistory()
     {

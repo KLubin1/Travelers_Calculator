@@ -106,7 +106,7 @@
             android:background="@color/colorAccent"
             android:text="@string/nine" />
         <Button
-            android:id="@+id/ac"
+            android:id="@+id/clear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -115,7 +115,7 @@
             android:padding="8dp"
             android:layout_marginRight="1dp"
             android:background="@color/bold_blue"
-            android:text="@string/ac" />
+            android:text="@string/clear" />
     </LinearLayout>
     <!--second row-->
     <LinearLayout

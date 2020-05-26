@@ -14,7 +14,7 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="zero">0</string>
-    <string name="ac">AC</string>
+    <string name="clear">C/AC</string>
     <string name="base10">10^</string>
     <string name="percent">%</string>
     <string name="divide">÷</string>
