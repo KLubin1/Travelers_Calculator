@@ -21,10 +21,12 @@ public class OnboardingAdapter extends PagerAdapter {
     public int[] icons = {R.drawable.ic_calculator, R.drawable.ic_kg_units, R.drawable.ic_access_time, R.drawable.ic_save};
     public String[] headers = {"Welcome to Traveler's Calculator!", "Convert with ease", "Keep track of time", "Save your calculations"};
     public String[] descriptions = {
-            "Perform basic calculations.",
-            "With US and metric units and up-to-date currency rates.",
+            "Perform basic calculations",
+            "With US and metric units and up-to-date currency rates",
             "No matter where you are in the world",
-            "History to keep up with your last saved calculations."
+            "History to keep up with your last saved calculations" +
+                    "" +
+                    ""
     };
 
     public OnboardingAdapter(Context mContext){
