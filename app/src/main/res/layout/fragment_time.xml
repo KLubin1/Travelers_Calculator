@@ -41,6 +41,7 @@
         android:scaleX="0.53"
         android:scaleY="0.53"
         android:timePickerMode="clock"
+        android:padding="4dp"
        />
 
     <Spinner
@@ -53,7 +54,8 @@
         android:layout_marginBottom="189dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="207dp" />
+        tools:layout_editor_absoluteY="207dp"
+        android:padding="4dp"/>
 
 
 </RelativeLayout>
