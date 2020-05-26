@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
  private CalculatorFragment calculatorFragment;
  private UnitsFragment unitsFragment;
  private CurrencyFragment currencyFragment;
+ private long backPressed;
+ private Toast backToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -107,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         else
         {
             //for development purposes
-            prefsEditor.putBoolean("firstStart", true);
-            prefsEditor.apply();
+            //prefsEditor.putBoolean("firstStart", true);
+            //prefsEditor.apply();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
         }
 
@@ -316,6 +319,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
+    }
+
+    //so the app will only exit after two quick presses of the back button
+    //to avoid accidental closing. Not that needed imo, but cool, I guess?
+    @Override
+    public void onBackPressed()
+    {
+        if(backPressed + 2000 >System.currentTimeMillis())
+        {
+            backToast.cancel();
+            super.onBackPressed();
+            return;
+
+        }
+        else
+        {
+            backToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressed = System.currentTimeMillis();
+
     }
 
     @Override
