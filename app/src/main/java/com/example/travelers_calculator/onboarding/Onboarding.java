@@ -1,5 +1,6 @@
 package com.example.travelers_calculator.onboarding;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -14,7 +15,6 @@ import com.example.travelers_calculator.R;
 
 public class Onboarding extends AppCompatActivity
 {
-
     private ViewPager viewpager;
     private LinearLayout dotLayout;
     private OnboardingAdapter onboardingAdapter;
@@ -107,7 +107,27 @@ public class Onboarding extends AppCompatActivity
         public void onPageScrollStateChanged(int state) {
 
         }
+
+
     };
+
+    //this is to close the app (and effectively cancel further procedure) if the user
+    //presses the back button while on the onboarding,
+    //because otherwise if the back button is pressed it will just end this activity and continue
+    //on to the main app.
+    //And setting the firstStart to true again
+    //so that the next time they open the app, the onboarding will reappear and relaunch until
+    //"Get Calculating!" is pressed, then it should proceed as normal.
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        this.finishAffinity();
+        SharedPreferences prefsDelete = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = prefsDelete.edit();
+        prefsEditor.putBoolean("firstStart", true);
+        prefsEditor.apply();
+    }
 }
 /*
 ---old code from onboarding library

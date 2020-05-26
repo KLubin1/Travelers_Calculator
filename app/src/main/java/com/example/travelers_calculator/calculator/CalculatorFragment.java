@@ -270,10 +270,12 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //what im trying to say here is that if there is a placed in value without actual input, then evaluate it
         //input to be parsed might be a thing.
         //SharedPreferences settings = getActivity().getSharedPreferences("Conversions Storage", Context.MODE_PRIVATE);
+        SharedPreferences settings = getActivity().getSharedPreferences("CalcResult", Context.MODE_PRIVATE);
+        String data = settings.getString("calc", "0");
         //if(currentDisplayedInput.length() != 0)
         //{
-         //outputResult.setText(currentDisplayedInput);
-         //inputToBeParsed = currentDisplayedInput;
+            //inputToBeParsed = data;
+           // outputResult.setText(data);
         //}
 
         //and display the input
