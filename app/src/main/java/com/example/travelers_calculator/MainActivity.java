@@ -290,12 +290,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
        //maybe i could use a linked list instead of array list?
        List<String> data = new ArrayList<String>();
 
-       for(int i = 0; i<calculatorFragment.getList().size(); i++)
+       /*for(int i = 0; i<calculatorFragment.getList().size(); i++)
        {
 
        //add the stored value to the array/list
        data.add(calculatorFragment.getList().toString());
-       }
+       }*/
+       data.add(sharedPreferences.getString("calcH", "0"));
        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
        LayoutInflater inflater = getLayoutInflater();
        View convertView = inflater.inflate(R.layout.history_layout, null);

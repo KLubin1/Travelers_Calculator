@@ -84,11 +84,11 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
                 result.setText((String.valueOf(conversionFactory())));
                 //set the type of result
                 unitType.setText(spinner2.getSelectedItem().toString());
-               /* //TODO: Get history shared preference and add value of result to it
+                //shared preferences version
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("calcUW", result.getText().toString());
-                editor.commit();*/
+                editor.putString("calcH", result.getText().toString());
+                editor.commit();
             }
         });
 

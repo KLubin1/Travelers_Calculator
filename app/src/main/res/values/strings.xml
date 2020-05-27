@@ -137,18 +137,18 @@
     <!--cities-->
     <string-array name="time_cities">
         <item>Local Time</item>
-        <item>New York</item>
-        <item>London</item>
-        <item>Los Angeles</item>
-        <item>Dubai</item>
-        <item>Paris</item>
-        <item>Moscow</item>
-        <item>Cairo</item>
-        <item>Beijing</item>
-        <item>Hong Kong</item>
-        <item>Brasilia</item>
-        <item>New Delhi</item>
-        <item>Mexico City</item>
+        <item>New York(EST)</item>
+        <item>London(BST)</item>
+        <item>Los Angeles(PST)</item>
+        <item>Dubai(GST)</item>
+        <item>Paris(CEST)</item>
+        <item>Moscow(MSK)</item>
+        <item>Cairo(EET)</item>
+        <item>Beijing(CST)</item>
+        <item>Hong Kong(CST)</item>
+        <item>Brasilia(BRT)</item>
+        <item>New Delhi(IST)</item>
+        <item>Mexico City(CDT)</item>
     </string-array>
 
     <!--for toolbar-->

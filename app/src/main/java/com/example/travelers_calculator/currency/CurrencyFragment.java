@@ -157,10 +157,10 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 try {
                     thread.join();
                     resultView.setText(String.valueOf(roundNumber(finalValue,2)));
-                    //TODO: Get history shared preference and add value of result to it
+                    //shared preferences version
                     SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("calcC", resultView.getText().toString());
+                    editor.putString("calcH", resultView.getText().toString());
                     editor.commit();
                 } catch (InterruptedException e)
                 {
