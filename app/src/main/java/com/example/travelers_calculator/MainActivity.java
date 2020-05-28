@@ -34,7 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener //implements OnFragmentInteractionListener
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, HistoryIsPressed //implements OnFragmentInteractionListener
 {
  private CalculatorFragment calculatorFragment;
  private UnitsFragment unitsFragment;
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-   private void setHistory() {
+   public String setHistory() {
        //however this goes, all the history functionality would have to come together in here
 
        SharedPreferences sharedPreferences = getSharedPreferences("History", MODE_PRIVATE);
@@ -312,9 +312,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                //String calc = parent.getItemAtPosition(position).toString();
                //calculatorFragment.getData(calc);
+
+               //SharedPreferences sharedPreferences = getSharedPreferences("History", MODE_PRIVATE);
+               //calculatorFragment.getTextView().setText(sharedPreferences.getString("calcH", "0"));
            }
        });
        alertDialog.setCancelable(true);
+
+
+       return sharedPreferences.getString("calcH", "0");
     }
 
     @Override

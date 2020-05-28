@@ -15,13 +15,15 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
+import com.example.travelers_calculator.HistoryIsPressed;
+import com.example.travelers_calculator.MainActivity;
 import com.example.travelers_calculator.R;
 import com.example.travelers_calculator.toolbar.history.HistoryData;
 
 import java.util.ArrayList;
 
 
-public class CalculatorFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener // AdapterView.OnItemClickListener
+public class CalculatorFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener, HistoryIsPressed // AdapterView.OnItemClickListener
  {
     //Add calculator code here
 
@@ -41,7 +43,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     //last result
     private String obtainLastResult = "";
     //output
-    public TextView outputResult;
+    private TextView outputResult;
     //calculator functionality class
     private CalculatorFunctionality mCalculator;
     //history data list
@@ -50,6 +52,9 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     public CalculatorFragment(){}
     //to get list that holds the saved results
     ArrayList<String> calculationList =  new ArrayList<>();
+    //Main Activity
+     private MainActivity mainActivity;
+
 
 
 
@@ -72,7 +77,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //assign the output button and text display
         outputResult = (TextView) view.findViewById(R.id.display);
         outputResult.setText("");
-
 
         mCalculator = new CalculatorFunctionality();
 
@@ -103,8 +107,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         closeParen = (Button) view.findViewById(R.id.close_paren);
 
 
-
-
         //widget assignment for loading conversions unto calculator
        // calculatorWidgetCalc = (Button) view.findViewById(R.id.calculator_widget_calc);
         /*calculatorWidgetCalc.setOnClickListener(new View.OnClickListener()
@@ -126,11 +128,10 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
         //load the saved data with SharedPreferences
         SharedPreferences settings = getActivity().getSharedPreferences("CalcResult", Context.MODE_PRIVATE);
-        String data = settings.getString("calc", null);
+        String data = settings.getString("calc", "");
         outputResult.setText(data);
         currentDisplayedInput+=data;
         inputToBeParsed+=data;
-
 
 
         //set on click listener events for numbers and operations
@@ -280,6 +281,9 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
            // outputResult.setText(data);
         //}
 
+
+
+
         //and display the input
         outputResult.setText(currentDisplayedInput);
     }
@@ -304,19 +308,19 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //for clear button
         if (data.equals("C/AC"))
         {
-            String eI = outputResult.getText().toString();
-            if(eI.length() > 0)
+            String enteredInput = outputResult.getText().toString();
+            if(enteredInput.length() > 0)
             {
-                eI = eI.substring(0, eI.length() - 1);
-                currentDisplayedInput = eI;
-                inputToBeParsed = eI;
+                enteredInput = enteredInput.substring(0, enteredInput.length() - 1);
+                currentDisplayedInput = enteredInput;
+                inputToBeParsed = enteredInput;
                 outputResult.setText(currentDisplayedInput);
             }
         }
         //for equal button
         else if (data.equals("="))
         {
-                String enteredInput = outputResult.getText().toString();
+                //String enteredInput = outputResult.getText().toString();
                 //enteredInput += obtainLastResult;
                 // calls the function that will return the result of the calculation.
                 String resultObject = mCalculator.getResult(currentDisplayedInput, inputToBeParsed);
@@ -330,7 +334,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
 
             //add the calculation to the list
-            calculationList.add(outputResult.getText().toString());
+           // calculationList.add(outputResult.getText().toString());
 
             //historyData.add(new HistoryData(outputResult.getText().toString()));
 
@@ -354,18 +358,15 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 //so by the end here, we should have a History shared prefrence for 10 entries.
         }
 
-
-
         //call the parser
         else
         {
             obtainInputValues(data);
         }
 
-
     }
 
-     //for clearing on hold
+     //for clearing all on hold
      @Override
      public boolean onLongClick(View v)
      {
@@ -539,7 +540,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
         }
 
-
     }
 
     private void darkModeToggle()
@@ -586,8 +586,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         else
             //making sure it sets the color to dark nlack when dark mode is off
           outputResult.setTextColor(getResources().getColor(R.color.black));
-
-
 
     }
 
