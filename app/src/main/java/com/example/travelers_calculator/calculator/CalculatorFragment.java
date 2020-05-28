@@ -128,6 +128,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         SharedPreferences settings = getActivity().getSharedPreferences("CalcResult", Context.MODE_PRIVATE);
         String data = settings.getString("calc", null);
         outputResult.setText(data);
+        currentDisplayedInput+=data;
+        inputToBeParsed+=data;
 
 
 
