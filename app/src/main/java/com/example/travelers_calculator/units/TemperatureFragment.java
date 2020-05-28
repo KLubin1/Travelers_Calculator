@@ -84,11 +84,11 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
                 result.setText(String.valueOf(conversionFactory()));
                 //set the type of result
                 unitType.setText(spinner2.getSelectedItem().toString());
-                //shared preferences version
+                /*//TODO: Get history shared preference and add value of result to it
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("calcH", result.getText().toString());
-                editor.commit();
+                editor.putString("calcUT", result.getText().toString());
+                editor.commit();*/
 
                 //result.setText("changed to conversion");
             }

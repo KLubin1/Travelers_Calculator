@@ -314,6 +314,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //for equal button
         else if (data.equals("="))
         {
+                int entry = 0;
                 String enteredInput = outputResult.getText().toString();
                 //enteredInput += obtainLastResult;
                 // calls the function that will return the result of the calculation.
@@ -323,7 +324,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 //shared preferences version
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("calcH", outputResult.getText().toString());
+                editor.putInt("entry", 0);
+                editor.putString("calcB", outputResult.getText().toString());
                 editor.commit();
 
 
