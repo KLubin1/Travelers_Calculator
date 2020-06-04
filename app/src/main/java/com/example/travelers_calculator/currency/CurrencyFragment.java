@@ -151,6 +151,9 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
             @Override
             public void onClick(View v)
             {
+                SharedPreferences restart = getActivity().getSharedPreferences("Restart",Context.MODE_PRIVATE);
+                SharedPreferences.Editor restartEditor = restart.edit();
+                restartEditor.putBoolean("Clicked", true);
                 Toast.makeText(getActivity(), getString(R.string.waiting_message), Toast.LENGTH_SHORT).show();
 
                 thread.start();
@@ -164,11 +167,14 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("calcH", resultView.getText().toString());
                     editor.commit();
+                    CurrencyFragment currencyFragment = new CurrencyFragment();
+                    getFragmentManager().beginTransaction().detach(currencyFragment).attach(currencyFragment).commit();
 
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
                 currencyType.setText(toSpinner.getSelectedItem().toString());
+
 
             }
         });

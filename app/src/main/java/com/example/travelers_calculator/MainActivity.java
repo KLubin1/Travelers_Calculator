@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             //prefsEditor.apply();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalculatorFragment()).commit();
         }
+        isRestarted();
 
     }
 
@@ -355,6 +356,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onRestart();
         recreate();
     }
+
+    private void isRestarted()
+    {
+      SharedPreferences restart = getSharedPreferences("Restart", MODE_PRIVATE) ;
+      boolean restarted = restart.getBoolean("Clicked", false);
+
+      if(restarted)
+      {
+          CurrencyFragment currencyFragment = new CurrencyFragment();
+          getSupportFragmentManager().beginTransaction().detach(currencyFragment).attach(currencyFragment).commit();
+      }
+    }
+
+    Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            isRestarted();
+
+        }
+    });
+
 }
         /*SharedPreferences settings = getSharedPreferences("colorChanged", MODE_PRIVATE);
         boolean settingsChanged = settings.getBoolean( getString(R.string.colorSchemeKey), false);
