@@ -181,6 +181,9 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
             //to liters
             else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 3.785412;
+            //to cups
+            else if(spinner2.getSelectedItemPosition() == 6)
+                constant = 15.7725;
             else return 0;
         }
 
@@ -205,6 +208,9 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
             //to liters
             else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 0.473176;
+            //to cups
+            else if(spinner2.getSelectedItemPosition() == 6)
+                constant = 1.971569;
             else return 0;
         }
 
@@ -229,6 +235,9 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
             //to liters
             else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 0.946353;
+            //to cups
+            else if(spinner2.getSelectedItemPosition() == 6)
+                constant = 3.943138;
             else return 0;
         }
         //from fluid ounces
@@ -252,6 +261,9 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
             //to liters
             else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 0.029574;
+            //to cups
+            else if(spinner2.getSelectedItemPosition() == 6)
+                constant = 0.123227;
             else return 0;
         }
         //from milliliters
@@ -275,6 +287,9 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
             //to liters
             else if(spinner2.getSelectedItemPosition() == 5)
                 constant = 0.001;
+            //to cups
+            else if(spinner2.getSelectedItemPosition() == 6)
+                constant = 0.004166667;
             else return 0;
         }
         //from liters
@@ -297,6 +312,36 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
                 constant = 1000;
             //to liters
             else if(spinner2.getSelectedItemPosition() == 5)
+                constant = 1;
+            //to cups
+            else if(spinner2.getSelectedItemPosition() == 6)
+                constant = 4.1666;
+            else return 0;
+        }
+
+        //from cups
+        else if(spinner1.getSelectedItemPosition() == 6)
+        {
+            //to gallons
+            if(spinner2.getSelectedItemPosition()==0)
+                constant = 0.0625;
+            //to pint
+            else if(spinner2.getSelectedItemPosition()==1)
+                constant=0.5;
+            //to quarts
+            else if(spinner2.getSelectedItemPosition()==2)
+                constant = 0.25;
+            //to fluid ounces
+            else if(spinner2.getSelectedItemPosition() == 3)
+                constant = 8;
+            //to milliliters
+            else if(spinner2.getSelectedItemPosition() == 4)
+                constant = 236.588236;
+            //to liters
+            else if(spinner2.getSelectedItemPosition() == 5)
+                constant = 0.236588;
+            //to cups
+            else if(spinner2.getSelectedItemPosition()== 6)
                 constant = 1;
             else return 0;
         }

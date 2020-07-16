@@ -78,6 +78,8 @@
         <item>fluid ounces(fl oz)</item>
         <item>milliliters(mL)</item>
         <item>liters(L)</item>
+        <item>cups(c)</item>
+
     </string-array>
 
     <string name="us_switch_tag">uSSwitch</string>
