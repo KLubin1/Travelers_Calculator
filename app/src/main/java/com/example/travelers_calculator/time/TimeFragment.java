@@ -32,11 +32,11 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View v= inflater.inflate(R.layout.fragment_time, container, false);
-        currentTime = v.findViewById(R.id.current_clock);
+       //currentTime = v.findViewById(R.id.current_clock); //TODO: Were taking away the current time clock
         convertTime = v.findViewById(R.id.convert_clock);
         convertSpinner = v.findViewById(R.id.convert_spinner);
 
-        currentTime.setIs24HourView(false);
+        //currentTime.setIs24HourView(false);
         convertTime.setIs24HourView(false);
         convertTime.setClickable(false);
 
@@ -117,7 +117,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
             //display current/local time
             int hour = c.get(Calendar.HOUR_OF_DAY);
             convertTime.setHour(hour);
-            currentTime.setHour(hour);
+            //currentTime.setHour(hour);
         }
         else if(convertSpinner.getSelectedItemPosition()== 1)
             convertTime.setHour(conversionFactory("New York"));
@@ -151,9 +151,9 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         //regardless of which time zone is changed to and if its never "reset" with LocalTime
         int minute = c.get(Calendar.MINUTE);
         convertTime.setMinute(minute);
-        currentTime.setMinute(minute);
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        currentTime.setHour(hour);
+        //currentTime.setMinute(minute);
+        //int hour = c.get(Calendar.HOUR_OF_DAY);
+        //currentTime.setHour(hour);
     }
 
     @Override

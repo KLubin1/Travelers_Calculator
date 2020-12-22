@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
-
     <!--
     <Spinner
         android:id="@+id/current_spinner"
@@ -20,42 +16,56 @@
         android:layout_marginBottom="135dp" />-->
 
 
-    <TimePicker
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+<!--    <TimePicker
         android:id="@+id/current_clock"
-        android:layout_width="337dp"
-        android:layout_height="337dp"
-        android:layout_marginTop="-25dp"
+        android:layout_width="313dp"
+        android:layout_height="343dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="329dp"
         android:clickable="false"
+        android:scaleX="0.53"
+        android:scaleY="0.53"
+        android:timePickerMode="clock" />-->
+
+    <TimePicker
+        android:id="@+id/convert_clock"
+        android:layout_width="355dp"
+        android:layout_height="431dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="17dp"
+        android:padding="4dp"
         android:scaleX="0.53"
         android:scaleY="0.53"
         android:timePickerMode="clock" />
 
-    <TimePicker
-        android:id="@+id/convert_clock"
-        android:layout_width="337dp"
-        android:layout_height="337dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="-75dp"
-        android:scaleX="0.53"
-        android:scaleY="0.53"
-        android:timePickerMode="clock"
-        android:padding="4dp"
-       />
-
     <Spinner
         android:id="@+id/convert_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="158dp"
+        android:layout_height="39dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="87dp"
-        android:layout_marginBottom="189dp"
+        android:layout_marginStart="115dp"
+        android:layout_marginEnd="121dp"
+        android:layout_marginBottom="164dp"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="207dp"
-        android:padding="4dp"/>
+        tools:layout_editor_absoluteY="207dp" />
 
 
 </RelativeLayout>

@@ -174,7 +174,7 @@ public class WeightFragment extends Fragment implements AdapterView.OnItemSelect
                 constant = 453.59237;
             //to kilograms
             else if(spinner2.getSelectedItemPosition() == 4)
-                constant = 0.0453592;
+                constant = 0.4535924;
             else return 0;
         }
         //from tons

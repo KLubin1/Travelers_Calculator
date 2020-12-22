@@ -289,7 +289,7 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
                 constant = 0.001;
             //to cups
             else if(spinner2.getSelectedItemPosition() == 6)
-                constant = 0.004166667;
+                constant = 0.0041666;
             else return 0;
         }
         //from liters
