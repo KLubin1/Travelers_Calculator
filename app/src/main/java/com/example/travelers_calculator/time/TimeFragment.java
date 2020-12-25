@@ -221,6 +221,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
         }
 
         //if the offset is in the AM
+        //this is how the la eg is am instead of pm
         if(offset < 12)
         {
             //set am
