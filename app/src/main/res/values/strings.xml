@@ -32,7 +32,6 @@
     <string name="error_message">"Can't Convert!"</string>
     <string name="waiting_message">Calculating...</string>
 
-    <!--TODO: Make an array for each type instead of us and metric-->
     <!--length-->
     <string-array name="length_spinner">
         <item>inches(in)</item>

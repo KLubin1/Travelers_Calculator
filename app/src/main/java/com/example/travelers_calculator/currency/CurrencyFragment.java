@@ -170,7 +170,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 //in order for this to be compatible, it must only start once and only join after the first thread start
                // if(start == 0) //this is the first run, start; otherwise skip starting
                 //{
-                    //thread.start(); //TODO: source of why it crashes on second click. However it MUST call start to execute the code!
+                    //thread.start();
                     start++;
                 //}
                //double realFinalValue = conversionFactory();

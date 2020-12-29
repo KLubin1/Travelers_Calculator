@@ -325,7 +325,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 // calls the function that will return the result of the calculation.
                 String resultObject = mCalculator.getResult(currentDisplayedInput, inputToBeParsed);
                 outputResult.setText(removeTrailingZero(resultObject));
-                //TODO: add the calculated result to the history shared preferences
                 //shared preferences version
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

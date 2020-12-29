@@ -34,7 +34,7 @@ public class TimeFragment extends Fragment implements AdapterView.OnItemSelected
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View v= inflater.inflate(R.layout.fragment_time, container, false);
-       //currentTime = v.findViewById(R.id.current_clock); //TODO: Were taking away the current time clock
+       //currentTime = v.findViewById(R.id.current_clock);
         convertTime = v.findViewById(R.id.convert_clock);
         convertSpinner = v.findViewById(R.id.convert_spinner);
         convertTime.setIs24HourView(false);

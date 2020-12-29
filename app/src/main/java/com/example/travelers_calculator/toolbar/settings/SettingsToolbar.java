@@ -83,7 +83,7 @@ public class SettingsToolbar extends AppCompatActivity
 
         /*ChangeDialog changeDialog = new ChangeDialog();
         changeDialog.show(getSupportFragmentManager(), "change dialog");*/
-        //TODO: Use the exact value names to pass in the case
+
         switch (colorSelect)
         {
             case "Orange-Red":

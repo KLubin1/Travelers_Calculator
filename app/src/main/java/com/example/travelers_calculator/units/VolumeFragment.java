@@ -38,8 +38,6 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        // return inflater.inflate(R.layout.fragment_units, container, false);
-        //TODO: CHANGE THE LAYOUT TO THE CLASS'S CORRESPONDING LAYOUT
         View view = inflater.inflate(R.layout.fragment_units_volume, container, false);
 
         //the conversion quantities
@@ -149,7 +147,6 @@ public class VolumeFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     //operations
-    //TODO: CHANGE THE CONVERSION FACTORY TO WHATEVER UNITS THE FRAGMENT TAKES CARE OF
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {

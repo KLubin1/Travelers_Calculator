@@ -237,7 +237,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String colorSelect = settings.getString(getString(R.string.colorSchemeKey),"Default Traveler");
         //so colorSelect is now holding the key for the color scheme, so now we can switch between them and change the color
 
-       //TODO: Use the exact value names to pass in the case
         switch (colorSelect)
         {
             case "Orange-Red":

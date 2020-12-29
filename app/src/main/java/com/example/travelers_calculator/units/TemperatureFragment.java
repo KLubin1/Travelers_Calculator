@@ -38,8 +38,6 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        // return inflater.inflate(R.layout.fragment_units, container, false);
-        //TODO: CHANGE THE LAYOUT TO THE CLASS'S CORRESPONDING LAYOUT
         View view = inflater.inflate(R.layout.fragment_units_temperature, container, false);
 
         //the conversion quantities
@@ -94,7 +92,6 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
             }
         });
 
-        // TODO: ADD THE ARROW BUTTONS ON CLICK LISTENER EVENT AND CALL FRAGMENTSWITCHER
         //saving calculations
         /*calculatorWidget.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +150,6 @@ public class TemperatureFragment extends Fragment implements AdapterView.OnItemS
     }
 
     //operations
-    //TODO: CHANGE THE CONVERSION FACTORY TO WHATEVER UNITS THE FRAGMENT TAKES CARE OF
     @SuppressLint("SetTextI18n")
     public double conversionFactory()
     {
