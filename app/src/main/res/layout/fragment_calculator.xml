@@ -27,6 +27,7 @@
             android:gravity="right"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:elevation="4dp"
             android:singleLine="true"
             android:text="@string/zero"
             android:textSize="60sp"
