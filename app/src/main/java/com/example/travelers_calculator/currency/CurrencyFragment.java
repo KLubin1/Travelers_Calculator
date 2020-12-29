@@ -42,6 +42,10 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
     private Button convert;
     private ImageView imageView;
     boolean firstStart = false;
+    //url
+   // HttpURLConnection urlConnection = null;
+    //for thread tracking
+    private int start = 0;
 
 
 
@@ -75,6 +79,8 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         imageView = (ImageView)v.findViewById(R.id.imageView);
         finalValue = 0.0;
 
+
+
         //for spinner 1
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.currencies_list, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -87,64 +93,65 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         toSpinner.setAdapter(adapter2);
         toSpinner.setOnItemSelectedListener(this);
 
-        final Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                HttpURLConnection urlConnection = null;
-                try
-                {
-                    try
-                    {
-                        //sending url request
-                        String mainUrl = "https://api.exchangeratesapi.io/latest";
-                        String updatedUrl = mainUrl + "?base=" + fromSpinner.getSelectedItem();
-                        URL url = new URL(updatedUrl);
-                        urlConnection = (HttpURLConnection) url.openConnection();
-                        //string parsing
-                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                        BufferedReader inReader = new BufferedReader(new InputStreamReader(in));
-                        String inputLine = "";
-                        String fullStr = "";
-                        while ((inputLine = inReader.readLine()) != null)
-                        {
-                            fullStr += inputLine;
-                        }
-                        //getting rates and set them to the corresponding currencies in spinners
-                        JSONObject jsonObj = new JSONObject(fullStr);
-                        JSONObject result = jsonObj.getJSONObject("rates");
+//        final Thread thread = new Thread(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                HttpURLConnection urlConnection = null;
+//                try
+//                {
+//                    try
+//                    {
+//                        //sending url request
+//                        String mainUrl = "https://api.exchangeratesapi.io/latest";
+//                        String updatedUrl = mainUrl + "?base=" + fromSpinner.getSelectedItem();
+//                        URL url = new URL(updatedUrl);
+//                        urlConnection = (HttpURLConnection) url.openConnection();
+//                        //string parsing
+//                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+//                        BufferedReader inReader = new BufferedReader(new InputStreamReader(in));
+//                        String inputLine = "";
+//                        String fullStr = "";
+//                        while ((inputLine = inReader.readLine()) != null)
+//                        {
+//                            fullStr += inputLine;
+//                        }
+//                        //getting rates and set them to the corresponding currencies in spinners
+//                        JSONObject jsonObj = new JSONObject(fullStr);
+//                        JSONObject result = jsonObj.getJSONObject("rates");
+//
+//                        Double moneyValue = Double.valueOf(quantity.getText().toString());
+//
+//                        if (fromSpinner.getSelectedItem().equals(toSpinner.getSelectedItem()))
+//                        {
+//                            finalValue = moneyValue;
+//                        }
+//
+//                        else
+//                        {
+//                            Double rateValue = Double.valueOf(result.getString((String) toSpinner.getSelectedItem()));
+//                            Double resultValue = moneyValue * rateValue;
+//                            finalValue = resultValue;
+//                        }
+//                    }
+//                    finally
+//                    {
+//                        if (urlConnection != null)
+//                            urlConnection.disconnect();
+//                    }
+//                }
+//                catch (NumberFormatException e)
+//                {
+//                    e.printStackTrace();
+//                }
+//                catch (Exception e)
+//                {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
-                        Double moneyValue = Double.valueOf(quantity.getText().toString());
-
-                        if (fromSpinner.getSelectedItem().equals(toSpinner.getSelectedItem()))
-                        {
-                            finalValue = moneyValue;
-                        }
-
-                        else
-                        {
-                            Double rateValue = Double.valueOf(result.getString((String) toSpinner.getSelectedItem()));
-                            Double resultValue = moneyValue * rateValue;
-                            finalValue = resultValue;
-                        }
-                    }
-                    finally
-                    {
-                        if (urlConnection != null)
-                            urlConnection.disconnect();
-                    }
-                }
-                catch (NumberFormatException e)
-                {
-                    e.printStackTrace();
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         convert.setOnClickListener(new View.OnClickListener()
         {
@@ -156,25 +163,105 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 restartEditor.putBoolean("Clicked", true);
                 Toast.makeText(getActivity(), getString(R.string.waiting_message), Toast.LENGTH_SHORT).show();
 
-                thread.start();
+
+
+
+
+                //in order for this to be compatible, it must only start once and only join after the first thread start
+               // if(start == 0) //this is the first run, start; otherwise skip starting
+                //{
+                    //thread.start(); //TODO: source of why it crashes on second click. However it MUST call start to execute the code!
+                    start++;
+                //}
+               //double realFinalValue = conversionFactory();
+
+
                 //the thread must be stopped before restarting it again
                 try
                 {
-                    thread.join(10000);
+                    //-----Test--------
+                    final Thread thread = new Thread(new Runnable()
+                    {
+
+                        @Override
+                        public void run()
+                        {
+                            HttpURLConnection urlConnection = null;
+                            try
+                            {
+                                try
+                                {
+                                    //sending url request
+                                    String mainUrl = "https://api.exchangeratesapi.io/latest";
+                                    String updatedUrl = mainUrl + "?base=" + fromSpinner.getSelectedItem();
+                                    URL url = new URL(updatedUrl);
+                                    urlConnection = (HttpURLConnection) url.openConnection();
+                                    //string parsing
+                                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                                    BufferedReader inReader = new BufferedReader(new InputStreamReader(in));
+                                    String inputLine = "";
+                                    String fullStr = "";
+                                    while ((inputLine = inReader.readLine()) != null)
+                                    {
+                                        fullStr += inputLine;
+                                    }
+                                    //getting rates and set them to the corresponding currencies in spinners
+                                    JSONObject jsonObj = new JSONObject(fullStr);
+                                    JSONObject result = jsonObj.getJSONObject("rates");
+
+                                    Double moneyValue = Double.valueOf(quantity.getText().toString());
+
+                                    if (fromSpinner.getSelectedItem().equals(toSpinner.getSelectedItem()))
+                                    {
+                                        finalValue = moneyValue;
+                                    }
+
+                                    else
+                                    {
+                                        Double rateValue = Double.valueOf(result.getString((String) toSpinner.getSelectedItem()));
+                                        Double resultValue = moneyValue * rateValue;
+                                        finalValue = resultValue;
+                                    }
+                                }
+                                finally
+                                {
+                                    if (urlConnection != null)
+                                        urlConnection.disconnect();
+                                }
+                            }
+                            catch (NumberFormatException e)
+                            {
+                                e.printStackTrace();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    thread.start();
+                    thread.join(500);
+                    //conversionFactory();
                     resultView.setText(String.valueOf(roundNumber(finalValue, 2)));
                     //shared preferences version
                     SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("calcH", resultView.getText().toString());
                     editor.commit();
-                    CurrencyFragment currencyFragment = new CurrencyFragment();
-                    getFragmentManager().beginTransaction().detach(currencyFragment).attach(currencyFragment).commit();
 
-                } catch (InterruptedException ex) {
+
+
+                    //onDestroyView();
+                    //CurrencyFragment currencyFragment = new CurrencyFragment();
+
+                    //getFragmentManager().beginTransaction().detach(currencyFragment).attach(this).commit();
+                    //onStop();
+
+
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 currencyType.setText(toSpinner.getSelectedItem().toString());
-
 
             }
         });
@@ -200,6 +287,65 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         return  v;
     }
 
+    private double conversionFactory()
+    {
+        HttpURLConnection urlConnection = null;
+        try
+        {
+            try
+            {
+                //sending url request
+                String mainUrl = "https://api.exchangeratesapi.io/latest";
+                String updatedUrl = mainUrl + "?base=" + fromSpinner.getSelectedItem();
+                URL url = new URL(updatedUrl);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                //string parsing
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader inReader = new BufferedReader(new InputStreamReader(in));
+                String inputLine = "";
+                String fullStr = "";
+                while ((inputLine = inReader.readLine()) != null)
+                {
+                    fullStr += inputLine;
+                }
+                //getting rates and set them to the corresponding currencies in spinners
+                JSONObject jsonObj = new JSONObject(fullStr);
+                JSONObject result = jsonObj.getJSONObject("rates");
+
+                Double moneyValue = Double.valueOf(quantity.getText().toString());
+
+                if (fromSpinner.getSelectedItem().equals(toSpinner.getSelectedItem()))
+                {
+                    finalValue = moneyValue;
+                }
+
+                else
+                {
+                    Double rateValue = Double.valueOf(result.getString((String) toSpinner.getSelectedItem()));
+                    Double resultValue = moneyValue * rateValue;
+                    finalValue = resultValue;
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            //finally
+            //{
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            //}
+        }
+        catch (NumberFormatException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return finalValue;
+    }
     //Since I cant find a way to contain the description within the spinner, then this method will be used to make a textview for each item when the item is selected
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -452,6 +598,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
         editor.putString("quan", quantity.getText().toString());
         editor.putString("currtype", currencyType.getText().toString());
         editor.commit();
+
 
     }
 
