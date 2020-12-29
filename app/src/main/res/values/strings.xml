@@ -151,6 +151,7 @@
         <item>Brasilia(BRT)</item>
         <item>New Delhi(IST)</item>
         <item>Mexico City(CDT)</item>
+        <item>Syndey(AET)</item>
     </string-array>
 
     <!--for toolbar-->
