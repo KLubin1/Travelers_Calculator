@@ -4,8 +4,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -20,11 +22,12 @@ public class SettingsToolbar extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.settings_layout);
 
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);*/
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 //       if(toolbar != null)
 //       {
@@ -41,7 +44,7 @@ public class SettingsToolbar extends AppCompatActivity
         //set settings page to fragment
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(android.R.id.content, new SettingFragment())
+                .replace(R.id.pref_container, new SettingFragment())
                 .commit();
 
 
