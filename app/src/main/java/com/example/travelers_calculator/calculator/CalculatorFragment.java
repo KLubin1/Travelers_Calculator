@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -22,10 +23,12 @@ import com.example.travelers_calculator.toolbar.history.HistoryData;
 
 import java.util.ArrayList;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
+
 
 public class CalculatorFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener, HistoryIsPressed // AdapterView.OnItemClickListener
  {
-    //Add calculator code here
 
     //calculator data members
     //numbers
@@ -105,6 +108,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         exponent  = (Button) view.findViewById(R.id.exponent);
         openParen = (Button) view.findViewById(R.id.open_paren);
         closeParen = (Button) view.findViewById(R.id.close_paren);
+
 
 
         //widget assignment for loading conversions unto calculator
@@ -308,6 +312,36 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         //for clear button
         if (data.equals("C/AC"))
         {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+            boolean firstStart= sharedPreferences.getBoolean("clFirstStart", true);
+            //in app oboarding for educating the user that they can tap to clear and hold to clear all
+            if(firstStart == true)
+            {
+                MaterialTapTargetPrompt prompt = new MaterialTapTargetPrompt.Builder(this)
+                        .setTarget(R.id.clear)
+                        .setPrimaryText("Tap to clear; hold to clear all.")
+                        //.setPromptBackground(new RectanglePromptBackground())
+                        .setPromptFocal(new RectanglePromptFocal())
+                        .setBackgroundColour(getResources().getColor(R.color.bold_blue))
+                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                            @Override
+                            public void onPromptStateChanged(@NonNull MaterialTapTargetPrompt prompt, int state) {
+                                if (state == MaterialTapTargetPrompt.STATE_NON_FOCAL_PRESSED || state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+                                {
+                                    prompt = null;
+                                    //shared prefs
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putBoolean("clFirstStart", false);
+                                    editor.commit();
+                                }
+                            }
+                        })
+                        .setMaxTextWidth(R.dimen.onboarding)
+                        .create();
+                if (prompt != null) {
+                    prompt.show();
+                }
+            }
             String enteredInput = outputResult.getText().toString();
             if(enteredInput.length() > 0)
             {
@@ -596,6 +630,12 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("calc", outputResult.getText().toString());
         editor.commit();
+
+        //for debugging in-app onboarding
+//        SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+//        editor2.putBoolean("clFirstStart", true);
+//        editor2.commit();
 
     }
     //outputResult is null, why?  Only I can think of is that by the time it reaches this point, its no longer initialized after onCreateView

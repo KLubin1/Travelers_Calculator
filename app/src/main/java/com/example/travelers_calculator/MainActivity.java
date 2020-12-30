@@ -34,6 +34,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, HistoryIsPressed //implements OnFragmentInteractionListener
 {
  private CalculatorFragment calculatorFragment;
@@ -99,8 +102,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         SharedPreferences.Editor prefsEditor = prefsDelete.edit();
         if(firstStart)
         {
-            clearData();
             //to clear data at start
+            clearData();
+
+            //set inAppOnboarding to appear
+            SharedPreferences inAppOnboarding = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor iAOeditor = inAppOnboarding.edit();
+            iAOeditor.putBoolean("clFirstStart", true); //for the clear button of calculator
+            iAOeditor.putBoolean("histFirstStart", true); //for the history button
+            iAOeditor.commit();
+
+            //reset prefs and start onboarding
             prefsEditor.putBoolean("firstStart", false);
             prefsEditor.apply();
             Intent onboard = new Intent(MainActivity.this, Onboarding.class);
@@ -285,7 +297,65 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
    public String setHistory() {
        //however this goes, all the history functionality would have to come together in here
 
-       SharedPreferences sharedPreferences = getSharedPreferences("History", MODE_PRIVATE);
+       //in app oboarding for educating the user of the History
+       SharedPreferences ftHistory = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+       boolean firstStart = ftHistory.getBoolean("histFirstStart", true);
+
+       SharedPreferences history = getSharedPreferences("History", MODE_PRIVATE);
+
+       if (firstStart == true) {
+           MaterialTapTargetPrompt prompt = new MaterialTapTargetPrompt.Builder(this)
+                   .setTarget(R.id.action_history)
+                   .setPrimaryText("Calculation History")
+                   .setSecondaryText("See your previous calculations here.")
+                   //.setPromptBackground(new RectanglePromptBackground())
+                   .setPromptFocal(new RectanglePromptFocal())
+                   .setBackgroundColour(getResources().getColor(R.color.bold_blue))
+                   .setFocalColour(getResources().getColor(R.color.colorAccent))
+                   .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                       @Override
+                       public void onPromptStateChanged(@NonNull MaterialTapTargetPrompt prompt, int state) {
+                           if (state == MaterialTapTargetPrompt.STATE_NON_FOCAL_PRESSED) {
+                               prompt = null;
+                               //shared prefs
+                               SharedPreferences.Editor editor = ftHistory.edit();
+                               editor.putBoolean("histFirstStart", false);
+                               editor.commit();
+                           }
+                           //proceed with rest of code if pressed out it
+                           else if (state == MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+                           {
+                               SharedPreferences history = getSharedPreferences("History", MODE_PRIVATE);
+                               List<String> data = new ArrayList<String>();
+
+                               data.add(history.getString("calcH", "0"));
+                               AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                               LayoutInflater inflater = getLayoutInflater();
+                               View convertView = inflater.inflate(R.layout.history_layout, null);
+                               //this sets the list view to the dialog box
+                               ListView lv = convertView.findViewById(R.id.history_list);
+                               alertDialog.setView(convertView);
+                               alertDialog.setTitle("History");
+                               ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, R.layout.history_textview, R.id.history_textview, data);
+                               lv.setAdapter(adapter);
+                               alertDialog.show();
+                               lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                   @Override
+                                   public void onItemClick(AdapterView<?> parent, View view, int position, long id) { }
+                               });
+                               alertDialog.setCancelable(true);
+                           }
+                       }
+                   })
+                   .setMaxTextWidth(R.dimen.onboarding)
+                   .create();
+           if (prompt != null) {
+
+               prompt.show();
+               return history.getString("calcH", "0");
+           }
+       }
+
        //String[] letters ={"A","B","C","D", "E", "F", "G"};
        //maybe i could use a linked list instead of array list?
        List<String> data = new ArrayList<String>();
@@ -296,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
        //add the stored value to the array/list
        data.add(calculatorFragment.getList().toString());
        }*/
-       data.add(sharedPreferences.getString("calcH", "0"));
+       data.add(history.getString("calcH", "0"));
        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
        LayoutInflater inflater = getLayoutInflater();
        View convertView = inflater.inflate(R.layout.history_layout, null);
@@ -320,9 +390,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
        alertDialog.setCancelable(true);
 
 
-       return sharedPreferences.getString("calcH", "0");
-    }
-
+       return history.getString("calcH", "0");
+   }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
@@ -377,19 +446,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     });
 
 }
-        /*SharedPreferences settings = getSharedPreferences("colorChanged", MODE_PRIVATE);
-        boolean settingsChanged = settings.getBoolean( getString(R.string.colorSchemeKey), false);
-
-        if(settingsChanged == true)
-        {
-            //recreate();
-            //ChangeDialog changeDialog = new ChangeDialog();
-            //changeDialog.show(getSupportFragmentManager(), "change dialog");
-            Toast.makeText(getApplicationContext(), "Restarted", Toast.LENGTH_SHORT).show();
-            SharedPreferences.Editor edit = settings.edit();
-            edit.putBoolean("colorChanged", false);
-        }
-        else
-            settingsChanged = false;*/
 
 
