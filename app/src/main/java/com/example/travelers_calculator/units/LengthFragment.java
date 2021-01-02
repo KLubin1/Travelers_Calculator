@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -77,16 +78,26 @@ public class LengthFragment extends Fragment implements AdapterView.OnItemSelect
                     quantity.setText("0");
                 }
 
+                try
+                {
 
-                //set result textview to the result
-                result.setText(String.valueOf(conversionFactory()));
-                //set the type of result
-                unitType.setText(rightSpinner.getSelectedItem().toString());
-                //shared preferences version
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("calcH", result.getText().toString());
-                editor.commit();
+                    //set result textview to the result
+                    result.setText(String.valueOf(conversionFactory()));
+                    //set the type of result
+                    unitType.setText(rightSpinner.getSelectedItem().toString());
+                    //shared preferences version
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("History", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("calcH", result.getText().toString());
+                    editor.commit();
+                }
+                catch(NumberFormatException e)
+                {
+                    Toast.makeText(getActivity(), "Invalid Input", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
+
 
 
                 //result.setText("changed to conversion");
