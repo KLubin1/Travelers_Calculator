@@ -1,8 +1,11 @@
 package com.example.travelers_calculator.currency;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +25,19 @@ import androidx.preference.PreferenceManager;
 
 import com.example.travelers_calculator.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 
 public class CurrencyFragment extends Fragment implements AdapterView.OnItemSelectedListener
@@ -170,8 +176,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                 //in order for this to be compatible, it must only start once and only join after the first thread start
                // if(start == 0) //this is the first run, start; otherwise skip starting
                 //{
-                    //thread.start();
-                    start++;
+                   
                 //}
                //double realFinalValue = conversionFactory();
 
@@ -186,6 +191,7 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                         @Override
                         public void run()
                         {
+                            //TODO: Error handle if theres no internet connection. Will require "No connection, try again" dialog
                             HttpURLConnection urlConnection = null;
                             try
                             {
@@ -197,7 +203,8 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                                     URL url = new URL(updatedUrl);
                                     urlConnection = (HttpURLConnection) url.openConnection();
                                     //string parsing
-                                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                                    InputStream in = new BufferedInputStream(urlConnection.getInputStream()); //this is where the exception will hit
                                     BufferedReader inReader = new BufferedReader(new InputStreamReader(in));
                                     String inputLine = "";
                                     String fullStr = "";
@@ -223,7 +230,32 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                                         finalValue = resultValue;
                                     }
                                 }
-                                finally
+                                catch (UnknownHostException e )
+                                {
+                                    // any of this has to run on ui thread
+                                    new Handler(Looper.getMainLooper()).post(() -> {
+                                        //Looper.prepare();
+
+                                        //if theres no connection; let user try again
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                        builder.setTitle("No Internet Connection!")
+                                        .setMessage("An internet connection is required to calculate the latest currency conversion.")
+                                        .setPositiveButton("Retry", (dialog, which) -> {
+
+                                            Toast.makeText(getActivity().getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
+
+                                        });
+                                        AlertDialog alert = builder.create();
+                                        alert.show();
+                                    });
+
+                                    e.printStackTrace();
+
+                                }
+                                catch (JSONException | IOException e)
+                                {
+                                    e.printStackTrace();
+                                } finally
                                 {
                                     if (urlConnection != null)
                                         urlConnection.disconnect();
@@ -231,12 +263,20 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                             }
                             catch (NumberFormatException e)
                             {
+                                //NOTE: The keyboard is locked to number mode anyway, but the user could still put in a "." or something.
+                                //If that happens, this will hit and throw an exception, but the user doesnt see that, and regardless, the default resultant will be 0.
+                                //still...
+                                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                        Toast.makeText(getActivity(), "Invalid Input", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                                 e.printStackTrace();
                             }
-                            catch (Exception e)
-                            {
-                                e.printStackTrace();
-                            }
+
                         }
                     });
                     thread.start();
