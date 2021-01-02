@@ -66,10 +66,9 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="0.16" />
 
     <TextView
         android:id="@+id/result"
@@ -83,10 +82,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.681"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/convertButton"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.318" />
 
     <TextView
         android:id="@+id/currency_type"
@@ -97,10 +96,10 @@
         android:layout_marginEnd="132dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/convertButton"
-        app:layout_constraintVertical_bias="0.332" />
+        app:layout_constraintVertical_bias="0.331" />
 
     <Button
         android:id="@+id/convertButton"
@@ -108,16 +107,14 @@
         android:layout_height="40dp"
         android:layout_below="@+id/quantity"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="159dp"
         android:background="@color/colorAccent"
         android:text="convert"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantity"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.204" />
 
     <ImageView
         android:id="@+id/imageView"
