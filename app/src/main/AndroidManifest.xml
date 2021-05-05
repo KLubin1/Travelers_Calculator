@@ -12,24 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.com.travelers_calculator.me.MainActivity"
+            android:name="com.example.me.MainActivity"
             android:screenOrientation="portrait">
 
 
         </activity>
-        <activity android:name="com.example.com.travelers_calculator.me.toolbar.settings.SettingsToolbar"
+        <activity android:name="com.example.me.toolbar.settings.SettingsToolbar"
             android:screenOrientation="portrait"
             android:label="Settings"
-            android:parentActivityName="com.example.com.travelers_calculator.me.MainActivity">
+            android:parentActivityName="com.example.me.MainActivity">
         </activity>
-        <activity android:name="com.example.com.travelers_calculator.me.toolbar.about.About"
+        <activity android:name="com.example.me.toolbar.about.About"
             android:screenOrientation="portrait"
-            android:parentActivityName="com.example.com.travelers_calculator.me.MainActivity">
+            android:parentActivityName="com.example.me.MainActivity">
         </activity>
-        <activity android:name="com.example.com.travelers_calculator.me.toolbar.history.History"
-            android:parentActivityName="com.example.com.travelers_calculator.me.MainActivity">
+        <activity android:name="com.example.me.toolbar.history.History"
+            android:parentActivityName="com.example.me.MainActivity">
         </activity>
-        <activity android:name="com.example.com.travelers_calculator.me.splash.SplashScreen"
+        <activity android:name="com.example.me.splash.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.com.travelers_calculator.me.onboarding.Onboarding">
+        <activity android:name="com.example.me.onboarding.Onboarding">
         </activity>
 
     </application>

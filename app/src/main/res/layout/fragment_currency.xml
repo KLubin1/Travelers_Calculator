@@ -72,20 +72,19 @@
 
     <TextView
         android:id="@+id/result"
-        android:layout_width="78dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/convertButton"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="183dp"
         android:text="result"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/convertButton"
-        app:layout_constraintVertical_bias="0.318" />
+        app:layout_constraintVertical_bias="0.358" />
 
     <TextView
         android:id="@+id/currency_type"
@@ -96,10 +95,10 @@
         android:layout_marginEnd="132dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/convertButton"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintVertical_bias="0.556" />
 
     <Button
         android:id="@+id/convertButton"

@@ -191,14 +191,15 @@ public class CurrencyFragment extends Fragment implements AdapterView.OnItemSele
                         @Override
                         public void run()
                         {
-                            //TODO: Error handle if theres no internet connection. Will require "No connection, try again" dialog
+                            // TODO: possibly cache results
+                            // this API udates every day at 10 am EST
                             HttpURLConnection urlConnection = null;
                             try
                             {
                                 try
                                 {
                                     //sending url request
-                                    String mainUrl = "https://api.exchangeratesapi.io/latest";
+                                    String mainUrl = "https://api.ratesapi.io/api/latest";
                                     String updatedUrl = mainUrl + "?base=" + fromSpinner.getSelectedItem();
                                     URL url = new URL(updatedUrl);
                                     urlConnection = (HttpURLConnection) url.openConnection();
