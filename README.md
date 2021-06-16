@@ -4,7 +4,7 @@ Code repository for midterm project
 ## Last major update: 6/15/21
 ## UPDATE: 
 The ratesapi.io is currently offline; specifically, it has redirected to exchangerates.api - which requires me to have an API key, and even then, my allowed requests are limited off of a free plan. 
-Therefore currenlty the currency converter is non functional until I can... figure something out. I will try to update as soon as possible. Sorry:(
+Therefore currenlty the currency converter is non functional until I can... figure something out. I will try to update as soon as possible. Sorry :(
 
 ## Description:
 
