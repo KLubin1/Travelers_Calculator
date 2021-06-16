@@ -37,7 +37,7 @@ import java.util.List;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, HistoryIsPressed //implements OnFragmentInteractionListener
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener //implements OnFragmentInteractionListener
 {
  private CalculatorFragment calculatorFragment;
  private UnitsFragment unitsFragment;

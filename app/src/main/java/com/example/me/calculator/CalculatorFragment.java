@@ -16,7 +16,6 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
-import com.example.me.HistoryIsPressed;
 import com.example.me.MainActivity;
 import com.example.me.R;
 import com.example.me.toolbar.history.HistoryData;
@@ -27,7 +26,7 @@ import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal;
 
 
-public class CalculatorFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener, HistoryIsPressed // AdapterView.OnItemClickListener
+public class CalculatorFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener // AdapterView.OnItemClickListener
  {
 
     //calculator data members
