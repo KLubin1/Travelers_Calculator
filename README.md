@@ -31,4 +31,5 @@ For a helper in quickly restarting the app for a very specific situation: https:
 
 And for the splash screen - which made that easier for me at the time, I used https://github.com/pantrif/EasySplashScreen
  
+
 This was my first Android application. It's not perfect. I know. But I worked pretty hard and continue to work on it. 
