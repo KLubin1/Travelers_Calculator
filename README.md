@@ -20,10 +20,15 @@ Traverler's Calculator is an Android app that performs as a basic calculator and
 
 ### Credits
 For retrieving currency converter, I used  https://ratesapi.io currency exchange API. This API updates from the European Central Bank every 24 hours. It is free and open source.
+
 For some calculator functionality, I used Javaluator: http://javaluator.sourceforge.net/en/home/
+
 For sending HTTP requests I used Okhttp: https://square.github.io/okhttp/
+
 For initial onboarding: https://github.com/ramotion/paper-onboarding, and for in-app onboarding: https://github.com/sjwall/MaterialTapTargetPrompt
+
 For a helper in quickly restarting the app for a very specific situation: https://github.com/JakeWharton/ProcessPhoenix
+
 And for the splash screen - which made that easier for me at the time, I used https://github.com/pantrif/EasySplashScreen
  
 This was my first Android application. It's not perfect. I know. But I worked pretty hard and continue to work on it. 
