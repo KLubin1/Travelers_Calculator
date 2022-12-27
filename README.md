@@ -1,7 +1,7 @@
 # Travelers_Calculator
 Code repository for midterm project
 
-[Google Play link to download app](https://play.google.com/store/apps/details?id=com.tc.me&pli=1)
+## [Google Play link to download app](https://play.google.com/store/apps/details?id=com.tc.me&pli=1)
 
 ## Last major update: 6/15/21
 ## UPDATE: 
